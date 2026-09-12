@@ -3,7 +3,12 @@
 import { CONFIG } from '@/config';
 import { useCarrito } from '@/hooks/useCarrito';
 import { AporteLibre } from './AporteLibre';
+import { BarraCarrito } from './BarraCarrito';
 import { ListaRegalos } from './ListaRegalos';
+import { PasoConfirmar } from './PasoConfirmar';
+import { PasoListo } from './PasoListo';
+import { PasoMensaje } from './PasoMensaje';
+import { PasoPasarela } from './PasoPasarela';
 import { PieDePagina } from './PieDePagina';
 
 /**
@@ -36,6 +41,27 @@ export function SeccionRegalos() {
 
       {/* Deja aire bajo la barra fija para que no tape el pie (§7.8). */}
       <div style={{ height: carrito.total > 0 ? '7rem' : 0 }} aria-hidden="true" />
+
+      <BarraCarrito
+        total={carrito.total}
+        cantidadRegalos={carrito.cantidadRegalos}
+        visible={carrito.total > 0 && carrito.paso === null}
+        alVaciar={carrito.vaciar}
+        alContinuar={carrito.continuar}
+      />
+
+      {carrito.paso === 'mensaje' && <PasoMensaje carrito={carrito} />}
+      {carrito.paso === 'confirmar' && <PasoConfirmar carrito={carrito} />}
+      {carrito.paso === 'pasarela' && carrito.cierre && (
+        <PasoPasarela total={carrito.cierre.total} alCompletar={carrito.completarPago} />
+      )}
+      {carrito.paso === 'listo' && carrito.cierre && (
+        <PasoListo
+          nombre={carrito.gracias}
+          cierre={carrito.cierre}
+          alVolver={carrito.volverALista}
+        />
+      )}
     </>
   );
 }

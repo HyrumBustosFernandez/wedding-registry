@@ -29,6 +29,12 @@
   max-width: 22rem;
 }
 
+/* Los kickers que hacen de label de formulario van un punto más apretados (§4). */
+.labelOrden {
+  display: block;
+  letter-spacing: 0.18em;
+}
+
 .select {
   width: 100%;
   margin-top: 0.4rem;

@@ -98,3 +98,27 @@ body.modal-abierto {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- utilidades compartidas por todas las secciones (§5) --- */
+
+/* Mismo contenedor de 62rem para TODAS las secciones, incluidas las barras fijas. */
+.contenedor {
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+
+/* Las secciones se separan por línea de 1px, no solo por aire. */
+.seccion {
+  border-top: 1px solid var(--linea);
+  padding-block: clamp(2.8rem, 8vw, 5rem);
+}
+
+/* Kicker mono en mayúsculas: el rótulo que abre casi todos los bloques. */
+.kicker {
+  font-family: var(--fuente-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}

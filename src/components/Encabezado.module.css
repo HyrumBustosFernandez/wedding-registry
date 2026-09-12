@@ -1,0 +1,43 @@
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--linea);
+}
+
+.interior {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 1.2rem;
+  min-height: 60px;
+  padding-block: 0.5rem;
+}
+
+.pareja {
+  font-family: var(--fuente-mano);
+  font-size: clamp(1.3rem, 5.5vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--acento-osc);
+  white-space: nowrap;
+}
+
+/* En pantallas angostas el nav baja solo a una segunda línea: flex-wrap, no
+   breakpoints ni menú hamburguesa (§7.1). */
+.nav {
+  margin-left: auto;
+  display: flex;
+  gap: clamp(0.9rem, 3vw, 1.7rem);
+}
+
+.enlace {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.enlace:hover {
+  color: var(--tinta);
+}

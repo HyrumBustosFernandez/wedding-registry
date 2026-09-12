@@ -1,0 +1,32 @@
+.control {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Estado sin nada en el carrito: un solo botón "Regalar" / "Completo". */
+.regalar {
+  min-height: 48px;
+  padding: 0 1.25rem;
+}
+
+/* Estado con partes elegidas: stepper [−] [n] [+], botones de 48×48 exactos. */
+.paso {
+  width: 48px;
+  height: 48px;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.paso:disabled {
+  opacity: 0.3;
+}
+
+.cantidad {
+  min-width: 2.2rem;
+  text-align: center;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}

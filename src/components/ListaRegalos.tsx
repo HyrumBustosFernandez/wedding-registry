@@ -22,7 +22,7 @@ export function ListaRegalos({ carrito, mostrarMiniaturas, mostrarNotas }: Props
         </div>
 
         <div className={estilos.orden}>
-          <label className="kicker" htmlFor="orden">
+          <label className={`kicker ${estilos.labelOrden}`} htmlFor="orden">
             {COPY.regalos.ordenarLabel}
           </label>
           <select

@@ -1,0 +1,50 @@
+/* Design tokens — §3 de ESPEC-DISENO.md.
+   El acento es #B06E6E (rosa terracota); todos los derivados salen de ahí.
+   Las variantes con alpha están precalculadas desde ese valor; cuando el flag
+   `acento` cambia, src/lib/tema.ts las recalcula e inyecta en el elemento raíz. */
+
+:root {
+  /* superficies */
+  --fondo: #ffffff;
+  --panel: #faf5f2;
+  --papel: #f4eae4;
+
+  /* tinta */
+  --tinta: #141414;
+  --tinta-cita: #2c2724;
+  --ink-muted: rgba(20, 20, 20, 0.62);
+  --linea: rgba(20, 20, 20, 0.12);
+
+  /* acento */
+  --acento: #b06e6e;
+  --acento-osc: #905855; /* único acento permitido en texto — 5.65:1 sobre blanco */
+
+  /* acento con alpha */
+  --acento-18: rgba(176, 110, 110, 0.18); /* borde panel Aporte libre */
+  --acento-20: rgba(176, 110, 110, 0.2); /* rayas foto grande */
+  --acento-22: rgba(176, 110, 110, 0.22); /* rayas miniaturas */
+  --acento-35: rgba(176, 110, 110, 0.35); /* borde superior barra carrito */
+
+  /* error */
+  --error: #a8452f;
+
+  /* geometría */
+  --radio-control: 2px;
+  --radio-modal: 3px;
+  --ancho-max: 62rem;
+  --pad-x: clamp(1.1rem, 5vw, 3.5rem);
+  --foto-giro: -1.1deg;
+  --foto-chin: 2.4rem;
+
+  /* sombras — las cuatro únicas del diseño */
+  --sombra-foto: 0 1px 2px rgba(20, 20, 20, 0.06), 0 18px 44px rgba(20, 20, 20, 0.09);
+  --sombra-mini: 0 1px 1px rgba(20, 20, 20, 0.05), 0 7px 18px rgba(20, 20, 20, 0.06);
+  --sombra-barra: 0 -10px 30px rgba(20, 20, 20, 0.07);
+  --sombra-modal: 0 24px 60px rgba(20, 20, 20, 0.25);
+
+  /* tipografías — las variables las define next/font en layout.tsx */
+  --fuente-ui: var(--fuente-instrument), system-ui, sans-serif;
+  --fuente-display: var(--fuente-garamond), Georgia, serif;
+  --fuente-mano: var(--fuente-caveat), cursive;
+  --fuente-mono: var(--fuente-plex-mono), ui-monospace, monospace;
+}

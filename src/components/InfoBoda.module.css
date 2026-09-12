@@ -1,0 +1,45 @@
+.anillo {
+  margin: 0 auto clamp(1.8rem, 5vw, 2.6rem);
+}
+
+.titulo {
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 6.5vw, 2.9rem);
+  line-height: 1.08;
+  margin: 0.7rem 0 clamp(1.8rem, 5vw, 2.6rem);
+}
+
+/* auto-fit en vez de columnas fijas: se reacomoda solo, sin media queries. */
+.grid {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 2.4rem) clamp(1.8rem, 5vw, 3rem);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.bloqueKicker {
+  color: var(--acento-osc);
+}
+
+.bloqueTitulo {
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  font-size: 1.42rem;
+  line-height: 1.2;
+  margin-top: 0.35rem;
+}
+
+.bloqueTexto {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  margin-top: 0.4rem;
+}
+
+.comoLlegar {
+  display: inline-block;
+  margin-top: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--acento);
+  padding-bottom: 2px;
+}

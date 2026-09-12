@@ -1,0 +1,70 @@
+/* Marco polaroid reutilizable (§8.3): marco blanco, leve rotación, sombra suave
+   y pie de foto manuscrito. Cuando lleguen las fotos reales el <img> reemplaza
+   solo el interior; el marco, la rotación y el pie se mantienen. */
+
+.figura {
+  margin: 0;
+  background: #fff;
+  border: 1px solid rgba(20, 20, 20, 0.07);
+}
+
+.grande {
+  padding: clamp(8px, 1.6vw, 14px);
+  padding-bottom: var(--foto-chin);
+  box-shadow: var(--sombra-foto);
+  transform: rotate(var(--foto-giro));
+}
+
+.mini {
+  padding: 5px;
+  box-shadow: var(--sombra-mini);
+}
+
+.interior {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--papel);
+}
+
+/* Placeholder rayado, hasta que la pareja entregue las fotos (§14). */
+.interior:not(.conFoto) {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--acento-20) 0 5px,
+    transparent 5px 12px
+  );
+}
+
+.mini .interior:not(.conFoto) {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--acento-22) 0 4px,
+    transparent 4px 9px
+  );
+}
+
+.imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.especificacion {
+  position: absolute;
+  left: 0.7rem;
+  bottom: 0.6rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.pie {
+  font-family: var(--fuente-mano);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--ink-muted);
+  margin-top: 0.7rem;
+}

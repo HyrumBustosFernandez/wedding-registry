@@ -1,0 +1,72 @@
+.portada {
+  text-align: center;
+  padding: clamp(2.8rem, 10vw, 6.5rem) var(--pad-x) clamp(2.5rem, 7vw, 4rem);
+}
+
+.titulo {
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 12vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin-top: 0.6rem;
+}
+
+/* La "y" manuscrita es el único uso de --acento en texto, y solo a tamaño display. */
+.conjuncion {
+  font-family: var(--fuente-mano);
+  font-size: 0.52em;
+  color: var(--acento);
+  vertical-align: 0.18em;
+  padding: 0 0.1em;
+}
+
+.onda {
+  margin: 1.3rem auto 0;
+  max-width: 40vw;
+}
+
+.datos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(1.6rem, 7vw, 3rem);
+  max-width: 32rem;
+  margin: clamp(2rem, 6vw, 2.8rem) auto 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--linea);
+}
+
+.valor {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--fuente-display);
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.numerico {
+  font-variant-numeric: tabular-nums;
+}
+
+.cita {
+  font-family: var(--fuente-display);
+  font-size: clamp(1.3rem, 4.6vw, 1.72rem);
+  line-height: 1.42;
+  color: var(--tinta-cita);
+  max-width: 34rem;
+  margin: clamp(2.4rem, 7vw, 3.4rem) auto 0;
+}
+
+.firma {
+  font-family: var(--fuente-mano);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--acento-osc);
+  margin-top: 1rem;
+}
+
+.foto {
+  max-width: 44rem;
+  margin: clamp(2.6rem, 8vw, 4.2rem) auto 0;
+}

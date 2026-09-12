@@ -3,6 +3,7 @@ import { Caveat, EB_Garamond, IBM_Plex_Mono, Instrument_Sans } from 'next/font/g
 import { COPY } from '@/lib/copy';
 import '@/styles/tokens.css';
 import '@/styles/base.css';
+import '@/styles/botones.css';
 
 /* Cuatro familias, cada una con su fallback declarado en tokens.css. */
 const instrument = Instrument_Sans({

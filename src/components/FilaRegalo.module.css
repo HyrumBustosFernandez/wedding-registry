@@ -1,0 +1,70 @@
+/* Una fila, no una tarjeta: separada por línea inferior, sin sombra ni radio. */
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.1rem;
+  padding: clamp(1.1rem, 3vw, 1.45rem) 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.miniatura {
+  flex: 0 0 auto;
+  width: clamp(58px, 15vw, 78px);
+}
+
+.texto {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.nombre {
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 4vw, 1.42rem);
+  line-height: 1.15;
+}
+
+.nota {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  max-width: 46ch;
+  margin-top: 0.35rem;
+}
+
+.progreso {
+  height: 3px;
+  background: var(--linea);
+  max-width: 15rem;
+  margin-top: 0.65rem;
+  overflow: hidden;
+}
+
+.relleno {
+  height: 100%;
+  background: var(--acento);
+  transition: width 0.35s ease;
+}
+
+.avance {
+  font-family: var(--fuente-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  margin-top: 0.35rem;
+}
+
+.avanceCompleto {
+  color: var(--acento-osc);
+}
+
+.precio {
+  flex: 0 0 auto;
+  font-family: var(--fuente-display);
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.precioCompleto {
+  color: var(--ink-muted);
+}

@@ -1,0 +1,60 @@
+.barra {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 35;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--acento-35);
+  box-shadow: var(--sombra-barra);
+  /* Se desliza, nunca display:none. */
+  transform: translateY(105%);
+  transition: transform 0.28s ease;
+}
+
+.visible {
+  transform: translateY(0);
+}
+
+.interior {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  padding-block: 0.85rem;
+}
+
+.resumen {
+  flex: 1 1 9rem;
+}
+
+.total {
+  font-family: var(--fuente-display);
+  font-size: 1.55rem;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+
+.elegidos {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  min-height: 1.2em;
+}
+
+.acciones {
+  flex: 1 1 15rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vaciar {
+  flex: 0 1 8rem;
+  min-height: 48px;
+}
+
+.continuar {
+  flex: 1 1 10rem;
+  min-height: 48px;
+}

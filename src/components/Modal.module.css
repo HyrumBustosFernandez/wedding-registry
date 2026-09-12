@@ -1,0 +1,31 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(20, 20, 20, 0.55);
+  display: grid;
+  place-items: start center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  overflow-y: auto;
+}
+
+/* Solo la pasarela va centrada vertical; el resto crece hacia abajo. */
+.overlayCentrado {
+  place-items: center;
+}
+
+/* start center + margin auto 0 es intencional: en móvil el modal alto hace
+   scrollear la página en vez de cortarse (§9). */
+.caja {
+  background: var(--fondo);
+  border-radius: var(--radio-modal);
+  box-shadow: var(--sombra-modal);
+  width: 100%;
+  max-width: 33rem;
+  padding: clamp(1.5rem, 5vw, 2.6rem);
+  margin: auto 0;
+}
+
+.cajaEstrecha {
+  max-width: 25rem;
+}

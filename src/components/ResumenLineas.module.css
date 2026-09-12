@@ -1,0 +1,27 @@
+/* Se usa en los tres modales que muestran el detalle del regalo (§9.5). */
+.resumen {
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+  padding: 0.9rem 0;
+  font-size: 0.93rem;
+}
+
+.linea {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.22rem 0;
+}
+
+.monto {
+  font-variant-numeric: tabular-nums;
+}
+
+.total {
+  composes: linea;
+  font-family: var(--fuente-display);
+  font-size: 1.3rem;
+  padding-top: 0.6rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--linea);
+}

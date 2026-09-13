@@ -9,9 +9,12 @@ Claude Design) se reimplementó aquí desde cero — no es una copia literal.
 
 ## Stack
 
-- **Next.js 15** (App Router) + **React 19** + **TypeScript**
+- **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript 6**
 - **CSS Modules** sobre design tokens en `src/styles/tokens.css`
 - Sin librerías de UI, sin CSS-in-JS, sin dependencias de estado
+
+Node **>=20.9** (lo exige Next 16). `.nvmrc` fija 24 para desarrollo y Vercel
+lee `engines.node` del `package.json`.
 
 ## Desarrollo
 
@@ -20,7 +23,15 @@ npm install
 npm run dev        # http://localhost:3000
 npm run build      # export estático a ./out
 npm run typecheck
+npm run lint
 ```
+
+`npm run lint` invoca ESLint directo (`eslint .`) con `eslint.config.mjs`: Next 16
+eliminó el comando `next lint`.
+
+ESLint queda pinneado en 9.x a propósito. Los plugins que arrastra
+`eslint-config-next` (`import`, `jsx-a11y`, `react`) todavía no declaran soporte
+para ESLint 10, así que subirlo rompe el árbol de dependencias.
 
 ## Estructura
 

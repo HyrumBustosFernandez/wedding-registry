@@ -1,4 +1,4 @@
-# Lista de Regalos — Antonia & Cristóbal
+# Lista de Regalos — Ailyne y Jose
 
 Sitio de boda con lista de regalos de **aporte compartido**: cada regalo se divide en
 N partes y varios invitados cubren una parte cada uno.

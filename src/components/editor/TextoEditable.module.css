@@ -1,0 +1,28 @@
+/* Marcas del Modo edición. Deliberadamente discretas: el sitio tiene que
+   seguir leyéndose como la página real mientras se edita, no como un
+   formulario. */
+
+.editable {
+  outline: 1px dashed var(--acento-35);
+  outline-offset: 3px;
+  border-radius: 1px;
+  cursor: text;
+  transition: background-color 0.12s ease;
+}
+
+.editable:hover {
+  background-color: var(--panel);
+}
+
+.editable:focus {
+  outline: 2px solid var(--acento-osc);
+  outline-offset: 3px;
+  background-color: var(--fondo);
+}
+
+/* Texto vacío: sin esto un campo en blanco no tiene dónde hacer clic. */
+.editable:empty::before {
+  content: attr(data-placeholder);
+  color: var(--ink-muted);
+  font-style: italic;
+}

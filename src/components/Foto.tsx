@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import estilos from './Foto.module.css';
 
@@ -11,8 +12,9 @@ type Props = {
   src?: string;
   /** Etiqueta mono en la esquina del placeholder, p. ej. "foto principal · 1920×1080". */
   especificacion?: string;
-  /** Pie de foto manuscrito. Solo en el hero. */
-  pie?: string;
+  /** Pie de foto manuscrito. Solo en el hero. Acepta un nodo para que el
+   *  editor pueda pasar un campo escribible en vez de texto plano. */
+  pie?: ReactNode;
   className?: string;
 };
 

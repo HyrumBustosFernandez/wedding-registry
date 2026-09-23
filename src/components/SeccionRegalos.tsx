@@ -1,9 +1,10 @@
 'use client';
 
-import { CONFIG } from '@/config';
 import { useCarrito } from '@/hooks/useCarrito';
 import { AporteLibre } from './AporteLibre';
 import { BarraCarrito } from './BarraCarrito';
+import { useEditando, useEditor } from './editor/EditorContexto';
+import { PanelOpciones } from './editor/PanelOpciones';
 import { ListaRegalos } from './ListaRegalos';
 import { PasoConfirmar } from './PasoConfirmar';
 import { PasoListo } from './PasoListo';
@@ -12,21 +13,22 @@ import { PasoPasarela } from './PasoPasarela';
 import { PieDePagina } from './PieDePagina';
 
 /**
- * Todo lo interactivo cuelga de acá: la lista comparte estado con el aporte
- * libre, la barra fija y el checkout, así que el carrito vive en este nivel.
+ * Todo lo interactivo del invitado cuelga de acá: la lista comparte estado con
+ * el aporte libre, la barra fija y el checkout.
+ *
+ * En Modo edición el carrito se esconde: quien edita está armando la página, no
+ * comprando. Al volver a Vista real vuelve a aparecer.
  */
 export function SeccionRegalos() {
-  const carrito = useCarrito();
+  const { contenido } = useEditor();
+  const editando = useEditando();
+  const carrito = useCarrito(contenido);
 
   return (
     <>
       <section id="regalos" className="seccion">
         <div className="contenedor">
-          <ListaRegalos
-            carrito={carrito}
-            mostrarMiniaturas={CONFIG.miniaturas}
-            mostrarNotas={CONFIG.notas}
-          />
+          <ListaRegalos carrito={carrito} />
 
           <AporteLibre
             valor={carrito.libreTxt}
@@ -35,27 +37,29 @@ export function SeccionRegalos() {
             alConfirmar={carrito.confirmarLibre}
           />
 
+          <PanelOpciones />
+
           <PieDePagina />
         </div>
       </section>
 
-      {/* Deja aire bajo la barra fija para que no tape el pie (§7.8). */}
-      <div style={{ height: carrito.total > 0 ? '7rem' : 0 }} aria-hidden="true" />
+      {/* Deja aire bajo la barra fija para que no tape el pie. */}
+      <div style={{ height: !editando && carrito.total > 0 ? '7rem' : 0 }} aria-hidden="true" />
 
       <BarraCarrito
         total={carrito.total}
         cantidadRegalos={carrito.cantidadRegalos}
-        visible={carrito.total > 0 && carrito.paso === null}
+        visible={!editando && carrito.total > 0 && carrito.paso === null}
         alVaciar={carrito.vaciar}
         alContinuar={carrito.continuar}
       />
 
-      {carrito.paso === 'mensaje' && <PasoMensaje carrito={carrito} />}
-      {carrito.paso === 'confirmar' && <PasoConfirmar carrito={carrito} />}
-      {carrito.paso === 'pasarela' && carrito.cierre && (
+      {!editando && carrito.paso === 'mensaje' && <PasoMensaje carrito={carrito} />}
+      {!editando && carrito.paso === 'confirmar' && <PasoConfirmar carrito={carrito} />}
+      {!editando && carrito.paso === 'pasarela' && carrito.cierre && (
         <PasoPasarela total={carrito.cierre.total} alCompletar={carrito.completarPago} />
       )}
-      {carrito.paso === 'listo' && carrito.cierre && (
+      {!editando && carrito.paso === 'listo' && carrito.cierre && (
         <PasoListo
           nombre={carrito.gracias}
           cierre={carrito.cierre}

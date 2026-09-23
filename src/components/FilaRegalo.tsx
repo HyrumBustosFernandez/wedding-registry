@@ -1,10 +1,13 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import type { Regalo } from '@/contenido/esquema';
-import { clp } from '@/lib/clp';
+import { clp, formatearInputMonto, parsearMonto } from '@/lib/clp';
 import { COPY } from '@/lib/copy';
 import { ControlPartes } from './ControlPartes';
-import { Foto } from './Foto';
+import { useEditando } from './editor/EditorContexto';
+import { FotoEditable } from './editor/FotoEditable';
+import { TextoEditable } from './editor/TextoEditable';
 import estilos from './FilaRegalo.module.css';
 
 type Props = {
@@ -18,6 +21,10 @@ type Props = {
   mostrarNota: boolean;
   agregar: () => void;
   quitar: () => void;
+  /** Modo edición: aplica un cambio a este regalo. */
+  alCambiar: (regalo: Regalo) => void;
+  /** Los botones de mover/eliminar, que arma la lista. */
+  controles: ReactNode;
 };
 
 export function FilaRegalo({
@@ -30,7 +37,11 @@ export function FilaRegalo({
   mostrarNota,
   agregar,
   quitar,
+  alCambiar,
+  controles,
 }: Props) {
+  const editando = useEditando();
+
   /* El avance solo existe si hay meta contra la cual medirlo. */
   const conMeta = mostrarMetas && regalo.objetivo !== null;
   const pct = conMeta ? Math.min(100, Math.round((cubierto / regalo.objetivo!) * 100)) : 0;
@@ -38,18 +49,35 @@ export function FilaRegalo({
   return (
     <article className={estilos.fila}>
       {mostrarMiniatura && (
-        <Foto
+        <FotoEditable
           className={estilos.miniatura}
           variante="mini"
           ratio="1"
-          src={regalo.foto?.url}
-          alt={regalo.foto?.alt || COPY.foto.altRegalo(regalo.nombre)}
+          foto={regalo.foto}
+          alCambiar={(foto) => alCambiar({ ...regalo, foto })}
+          altPorDefecto={COPY.foto.altRegalo(regalo.nombre)}
         />
       )}
 
       <div className={estilos.texto}>
-        <h3 className={estilos.nombre}>{regalo.nombre}</h3>
-        {mostrarNota && regalo.nota && <p className={estilos.nota}>{regalo.nota}</p>}
+        <TextoEditable
+          como="h3"
+          className={estilos.nombre}
+          valor={regalo.nombre}
+          alCambiar={(nombre) => alCambiar({ ...regalo, nombre })}
+          placeholder="Nombre del regalo"
+        />
+
+        {(mostrarNota || editando) && (
+          <TextoEditable
+            como="p"
+            className={estilos.nota}
+            valor={regalo.nota}
+            alCambiar={(nota) => alCambiar({ ...regalo, nota })}
+            multilinea
+            placeholder="Nota corta (se muestra si activas «Notas de cada regalo»)"
+          />
+        )}
 
         {conMeta && (
           <>
@@ -63,20 +91,58 @@ export function FilaRegalo({
             </p>
           </>
         )}
+
+        {editando && (
+          <div className={estilos.editorCampos}>
+            <label className={estilos.campoNumero}>
+              Monto
+              <input
+                type="text"
+                inputMode="numeric"
+                className={estilos.numero}
+                value={formatearInputMonto(String(regalo.precio))}
+                onChange={(e) => alCambiar({ ...regalo, precio: parsearMonto(e.target.value) })}
+              />
+            </label>
+
+            {mostrarMetas && (
+              <label className={estilos.campoNumero}>
+                Meta (partes)
+                <input
+                  type="number"
+                  min={1}
+                  className={`${estilos.numero} ${estilos.numeroCorto}`}
+                  value={regalo.objetivo ?? ''}
+                  placeholder="sin meta"
+                  onChange={(e) =>
+                    alCambiar({
+                      ...regalo,
+                      objetivo: e.target.value ? Number(e.target.value) : null,
+                    })
+                  }
+                />
+              </label>
+            )}
+          </div>
+        )}
+
+        {controles}
       </div>
 
       <p className={`${estilos.precio} ${lleno ? estilos.precioCompleto : ''}`}>
         {clp(regalo.precio)}
       </p>
 
-      <ControlPartes
-        regalo={regalo}
-        enCarro={enCarro}
-        lleno={lleno}
-        mostrarMetas={mostrarMetas}
-        agregar={agregar}
-        quitar={quitar}
-      />
+      {!editando && (
+        <ControlPartes
+          regalo={regalo}
+          enCarro={enCarro}
+          lleno={lleno}
+          mostrarMetas={mostrarMetas}
+          agregar={agregar}
+          quitar={quitar}
+        />
+      )}
     </article>
   );
 }

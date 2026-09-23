@@ -70,6 +70,28 @@ Lo que se guarda vive en `src/contenido/esquema.ts`. `src/contenido/semilla.ts`
 es el contenido de relleno inicial: se muestra mientras nadie haya guardado, y
 sale de `ESPEC-DISENO.md`.
 
+### Cómo se usa
+
+El botón **«Editar la página»** aparece arriba a la derecha y pide la clave
+(`EDIT_PASSWORD`). Un invitado sin la clave nunca ve nada de esto. Con la sesión
+abierta aparece el interruptor **Vista real / Modo edición**.
+
+En Modo edición:
+
+- **Textos**: se hace clic sobre cualquier texto y se escribe encima. Enter
+  confirma, Escape cancela.
+- **Listas**: los datos de la portada, los bloques de la boda y los regalos
+  tienen botones para subir (↑), bajar (↓) y eliminar (×), más un
+  «+ Agregar» al final de cada lista.
+- **Fotos**: «Subir foto» en la portada y en cada regalo. JPG, PNG, WebP o AVIF,
+  hasta 8 MB.
+- **Ajustes** (al final de la lista de regalos): encender metas por regalo,
+  miniaturas, notas, estilo de foto y color de acento.
+
+**Vista real** muestra el borrador tal como lo verán los invitados, sin guardar
+todavía: sirve de previsualización. **Guardar** lo publica para todos y
+**Descartar** vuelve a lo último guardado.
+
 ### Configuración
 
 Copia `.env.example` a `.env.local` y llena las tres variables:

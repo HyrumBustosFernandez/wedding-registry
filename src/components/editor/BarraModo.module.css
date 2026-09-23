@@ -1,0 +1,90 @@
+/* Barra flotante del editor. Va arriba a la derecha, bajo el header sticky, para
+   no chocar con la barra de carrito que ocupa todo el borde inferior. */
+
+.barra {
+  position: fixed;
+  top: 72px;
+  right: clamp(0.6rem, 3vw, 1.4rem);
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: calc(100vw - 1.2rem);
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-modal);
+  box-shadow: var(--sombra-mini);
+}
+
+.boton {
+  min-height: 40px;
+  padding: 0 0.85rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* El interruptor de modo: dos mitades, la activa en tinta llena. */
+.interruptor {
+  display: flex;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-control);
+  overflow: hidden;
+}
+
+.mitad {
+  min-height: 40px;
+  padding: 0 0.85rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+}
+
+.mitad:hover:not(.activa) {
+  background: var(--panel);
+  color: var(--tinta);
+}
+
+.activa {
+  background: var(--tinta);
+  color: #fff;
+}
+
+.estado {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  padding-inline: 0.2rem;
+}
+
+.ok {
+  color: var(--acento-osc);
+}
+
+.error {
+  color: var(--error);
+  max-width: 16rem;
+}
+
+/* --- diálogo de clave --- */
+
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.clave {
+  min-height: 40px;
+  width: 11rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-control);
+  background: transparent;
+}

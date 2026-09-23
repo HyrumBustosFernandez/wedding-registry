@@ -1,0 +1,65 @@
+.panel {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding: clamp(1.2rem, 4vw, 2rem);
+  border: 1px dashed var(--acento-35);
+  border-radius: var(--radio-modal);
+  background: var(--panel);
+}
+
+.titulo {
+  font-family: var(--fuente-mano);
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--acento-osc);
+  margin: 0.3rem 0 1.2rem;
+}
+
+.fila {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--linea);
+  font-size: 0.92rem;
+}
+
+.fila input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.15rem;
+  flex: 0 0 auto;
+  accent-color: var(--acento-osc);
+}
+
+.fila > span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ayuda {
+  display: block;
+  margin-top: 0.15rem;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.select {
+  min-height: 40px;
+  padding: 0 0.6rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-control);
+  background: var(--fondo);
+  flex: 0 0 auto;
+}
+
+.color {
+  width: 48px;
+  height: 40px;
+  padding: 2px;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-control);
+  background: var(--fondo);
+  flex: 0 0 auto;
+}

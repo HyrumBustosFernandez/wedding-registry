@@ -1,5 +1,6 @@
 'use client';
 
+import type { Contenido } from '@/contenido/esquema';
 import type { Carrito, Orden } from '@/hooks/useCarrito';
 import { COPY } from '@/lib/copy';
 import { FilaRegalo } from './FilaRegalo';
@@ -7,18 +8,23 @@ import estilos from './ListaRegalos.module.css';
 
 type Props = {
   carrito: Carrito;
-  mostrarMiniaturas: boolean;
-  mostrarNotas: boolean;
+  regalos: Contenido['regalos'];
+  opciones: Contenido['opciones'];
 };
 
-export function ListaRegalos({ carrito, mostrarMiniaturas, mostrarNotas }: Props) {
+export function ListaRegalos({ carrito, regalos, opciones }: Props) {
+  /* "Los que más faltan" no significa nada sin metas. */
+  const opcionesOrden = COPY.regalos.opcionesOrden.filter(
+    (o) => o.valor !== 'faltan' || opciones.mostrarMetas,
+  );
+
   return (
     <>
       <div className={estilos.cabecera}>
         <div className={estilos.presentacion}>
-          <p className="kicker">{COPY.regalos.kicker}</p>
-          <h2 className={estilos.titulo}>{COPY.regalos.titulo}</h2>
-          <p className={estilos.intro}>{COPY.regalos.intro}</p>
+          <p className="kicker">{regalos.kicker}</p>
+          <h2 className={estilos.titulo}>{regalos.titulo}</h2>
+          <p className={estilos.intro}>{regalos.intro}</p>
         </div>
 
         <div className={estilos.orden}>
@@ -31,7 +37,7 @@ export function ListaRegalos({ carrito, mostrarMiniaturas, mostrarNotas }: Props
             value={carrito.orden}
             onChange={(e) => carrito.setOrden(e.target.value as Orden)}
           >
-            {COPY.regalos.opcionesOrden.map((opcion) => (
+            {opcionesOrden.map((opcion) => (
               <option key={opcion.valor} value={opcion.valor}>
                 {opcion.texto}
               </option>
@@ -48,8 +54,9 @@ export function ListaRegalos({ carrito, mostrarMiniaturas, mostrarNotas }: Props
             cubierto={carrito.cubierto(regalo)}
             enCarro={carrito.enCarro(regalo)}
             lleno={carrito.lleno(regalo)}
-            mostrarMiniatura={mostrarMiniaturas}
-            mostrarNota={mostrarNotas}
+            mostrarMetas={opciones.mostrarMetas}
+            mostrarMiniatura={opciones.mostrarMiniaturas}
+            mostrarNota={opciones.mostrarNotas}
             agregar={() => carrito.agregar(regalo)}
             quitar={() => carrito.quitar(regalo)}
           />

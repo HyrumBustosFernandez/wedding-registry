@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import type { Config, EstiloFoto } from '@/config';
+import type { Opciones } from '@/contenido/esquema';
 
 type RGB = [number, number, number];
 
@@ -82,15 +82,15 @@ export function variablesDeAcento(acento: string): CSSProperties {
   } as CSSProperties;
 }
 
-/** Geometría del marco de foto según el flag `estiloFoto` (§8.3). */
-export function variablesDeFoto(estilo: EstiloFoto): CSSProperties {
+/** Geometría del marco de foto según la opción `estiloFoto` (§8.3). */
+export function variablesDeFoto(estilo: Opciones['estiloFoto']): CSSProperties {
   if (estilo === 'polaroid') return {};
   return { '--foto-giro': '0deg', '--foto-chin': '0.7rem' } as CSSProperties;
 }
 
-/** Todas las variables que el flag de configuración inyecta en el elemento raíz. */
-export function variablesDeTema(config: Config): CSSProperties {
-  return { ...variablesDeAcento(config.acento), ...variablesDeFoto(config.estiloFoto) };
+/** Todas las variables que las opciones inyectan en el elemento raíz. */
+export function variablesDeTema(opciones: Opciones): CSSProperties {
+  return { ...variablesDeAcento(opciones.acento), ...variablesDeFoto(opciones.estiloFoto) };
 }
 
 export { ACENTO_BASE, ACENTO_OSC_BASE };

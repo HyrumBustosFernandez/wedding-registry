@@ -1,22 +1,36 @@
 'use client';
 
-import type { Regalo } from '@/data/regalos';
+import type { Regalo } from '@/contenido/esquema';
 import { COPY } from '@/lib/copy';
 import estilos from './ControlPartes.module.css';
 
 type Props = {
   regalo: Regalo;
-  /** Partes de este regalo que hay en el carrito. */
+  /** Aportes de este regalo que hay en el carrito. */
   enCarro: number;
-  /** true cuando cubierto >= objetivo, contando ya lo que hay en el carrito. */
+  /** Solo puede ser true con metas encendidas. */
   lleno: boolean;
+  /** Cambia la etiqueta: sin metas se "aporta", con metas se "regala". */
+  mostrarMetas: boolean;
   agregar: () => void;
   quitar: () => void;
 };
 
-export function ControlPartes({ regalo, enCarro, lleno, agregar, quitar }: Props) {
-  /* Sin nada en el carrito el control es un solo botón. */
+export function ControlPartes({
+  regalo,
+  enCarro,
+  lleno,
+  mostrarMetas,
+  agregar,
+  quitar,
+}: Props) {
   if (enCarro === 0) {
+    const etiqueta = lleno
+      ? COPY.regalos.completo
+      : mostrarMetas
+        ? COPY.regalos.regalar
+        : COPY.regalos.aportar;
+
     return (
       <div className={estilos.control}>
         <button
@@ -25,7 +39,7 @@ export function ControlPartes({ regalo, enCarro, lleno, agregar, quitar }: Props
           onClick={agregar}
           disabled={lleno}
         >
-          {lleno ? COPY.regalos.completo : COPY.regalos.regalar}
+          {etiqueta}
         </button>
       </div>
     );

@@ -1,11 +1,11 @@
 import { COPY } from '@/lib/copy';
 import estilos from './Encabezado.module.css';
 
-export function Encabezado() {
+export function Encabezado({ pareja }: { pareja: string }) {
   return (
     <header className={estilos.encabezado}>
       <div className={`contenedor ${estilos.interior}`}>
-        <span className={estilos.pareja}>{COPY.pareja}</span>
+        <span className={estilos.pareja}>{pareja}</span>
         <nav className={estilos.nav}>
           {COPY.nav.map((item) => (
             <a key={item.href} className={estilos.enlace} href={item.href}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { CONFIG } from '@/config';
+import type { Contenido } from '@/contenido/esquema';
 import { useCarrito } from '@/hooks/useCarrito';
 import { AporteLibre } from './AporteLibre';
 import { BarraCarrito } from './BarraCarrito';
@@ -15,8 +15,8 @@ import { PieDePagina } from './PieDePagina';
  * Todo lo interactivo cuelga de acá: la lista comparte estado con el aporte
  * libre, la barra fija y el checkout, así que el carrito vive en este nivel.
  */
-export function SeccionRegalos() {
-  const carrito = useCarrito();
+export function SeccionRegalos({ contenido }: { contenido: Contenido }) {
+  const carrito = useCarrito(contenido);
 
   return (
     <>
@@ -24,22 +24,23 @@ export function SeccionRegalos() {
         <div className="contenedor">
           <ListaRegalos
             carrito={carrito}
-            mostrarMiniaturas={CONFIG.miniaturas}
-            mostrarNotas={CONFIG.notas}
+            regalos={contenido.regalos}
+            opciones={contenido.opciones}
           />
 
           <AporteLibre
+            libre={contenido.libre}
             valor={carrito.libreTxt}
             alEscribir={carrito.escribirLibre}
             alFijarTexto={carrito.setLibreTxt}
             alConfirmar={carrito.confirmarLibre}
           />
 
-          <PieDePagina />
+          <PieDePagina pie={contenido.pie} />
         </div>
       </section>
 
-      {/* Deja aire bajo la barra fija para que no tape el pie (§7.8). */}
+      {/* Deja aire bajo la barra fija para que no tape el pie. */}
       <div style={{ height: carrito.total > 0 ? '7rem' : 0 }} aria-hidden="true" />
 
       <BarraCarrito

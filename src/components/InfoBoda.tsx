@@ -1,10 +1,8 @@
-import { COPY } from '@/lib/copy';
+import type { Contenido } from '@/contenido/esquema';
 import { DivisorAnillo } from './DivisorAnillo';
 import estilos from './InfoBoda.module.css';
 
-const { boda } = COPY;
-
-export function InfoBoda() {
+export function InfoBoda({ boda }: { boda: Contenido['boda'] }) {
   return (
     <section id="boda" className="seccion">
       <div className="contenedor">
@@ -15,7 +13,7 @@ export function InfoBoda() {
 
         <div className={estilos.grid}>
           {boda.bloques.map((bloque) => (
-            <div key={bloque.kicker}>
+            <div key={bloque.id}>
               <p className={`kicker ${estilos.bloqueKicker}`}>{bloque.kicker}</p>
               <h3 className={estilos.bloqueTitulo}>{bloque.titulo}</h3>
               <p className={estilos.bloqueTexto}>{bloque.texto}</p>
@@ -23,14 +21,16 @@ export function InfoBoda() {
           ))}
         </div>
 
-        <a
-          className={estilos.comoLlegar}
-          href={boda.enlace.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {boda.enlace.texto}
-        </a>
+        {boda.enlace.texto && (
+          <a
+            className={estilos.comoLlegar}
+            href={boda.enlace.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {boda.enlace.texto}
+          </a>
+        )}
       </div>
     </section>
   );

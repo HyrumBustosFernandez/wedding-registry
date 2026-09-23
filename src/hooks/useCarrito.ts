@@ -1,25 +1,27 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
-import { REGALOS, type Regalo } from '@/data/regalos';
+import type { Contenido, Regalo } from '@/contenido/esquema';
 import { formatearInputMonto, parsearMonto } from '@/lib/clp';
-import { COPY } from '@/lib/copy';
 import { validar, type ErroresFormulario } from '@/lib/validacion';
 
 export type Orden = 'original' | 'precio-asc' | 'precio-desc' | 'faltan' | 'nombre-asc';
 export type Paso = null | 'mensaje' | 'confirmar' | 'pasarela' | 'listo';
 
-/** Una fila del resumen: un regalo con sus partes, o el aporte libre. */
+/** Una fila del resumen: un regalo con sus aportes, o el aporte libre. */
 export type Linea = { clave: string; etiqueta: string; monto: number };
 
 export type Cierre = { lineas: Linea[]; total: number };
 
-/** Duración de la pasarela simulada. En producción este paso no existe (§9.4). */
+/** Duración de la pasarela simulada. En producción este paso no existe. */
 export const MS_PASARELA = 2000;
 
-export function useCarrito() {
-  const [carro, setCarro] = useState<Record<number, number>>({});
-  const [prog, setProg] = useState<Record<number, number>>({});
+export function useCarrito(contenido: Contenido) {
+  const regalos = contenido.regalos.items;
+  const { mostrarMetas } = contenido.opciones;
+
+  const [carro, setCarro] = useState<Record<string, number>>({});
+  const [prog, setProg] = useState<Record<string, number>>({});
   const [libre, setLibre] = useState(0);
   const [libreTxt, setLibreTxt] = useState('');
   const [orden, setOrden] = useState<Orden>('original');
@@ -36,10 +38,18 @@ export function useCarrito() {
   const regalados = useCallback((r: Regalo) => prog[r.id] ?? r.regalados, [prog]);
   const enCarro = useCallback((r: Regalo) => carro[r.id] ?? 0, [carro]);
   const cubierto = useCallback((r: Regalo) => regalados(r) + enCarro(r), [regalados, enCarro]);
-  const lleno = useCallback((r: Regalo) => cubierto(r) >= r.objetivo, [cubierto]);
+
+  /**
+   * Sin metas encendidas un regalo nunca se llena: se aporta voluntariamente,
+   * cuantas veces se quiera. Con metas vuelve el tope del objetivo.
+   */
+  const lleno = useCallback(
+    (r: Regalo) => mostrarMetas && r.objetivo !== null && cubierto(r) >= r.objetivo,
+    [mostrarMetas, cubierto],
+  );
 
   const regalosOrdenados = useMemo(() => {
-    const lista = [...REGALOS];
+    const lista = [...regalos];
     switch (orden) {
       case 'precio-asc':
         return lista.sort((a, b) => a.precio - b.precio);
@@ -48,35 +58,38 @@ export function useCarrito() {
       case 'nombre-asc':
         return lista.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
       case 'faltan':
-        /* Partes pendientes, sin contar lo que hay en el carrito. */
+        /* Partes pendientes, sin contar el carrito. Solo tiene sentido con metas. */
         return lista.sort(
-          (a, b) => b.objetivo - regalados(b) - (a.objetivo - regalados(a)),
+          (a, b) =>
+            (b.objetivo ?? 0) - regalados(b) - ((a.objetivo ?? 0) - regalados(a)),
         );
       default:
         return lista;
     }
-  }, [orden, regalados]);
+  }, [regalos, orden, regalados]);
 
   const lineas = useMemo<Linea[]>(() => {
-    const filas: Linea[] = REGALOS.filter((r) => (carro[r.id] ?? 0) > 0).map((r) => {
-      const n = carro[r.id];
-      return {
-        clave: String(r.id),
-        etiqueta: `${r.nombre} × ${n}`,
-        monto: r.precio * n,
-      };
-    });
+    const filas: Linea[] = regalos
+      .filter((r) => (carro[r.id] ?? 0) > 0)
+      .map((r) => {
+        const n = carro[r.id];
+        return {
+          clave: r.id,
+          /* Sin metas, aportar una sola vez no necesita el "× 1". */
+          etiqueta: n > 1 ? `${r.nombre} × ${n}` : r.nombre,
+          monto: r.precio * n,
+        };
+      });
 
     if (libre > 0) {
-      filas.push({ clave: 'libre', etiqueta: COPY.libre.etiquetaLinea, monto: libre });
+      filas.push({ clave: 'libre', etiqueta: contenido.libre.titulo, monto: libre });
     }
 
     return filas;
-  }, [carro, libre]);
+  }, [regalos, carro, libre, contenido.libre.titulo]);
 
   const total = useMemo(() => lineas.reduce((suma, l) => suma + l.monto, 0), [lineas]);
 
-  /** Cuántos regalos distintos hay en el carrito (el aporte libre no cuenta como regalo). */
   const cantidadRegalos = useMemo(
     () => Object.values(carro).filter((n) => n > 0).length,
     [carro],
@@ -86,7 +99,6 @@ export function useCarrito() {
 
   const agregar = useCallback(
     (r: Regalo) => {
-      /* Invariante: nunca dejar que cubierto supere el objetivo. */
       if (lleno(r)) return;
       setCarro((c) => ({ ...c, [r.id]: (c[r.id] ?? 0) + 1 }));
     },
@@ -103,7 +115,6 @@ export function useCarrito() {
     });
   }, []);
 
-  /** Escribe en el input de aporte libre, reformateando en vivo. */
   const escribirLibre = useCallback((valor: string) => {
     setLibreTxt(formatearInputMonto(valor));
   }, []);
@@ -121,7 +132,7 @@ export function useCarrito() {
     setLibreTxt('');
   }, []);
 
-  /* ---- máquina de estados del checkout (§9) ---- */
+  /* ---- máquina de estados del checkout ---- */
 
   const continuar = useCallback(() => {
     if (total > 0) setPaso('mensaje');
@@ -133,10 +144,6 @@ export function useCarrito() {
     if (Object.keys(errores).length === 0) setPaso('confirmar');
   }, [nombre, correo, mensaje]);
 
-  /**
-   * "Pagar ahora": congela el resumen y entra a la pasarela simulada.
-   * En producción acá va el redirect real a la pasarela.
-   */
   const pagar = useCallback(() => {
     setCierre({ lineas, total });
     setGracias(nombre.trim());
@@ -144,25 +151,28 @@ export function useCarrito() {
   }, [lineas, total, nombre]);
 
   /**
-   * Fin de la pasarela: las partes del carrito se suman al progreso real y el
-   * carrito queda vacío. El resumen del paso 4 sale del snapshot, no del carrito.
+   * Fin de la pasarela. Con metas encendidas, los aportes suman al progreso
+   * real; sin metas no hay progreso que llevar, solo se vacía el carrito.
    */
   const completarPago = useCallback(() => {
-    setProg((p) => {
-      const siguiente = { ...p };
-      for (const r of REGALOS) {
-        const partes = carro[r.id] ?? 0;
-        if (partes > 0) {
-          siguiente[r.id] = Math.min(r.objetivo, (p[r.id] ?? r.regalados) + partes);
+    if (mostrarMetas) {
+      setProg((p) => {
+        const siguiente = { ...p };
+        for (const r of regalos) {
+          const partes = carro[r.id] ?? 0;
+          if (partes > 0) {
+            const base = (p[r.id] ?? r.regalados) + partes;
+            siguiente[r.id] = r.objetivo === null ? base : Math.min(r.objetivo, base);
+          }
         }
-      }
-      return siguiente;
-    });
+        return siguiente;
+      });
+    }
     setCarro({});
     setLibre(0);
     setLibreTxt('');
     setPaso('listo');
-  }, [carro]);
+  }, [mostrarMetas, regalos, carro]);
 
   const volver = useCallback(() => {
     setPaso((p) => (p === 'confirmar' ? 'mensaje' : null));
@@ -179,44 +189,12 @@ export function useCarrito() {
   }, []);
 
   return {
-    /* estado */
-    carro,
-    libre,
-    libreTxt,
-    orden,
-    paso,
-    nombre,
-    correo,
-    mensaje,
-    err,
-    gracias,
-    cierre,
-    /* derivados */
-    regalosOrdenados,
-    regalados,
-    enCarro,
-    cubierto,
-    lleno,
-    lineas,
-    total,
-    cantidadRegalos,
-    /* acciones */
-    setOrden,
-    setNombre,
-    setCorreo,
-    setMensaje,
-    agregar,
-    quitar,
-    escribirLibre,
-    setLibreTxt,
-    confirmarLibre,
-    vaciar,
-    continuar,
-    irAPagar,
-    pagar,
-    completarPago,
-    volver,
-    volverALista,
+    carro, libre, libreTxt, orden, paso, nombre, correo, mensaje, err, gracias, cierre,
+    regalosOrdenados, regalados, enCarro, cubierto, lleno, lineas, total, cantidadRegalos,
+    mostrarMetas,
+    setOrden, setNombre, setCorreo, setMensaje,
+    agregar, quitar, escribirLibre, setLibreTxt, confirmarLibre, vaciar,
+    continuar, irAPagar, pagar, completarPago, volver, volverALista,
   };
 }
 

@@ -58,3 +58,24 @@
   min-height: 50px;
   font-size: 0.95rem;
 }
+
+/* --- solo Modo edición --- */
+
+.sugeridoEditor {
+  display: flex;
+  align-items: center;
+  border: 1px dashed var(--acento-35);
+  border-radius: var(--radio-control);
+  background: var(--fondo);
+  padding: 0 0.5rem;
+}
+
+.sugeridoInput {
+  width: 100%;
+  min-height: 46px;
+  border: 0;
+  background: transparent;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}

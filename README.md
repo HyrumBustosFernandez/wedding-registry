@@ -58,6 +58,35 @@ invitado:
 | `miniaturas` | `true` | Muestra las miniaturas cuadradas en la lista |
 | `notas` | `false` | Muestra la nota descriptiva bajo cada regalo |
 
+## Contenido editable
+
+La página tiene dos modos, con un botón para alternar:
+
+- **Vista real** — lo que ven los invitados.
+- **Modo edición** — los novios cambian nombres, fecha, contacto, fotos, los
+  bloques de la boda y la lista de regalos.
+
+Lo que se guarda vive en `src/contenido/esquema.ts`. `src/contenido/semilla.ts`
+es el contenido de relleno inicial: se muestra mientras nadie haya guardado, y
+sale de `ESPEC-DISENO.md`.
+
+### Configuración
+
+Copia `.env.example` a `.env.local` y llena las tres variables:
+
+| Variable | Para qué | Si falta |
+|---|---|---|
+| `DATABASE_URL` | Guardar el contenido (Neon, integración nativa de Vercel) | El sitio anda en solo lectura sobre la semilla |
+| `EDIT_PASSWORD` | Clave que abre el Modo edición | El botón de edición no aparece |
+| `BLOB_READ_WRITE_TOKEN` | Subir fotos (Vercel Blob) | Todo lo demás anda; no se pueden subir imágenes |
+
+En Vercel: **Storage → Neon** crea `DATABASE_URL`, **Storage → Blob** crea
+`BLOB_READ_WRITE_TOKEN`, y `EDIT_PASSWORD` se agrega a mano en
+**Settings → Environment Variables**. La tabla se crea sola en el primer uso.
+
+El sitio dejó de ser export estático (`output: 'export'`): el contenido se lee
+en cada request y el editor necesita Server Actions.
+
 ## Pendientes antes de producción
 
 - **Fotos reales** (§14 de la espec): 1 foto de portada 1920×1080 y 9 cuadradas ≥400×400.

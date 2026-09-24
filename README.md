@@ -84,7 +84,9 @@ En Modo edición:
   tienen botones para subir (↑), bajar (↓) y eliminar (×), más un
   «+ Agregar» al final de cada lista.
 - **Fotos**: «Subir foto» en la portada y en cada regalo. JPG, PNG, WebP o AVIF,
-  hasta 8 MB.
+  hasta 12 MB. El archivo sube del navegador directo a Vercel Blob, sin pasar
+  por el servidor: una subida por Server Action topaba en los 4,5 MB que Vercel
+  impone al cuerpo de una petición, y las fotos de celular pasan ese límite.
 - **Ajustes** (al final de la lista de regalos): encender metas por regalo,
   miniaturas, notas, estilo de foto y color de acento.
 

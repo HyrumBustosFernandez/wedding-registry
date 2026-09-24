@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useState, useTransition } from 'react';
+import { upload } from '@vercel/blob/client';
 import type { Foto } from '@/contenido/esquema';
-import { subirFoto } from '@/server/acciones';
 import { Foto as MarcoFoto } from '../Foto';
 import { useEditando } from './EditorContexto';
 import { TextoEditable } from './TextoEditable';
@@ -63,17 +63,26 @@ export function FotoEditable({
 
   if (!editando) return marco;
 
+  /* El archivo va del navegador directo a Blob; el servidor solo firma el
+     permiso en /api/fotos. Así no topa con el límite de 4,5 MB que Vercel
+     impone al cuerpo de una petición. */
   const subir = (archivo: File) => {
     setError(null);
-    const datos = new FormData();
-    datos.set('archivo', archivo);
 
     empezarSubida(async () => {
-      const resultado = await subirFoto(datos);
-      if (resultado.ok) {
-        alCambiar({ url: resultado.url, alt: foto?.alt || altPorDefecto, pie: foto?.pie ?? '' });
-      } else {
-        setError(resultado.error);
+      try {
+        const subida = await upload(archivo.name, archivo, {
+          access: 'public',
+          handleUploadUrl: '/api/fotos',
+          contentType: archivo.type,
+        });
+        alCambiar({ url: subida.url, alt: foto?.alt || altPorDefecto, pie: foto?.pie ?? '' });
+      } catch (error) {
+        setError(
+          error instanceof Error
+            ? error.message
+            : 'No se pudo subir la imagen. Inténtalo de nuevo.',
+        );
       }
     });
   };

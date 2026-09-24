@@ -1,8 +1,8 @@
 {
   "name": "wedding-registry",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
-  "description": "Lista de regalos de boda de aporte compartido — Antonia & Cristóbal",
+  "description": "Lista de regalos de boda de aporte compartido \u2014 Antonia & Crist\u00f3bal",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -119,7 +119,6 @@ export function ListaRegalos({ carrito }: { carrito: Carrito }) {
               id: nuevoId('regalo'),
               nombre: 'Regalo nuevo',
               nota: '',
-              foto: null,
               precio: 30000,
               objetivo: null,
               regalados: 0,

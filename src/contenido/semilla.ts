@@ -21,7 +21,7 @@ export const SEMILLA: Contenido = {
     cita:
       'Siete años arrendando y por fin tenemos casa. Está bastante vacía, pero no queremos tres jugueras. Armamos esta lista con las cosas que de verdad vamos a usar y los viajes que llevamos años prometiéndonos.',
     firma: '— los dos, desde el living sin sillón',
-    foto: null,
+    pieFoto: 'La casa nueva, el primer día',
   },
 
   boda: {
@@ -64,15 +64,15 @@ export const SEMILLA: Contenido = {
     titulo: 'Cosas que sí vamos a usar',
     intro: 'Elige lo que quieras regalar y aporta el monto que te acomode.',
     items: [
-      { id: 'regalo-japon', nombre: 'Pasajes a Japón', precio: 180000, objetivo: null, regalados: 0, foto: null, nota: 'El viaje que venimos hablando desde la primera cita.' },
-      { id: 'regalo-ryokan', nombre: 'Noche en un ryokan', precio: 95000, objetivo: null, regalados: 0, foto: null, nota: 'Dormir en tatami y desayunar mirando un jardín.' },
-      { id: 'regalo-cena', nombre: 'La cena de aniversario', precio: 60000, objetivo: null, regalados: 0, foto: null, nota: 'Nos comprometimos a salir a comer cada 21 de noviembre.' },
-      { id: 'regalo-sartenes', nombre: 'Sartenes de fierro', precio: 45000, objetivo: null, regalados: 0, foto: null, nota: 'El set que queremos dura cincuenta años.' },
-      { id: 'regalo-coreano', nombre: 'Clases de coreano', precio: 35000, objetivo: null, regalados: 0, foto: null, nota: 'Empezamos por los dramas y ya no hay vuelta atrás.' },
-      { id: 'regalo-mudanza', nombre: 'La mudanza a la casa', precio: 70000, objetivo: null, regalados: 0, foto: null, nota: 'Camión, cajas y alguien que suba el sillón por la escalera.' },
-      { id: 'regalo-termas', nombre: 'Termas de Chillán', precio: 50000, objetivo: null, regalados: 0, foto: null, nota: 'Tres días de agua caliente en septiembre, sin teléfono.' },
-      { id: 'regalo-limonero', nombre: 'El limonero del patio', precio: 25000, objetivo: null, regalados: 0, foto: null, nota: 'La idea es hacer pisco sour con sus limones en diez años.' },
-      { id: 'regalo-camara', nombre: 'La cámara del viaje', precio: 220000, objetivo: null, regalados: 0, foto: null, nota: 'Para no volver de Japón con puras fotos de celular.' },
+      { id: 'regalo-japon', nombre: 'Pasajes a Japón', precio: 180000, objetivo: null, regalados: 0, nota: 'El viaje que venimos hablando desde la primera cita.' },
+      { id: 'regalo-ryokan', nombre: 'Noche en un ryokan', precio: 95000, objetivo: null, regalados: 0, nota: 'Dormir en tatami y desayunar mirando un jardín.' },
+      { id: 'regalo-cena', nombre: 'La cena de aniversario', precio: 60000, objetivo: null, regalados: 0, nota: 'Nos comprometimos a salir a comer cada 21 de noviembre.' },
+      { id: 'regalo-sartenes', nombre: 'Sartenes de fierro', precio: 45000, objetivo: null, regalados: 0, nota: 'El set que queremos dura cincuenta años.' },
+      { id: 'regalo-coreano', nombre: 'Clases de coreano', precio: 35000, objetivo: null, regalados: 0, nota: 'Empezamos por los dramas y ya no hay vuelta atrás.' },
+      { id: 'regalo-mudanza', nombre: 'La mudanza a la casa', precio: 70000, objetivo: null, regalados: 0, nota: 'Camión, cajas y alguien que suba el sillón por la escalera.' },
+      { id: 'regalo-termas', nombre: 'Termas de Chillán', precio: 50000, objetivo: null, regalados: 0, nota: 'Tres días de agua caliente en septiembre, sin teléfono.' },
+      { id: 'regalo-limonero', nombre: 'El limonero del patio', precio: 25000, objetivo: null, regalados: 0, nota: 'La idea es hacer pisco sour con sus limones en diez años.' },
+      { id: 'regalo-camara', nombre: 'La cámara del viaje', precio: 220000, objetivo: null, regalados: 0, nota: 'Para no volver de Japón con puras fotos de celular.' },
     ],
   },
 

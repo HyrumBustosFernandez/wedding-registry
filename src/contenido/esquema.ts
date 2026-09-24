@@ -8,12 +8,15 @@
 
 export const VERSION_ESQUEMA = 1;
 
+/**
+ * Una foto del sitio. No es contenido editable: las fotos las agrega quien
+ * mantiene el repo, en `fotos.ts`. Lo único que los novios escriben es el pie,
+ * que es texto y vive en el documento.
+ */
 export type Foto = {
-  /** URL pública en Vercel Blob. Vacío = se dibuja el placeholder rayado. */
+  /** Ruta bajo /public, p. ej. '/fotos/portada.jpg'. */
   url: string;
   alt: string;
-  /** Pie de foto manuscrito. Solo lo usa la portada. */
-  pie?: string;
 };
 
 /** Un dato suelto de la portada: FECHA / 21.11.2026. */
@@ -38,7 +41,6 @@ export type Regalo = {
   id: string;
   nombre: string;
   nota: string;
-  foto: Foto | null;
   /** Monto sugerido del aporte, en CLP. */
   precio: number;
   /**
@@ -76,7 +78,8 @@ export type Contenido = {
     datos: DatoPortada[];
     cita: string;
     firma: string;
-    foto: Foto | null;
+    /** Pie de la foto de portada. Se muestra solo si hay foto puesta. */
+    pieFoto: string;
   };
   boda: {
     kicker: string;

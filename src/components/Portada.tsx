@@ -1,11 +1,12 @@
 'use client';
 
 import { nombrePareja, nuevoId, type Contenido } from '@/contenido/esquema';
+import { FOTO_PORTADA } from '@/contenido/fotos';
 import { COPY } from '@/lib/copy';
 import { useEditor } from './editor/EditorContexto';
 import { BotonAgregar, ControlesItem, eliminar, mover, reemplazar } from './editor/ControlesLista';
-import { FotoEditable } from './editor/FotoEditable';
 import { TextoEditable } from './editor/TextoEditable';
+import { Foto } from './Foto';
 import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Portada.module.css';
 
@@ -109,16 +110,21 @@ export function Portada() {
         placeholder="— los dos"
       />
 
-      <FotoEditable
+      {/* La foto la pone quien mantiene el repo, en contenido/fotos.ts. El pie
+          sí es texto, así que se edita como cualquier otro. */}
+      <Foto
         className={estilos.foto}
         variante="grande"
         ratio="16 / 10"
-        foto={portada.foto}
-        alCambiar={(foto) => setPortada({ foto })}
-        altPorDefecto={COPY.foto.altPortada(nombrePareja(contenido))}
+        src={FOTO_PORTADA?.url}
+        alt={FOTO_PORTADA?.alt || COPY.foto.altPortada(nombrePareja(contenido))}
         especificacion={COPY.foto.especificacionPortada}
-        alCambiarPie={(pie) =>
-          portada.foto && setPortada({ foto: { ...portada.foto, pie } })
+        pie={
+          <TextoEditable
+            valor={portada.pieFoto}
+            alCambiar={(pieFoto) => setPortada({ pieFoto })}
+            placeholder="Pie de foto"
+          />
         }
       />
     </section>

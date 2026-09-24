@@ -2,11 +2,12 @@
 
 import type { ReactNode } from 'react';
 import type { Regalo } from '@/contenido/esquema';
+import { fotoDeRegalo } from '@/contenido/fotos';
 import { clp, formatearInputMonto, parsearMonto } from '@/lib/clp';
 import { COPY } from '@/lib/copy';
 import { ControlPartes } from './ControlPartes';
+import { Foto } from './Foto';
 import { useEditando } from './editor/EditorContexto';
-import { FotoEditable } from './editor/FotoEditable';
 import { TextoEditable } from './editor/TextoEditable';
 import estilos from './FilaRegalo.module.css';
 
@@ -49,13 +50,12 @@ export function FilaRegalo({
   return (
     <article className={estilos.fila}>
       {mostrarMiniatura && (
-        <FotoEditable
+        <Foto
           className={estilos.miniatura}
           variante="mini"
           ratio="1"
-          foto={regalo.foto}
-          alCambiar={(foto) => alCambiar({ ...regalo, foto })}
-          altPorDefecto={COPY.foto.altRegalo(regalo.nombre)}
+          src={fotoDeRegalo(regalo.id)?.url}
+          alt={fotoDeRegalo(regalo.id)?.alt || COPY.foto.altRegalo(regalo.nombre)}
         />
       )}
 

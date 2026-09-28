@@ -58,60 +58,25 @@ invitado:
 | `miniaturas` | `true` | Muestra las miniaturas cuadradas en la lista |
 | `notas` | `false` | Muestra la nota descriptiva bajo cada regalo |
 
-## Contenido editable
+## Cómo cambiar el contenido
 
-La página tiene dos modos, con un botón para alternar:
+Todo el texto del sitio vive en **`src/contenido/contenido.ts`**: nombres, fecha,
+lugar, los bloques de la boda, la lista de regalos, el correo de contacto. Se
+edita el archivo, se guarda y se despliega.
 
-- **Vista real** — lo que ven los invitados.
-- **Modo edición** — los novios cambian los textos: nombres, fecha, contacto,
-  los bloques de la boda y la lista de regalos.
+Al final de ese archivo, en `opciones`, están los interruptores:
 
-Las fotos **no** son editables: las agrega quien mantiene el repo (ver más
-abajo). Así un guardado de los novios nunca las pisa.
-
-Lo que se guarda vive en `src/contenido/esquema.ts`. `src/contenido/semilla.ts`
-es el contenido de relleno inicial: se muestra mientras nadie haya guardado, y
-sale de `ESPEC-DISENO.md`.
-
-### Cómo se usa
-
-El botón **«Editar la página»** aparece arriba a la derecha y pide la clave
-(`EDIT_PASSWORD`). Un invitado sin la clave nunca ve nada de esto. Con la sesión
-abierta aparece el interruptor **Vista real / Modo edición**.
-
-En Modo edición:
-
-- **Textos**: se hace clic sobre cualquier texto y se escribe encima. Enter
-  confirma, Escape cancela.
-- **Listas**: los datos de la portada, los bloques de la boda y los regalos
-  tienen botones para subir (↑), bajar (↓) y eliminar (×), más un
-  «+ Agregar» al final de cada lista.
-- **Ajustes** (al final de la lista de regalos): encender metas por regalo,
-  miniaturas, notas, estilo de foto y color de acento.
-
-El pie de la foto de portada sí es texto, así que se edita como cualquier otro.
-
-**Vista real** muestra el borrador tal como lo verán los invitados, sin guardar
-todavía: sirve de previsualización. **Guardar** lo publica para todos y
-**Descartar** vuelve a lo último guardado.
-
-### Configuración
-
-Copia `.env.example` a `.env.local` y llena las tres variables:
-
-| Variable | Para qué | Si falta |
+| Opción | Default | Efecto |
 |---|---|---|
-| `DATABASE_URL` | Guardar el contenido (Neon, integración nativa de Vercel) | El sitio anda en solo lectura sobre la semilla |
-| `EDIT_PASSWORD` | Clave que abre el Modo edición | El botón de edición no aparece |
-
-En Vercel: **Storage → Neon** crea `DATABASE_URL` (usa el prefijo `DATABASE`
-al conectar el proyecto, o la variable sale como `STORAGE_URL`), y
-`EDIT_PASSWORD` se agrega a mano en **Settings → Environment Variables**. La
-tabla se crea sola en el primer uso.
+| `mostrarMetas` | `false` | Apagado, cada regalo se aporta voluntariamente, sin barra de progreso ni tope. Encendido, vuelven la meta, la barra y el «3 de 6 regalados» |
+| `mostrarMiniaturas` | `true` | La foto cuadrada junto a cada regalo |
+| `mostrarNotas` | `false` | La nota corta bajo el nombre de cada regalo |
+| `estiloFoto` | `polaroid` | `polaroid` va inclinada, `marco` va recta |
+| `acento` | `#B06E6E` | Color de líneas, ondas y detalles |
 
 ### Agregar fotos
 
-Las fotos viven en código, en `src/contenido/fotos.ts`:
+Las fotos van en **`src/contenido/fotos.ts`**:
 
 1. Deja el archivo en `public/fotos/`.
 2. Apúntalo en `FOTO_PORTADA` (la de portada) o en `FOTOS_REGALOS`, donde la
@@ -121,8 +86,10 @@ Las fotos viven en código, en `src/contenido/fotos.ts`:
 Mientras una entrada sea `null` se dibuja el placeholder rayado del diseño, así
 que el sitio se ve bien aunque falten fotos.
 
-El sitio dejó de ser export estático (`output: 'export'`): el contenido se lee
-en cada request y el editor necesita Server Actions.
+### Sin configuración
+
+El sitio no necesita variables de entorno, base de datos ni servicios externos:
+se exporta entero como HTML estático (`output: 'export'`). Basta con desplegar.
 
 ## Pendientes antes de producción
 

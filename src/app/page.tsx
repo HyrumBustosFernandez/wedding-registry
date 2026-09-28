@@ -1,18 +1,20 @@
-import { EditorProvider } from '@/components/editor/EditorContexto';
-import { Sitio } from '@/components/Sitio';
-import { leerContenido } from '@/server/almacen';
-import { hayClaveConfigurada, puedeEditar } from '@/server/sesion';
+import { Encabezado } from '@/components/Encabezado';
+import { InfoBoda } from '@/components/InfoBoda';
+import { Portada } from '@/components/Portada';
+import { SeccionRegalos } from '@/components/SeccionRegalos';
+import { CONTENIDO } from '@/contenido/contenido';
+import { nombrePareja } from '@/contenido/esquema';
+import { variablesDeTema } from '@/lib/tema';
 
-/* El contenido se lee en cada request: lo que los novios guarden tiene que
-   verse de inmediato, sin esperar una revalidación. */
-export const dynamic = 'force-dynamic';
-
-export default async function Pagina() {
-  const [contenido, autorizado] = await Promise.all([leerContenido(), puedeEditar()]);
-
+export default function Pagina() {
   return (
-    <EditorProvider inicial={contenido} autorizado={autorizado}>
-      <Sitio hayClave={hayClaveConfigurada()} />
-    </EditorProvider>
+    <div style={variablesDeTema(CONTENIDO.opciones)}>
+      <Encabezado pareja={nombrePareja(CONTENIDO)} />
+      <main>
+        <Portada contenido={CONTENIDO} />
+        <InfoBoda boda={CONTENIDO.boda} />
+        <SeccionRegalos contenido={CONTENIDO} />
+      </main>
+    </div>
   );
 }

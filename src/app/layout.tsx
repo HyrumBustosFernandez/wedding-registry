@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Caveat, EB_Garamond, IBM_Plex_Mono, Instrument_Sans } from 'next/font/google';
+import { CONTENIDO } from '@/contenido/contenido';
 import { nombrePareja } from '@/contenido/esquema';
-import { leerContenido } from '@/server/almacen';
 import '@/styles/tokens.css';
 import '@/styles/base.css';
 import '@/styles/botones.css';
@@ -36,15 +36,10 @@ const plexMono = IBM_Plex_Mono({
   display: 'swap',
 });
 
-/* El título y la descripción salen del contenido editable, así que cambian
-   cuando los novios editan sus nombres o su cita. */
-export async function generateMetadata(): Promise<Metadata> {
-  const contenido = await leerContenido();
-  return {
-    title: `${nombrePareja(contenido)} · Lista de regalos`,
-    description: contenido.portada.cita,
-  };
-}
+export const metadata: Metadata = {
+  title: `${nombrePareja(CONTENIDO)} · Lista de regalos`,
+  description: CONTENIDO.portada.cita,
+};
 
 export const viewport: Viewport = {
   width: 'device-width',

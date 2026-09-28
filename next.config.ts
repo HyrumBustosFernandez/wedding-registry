@@ -1,11 +1,10 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* El sitio dejó de ser export estático: el contenido se lee de la base en
-     cada request y el Modo edición necesita Server Actions. */
-  images: {
-    remotePatterns: [{ protocol: 'https', hostname: '*.public.blob.vercel-storage.com' }],
-  },
+  /* El contenido vive en el código, así que el sitio se exporta entero como
+     HTML estático: sin servidor, sin base de datos y sin variables de entorno. */
+  output: 'export',
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

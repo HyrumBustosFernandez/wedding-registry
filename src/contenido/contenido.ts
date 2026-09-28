@@ -2,11 +2,18 @@ import type { Contenido } from './esquema';
 import { VERSION_ESQUEMA } from './esquema';
 
 /**
- * Contenido inicial: lo que se ve mientras los novios no hayan guardado nada.
- * Sale de ESPEC-DISENO.md. Todo esto es editable desde el Modo edición, así que
- * funciona como ejemplo de relleno, no como dato definitivo.
+ * TODO EL CONTENIDO DEL SITIO. Este es el archivo que se edita.
+ *
+ * Nombres, fecha, lugar, los bloques de la boda, la lista de regalos, el correo
+ * de contacto: todo sale de acá. Para cambiar algo, se cambia el texto, se
+ * guarda y se despliega.
+ *
+ * Las fotos van aparte, en `fotos.ts`.
+ *
+ * Al final del archivo, en `opciones`, están los interruptores: metas por
+ * regalo, miniaturas, notas, estilo de foto y color de acento.
  */
-export const SEMILLA: Contenido = {
+export const CONTENIDO: Contenido = {
   version: VERSION_ESQUEMA,
 
   pareja: { nombreUno: 'Antonia', conjuncion: 'y', nombreDos: 'Cristóbal' },

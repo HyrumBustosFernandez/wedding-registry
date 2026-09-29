@@ -2,6 +2,7 @@ import { Confirmacion } from '@/components/Confirmacion';
 import { Encabezado } from '@/components/Encabezado';
 import { FondoFoto } from '@/components/FondoFoto';
 import { InfoBoda } from '@/components/InfoBoda';
+import { PieDePagina } from '@/components/PieDePagina';
 import { Portada } from '@/components/Portada';
 import { RevelarAlScroll } from '@/components/RevelarAlScroll';
 import { SeccionRegalos } from '@/components/SeccionRegalos';
@@ -34,7 +35,11 @@ export default function Pagina() {
 
         <SeccionRegalos contenido={CONTENIDO} />
 
-        <FondoFoto foto={FONDO_FINAL} posicion="final" />
+        {/* Cierra con el pie apoyado sobre la foto: la despedida ya no flota en
+            una franja blanca, y el degradado corre por toda la banda. */}
+        <FondoFoto foto={FONDO_FINAL} posicion="final">
+          <PieDePagina pie={CONTENIDO.pie} />
+        </FondoFoto>
       </main>
     </div>
   );

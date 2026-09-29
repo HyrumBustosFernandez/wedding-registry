@@ -78,8 +78,6 @@ export type Contenido = {
     datos: DatoPortada[];
     cita: string;
     firma: string;
-    /** Pie de la foto de portada. Se muestra solo si hay foto puesta. */
-    pieFoto: string;
   };
   boda: {
     kicker: string;
@@ -94,10 +92,19 @@ export type Contenido = {
     items: Regalo[];
   };
   libre: {
+    titulo: string;
+    boton: string;
+  };
+  confirmacion: {
     kicker: string;
     titulo: string;
     texto: string;
-    sugeridos: number[];
+    /**
+     * Id del formulario de Formspree (la parte final de
+     * https://formspree.io/f/XXXXXXX). Vacío = el formulario se muestra pero
+     * avisa que todavía no está conectado.
+     */
+    formspreeId: string;
   };
   pie: {
     despedida: string;

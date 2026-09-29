@@ -53,7 +53,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="es-CL"
       className={`${instrument.variable} ${garamond.variable} ${caveat.variable} ${plexMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {/* Sin JavaScript no corre el observador que revela las secciones, así
+            que se anula el estado inicial escondido. */}
+        <noscript>
+          <style>{`[class*="revelar"] { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

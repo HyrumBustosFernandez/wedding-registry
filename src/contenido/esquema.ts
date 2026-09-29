@@ -17,6 +17,9 @@ export type Foto = {
   /** Ruta bajo /public, p. ej. '/fotos/portada.jpg'. */
   url: string;
   alt: string;
+  /** Medidas reales del archivo. El carrusel las usa para darle forma al marco. */
+  ancho?: number;
+  alto?: number;
 };
 
 /** Un dato suelto de la portada: FECHA / 21.11.2026. */
@@ -93,6 +96,7 @@ export type Contenido = {
   };
   libre: {
     titulo: string;
+    texto: string;
     boton: string;
   };
   confirmacion: {

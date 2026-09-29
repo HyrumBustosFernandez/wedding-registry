@@ -66,8 +66,9 @@
   margin-top: 1rem;
 }
 
-/* Angosto porque la ventana es vertical: a 44rem el marco quedaría altísimo. */
+/* El tope lo fija la foto más ancha del carrusel: a 22rem de alto pide
+   33rem más el marco, y con menos se le recortarían los costados. */
 .foto {
-  max-width: 28rem;
+  max-width: 40rem;
   margin: clamp(2.6rem, 8vw, 4.2rem) auto 0;
 }

@@ -3,6 +3,9 @@
 
 .marco {
   position: relative;
+  /* Se ajusta al ancho de la foto de turno en vez de estirarse. */
+  width: fit-content;
+  margin-inline: auto;
   background: #fff;
   padding: clamp(8px, 1.6vw, 14px);
   padding-bottom: var(--foto-chin);
@@ -12,14 +15,17 @@
   margin: 0;
 }
 
-/* Siete de las diez fotos son verticales, así que la ventana es vertical.
-   La proporción es fija: si cambiara con cada foto, el resto de la página
-   daría un salto cada siete segundos. */
+/* El marco toma la forma de cada foto. El alto se mantiene y lo que cambia
+   es el ancho: así el marco se ensancha y se angosta sin mover nada de lo
+   que viene debajo. El tope de 34rem del contenedor deja pasar entera a la
+   más ancha de las diez (1800x1276) sin recortar el alto. */
 .ventana {
   position: relative;
   overflow: hidden;
   background-color: var(--papel);
-  aspect-ratio: 4 / 5;
+  height: clamp(13rem, 44vw, 22rem);
+  aspect-ratio: var(--proporcion, 4 / 5);
+  transition: aspect-ratio 0.9s ease-in-out;
 }
 
 .lamina {
@@ -33,12 +39,13 @@
   opacity: 1;
 }
 
-/* `contain` y no `cover`: ninguna foto se recorta. Las que no llenan la
-   ventana descansan sobre el papel, como una copia sobre su paspartú. */
+/* La ventana ya tiene la forma de la foto activa, así que `cover` la llena
+   exacta y no recorta nada. Solo durante el fundido, mientras el marco se
+   mueve de una forma a la otra, la saliente se recorta un instante. */
 .imagen {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 /* Puntos de posición, discretos, bajo el marco. */
@@ -68,7 +75,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lamina {
+  .lamina,
+  .ventana {
     transition: none;
   }
 }

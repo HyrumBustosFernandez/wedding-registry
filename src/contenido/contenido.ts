@@ -83,6 +83,8 @@ export const CONTENIDO: Contenido = {
 
   libre: {
     titulo: 'Aporte voluntario',
+    texto:
+      'Nos complace mucho que seas parte de este hermoso momento en nuestras vidas. Si te gustaría seguir apoyándonos en esta nueva etapa, estaríamos muy agradecidos.',
     boton: 'Agregar',
   },
 

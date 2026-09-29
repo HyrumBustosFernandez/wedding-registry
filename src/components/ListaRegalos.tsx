@@ -3,7 +3,7 @@
 import type { Contenido } from '@/contenido/esquema';
 import type { Carrito, Orden } from '@/hooks/useCarrito';
 import { COPY } from '@/lib/copy';
-import { FilaRegalo } from './FilaRegalo';
+import { FichaRegalo } from './FichaRegalo';
 import estilos from './ListaRegalos.module.css';
 
 type Props = {
@@ -46,19 +46,16 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
         </div>
       </div>
 
-      <div className={estilos.lista}>
+      <div className={estilos.rejilla}>
         {carrito.regalosOrdenados.map((regalo) => (
-          <FilaRegalo
+          <FichaRegalo
             key={regalo.id}
             regalo={regalo}
-            cubierto={carrito.cubierto(regalo)}
-            enCarro={carrito.enCarro(regalo)}
-            lleno={carrito.lleno(regalo)}
-            mostrarMetas={opciones.mostrarMetas}
-            mostrarMiniatura={opciones.mostrarMiniaturas}
-            mostrarNota={opciones.mostrarNotas}
-            agregar={() => carrito.agregar(regalo)}
-            quitar={() => carrito.quitar(regalo)}
+            texto={carrito.montosTxt[regalo.id] ?? ''}
+            monto={carrito.montos[regalo.id] ?? 0}
+            alEscribir={(valor) => carrito.escribirMonto(regalo.id, valor)}
+            alConfirmar={() => carrito.confirmarMonto(regalo.id)}
+            alQuitar={() => carrito.quitarRegalo(regalo.id)}
           />
         ))}
       </div>

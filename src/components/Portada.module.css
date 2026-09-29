@@ -66,7 +66,8 @@
   margin-top: 1rem;
 }
 
+/* Angosto porque la ventana es vertical: a 44rem el marco quedaría altísimo. */
 .foto {
-  max-width: 44rem;
+  max-width: 28rem;
   margin: clamp(2.6rem, 8vw, 4.2rem) auto 0;
 }

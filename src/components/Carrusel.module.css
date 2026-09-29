@@ -12,11 +12,14 @@
   margin: 0;
 }
 
+/* Siete de las diez fotos son verticales, así que la ventana es vertical.
+   La proporción es fija: si cambiara con cada foto, el resto de la página
+   daría un salto cada siete segundos. */
 .ventana {
   position: relative;
   overflow: hidden;
   background-color: var(--papel);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
 }
 
 .lamina {
@@ -30,10 +33,12 @@
   opacity: 1;
 }
 
+/* `contain` y no `cover`: ninguna foto se recorta. Las que no llenan la
+   ventana descansan sobre el papel, como una copia sobre su paspartú. */
 .imagen {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* Puntos de posición, discretos, bajo el marco. */

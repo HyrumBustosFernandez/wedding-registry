@@ -43,7 +43,7 @@ export function Carrusel({ className }: { className?: string }) {
                 src={foto.url}
                 alt={foto.alt}
                 fill
-                sizes="(max-width: 48rem) 100vw, 44rem"
+                sizes="(max-width: 30rem) 100vw, 28rem"
                 /* Las dos primeras pesan para la primera impresión; el resto
                    puede esperar a que el navegador tenga tiempo. */
                 priority={i === 0}

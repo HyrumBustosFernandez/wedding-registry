@@ -1,6 +1,6 @@
 /* Banda de foto a sangre completa, al comienzo y al cierre de la página.
    Se funde con el blanco del sitio en vez de cortar en seco: de ahí que lleve
-   un degradado en el borde por donde continúa el contenido. */
+   un degradado largo en el borde por donde continúa el contenido. */
 
 .banda {
   position: relative;
@@ -9,11 +9,11 @@
 }
 
 .inicio {
-  height: clamp(20rem, 62vh, 34rem);
+  height: clamp(26rem, 82vh, 46rem);
 }
 
 .final {
-  height: clamp(16rem, 48vh, 28rem);
+  height: clamp(24rem, 74vh, 42rem);
 }
 
 .imagen {
@@ -32,7 +32,10 @@
   }
 }
 
-/* El velo que funde la foto con el fondo de la página. */
+/* El velo que funde la foto con el fondo de la página.
+   Son muchas paradas a propósito: un degradado lineal de dos puntos sobre una
+   foto deja una banda visible donde el ojo engancha el cambio de pendiente.
+   Estas paradas dibujan una curva suave, así el blanco entra sin borde. */
 .velo {
   position: absolute;
   inset: 0;
@@ -42,9 +45,17 @@
 .inicio .velo {
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.75) 88%,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.02) 22%,
+    rgba(255, 255, 255, 0.07) 34%,
+    rgba(255, 255, 255, 0.15) 44%,
+    rgba(255, 255, 255, 0.26) 53%,
+    rgba(255, 255, 255, 0.4) 62%,
+    rgba(255, 255, 255, 0.55) 70%,
+    rgba(255, 255, 255, 0.69) 78%,
+    rgba(255, 255, 255, 0.81) 85%,
+    rgba(255, 255, 255, 0.91) 91%,
+    rgba(255, 255, 255, 0.97) 96%,
     var(--fondo) 100%
   );
 }
@@ -52,9 +63,17 @@
 .final .velo {
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.75) 88%,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.02) 22%,
+    rgba(255, 255, 255, 0.07) 34%,
+    rgba(255, 255, 255, 0.15) 44%,
+    rgba(255, 255, 255, 0.26) 53%,
+    rgba(255, 255, 255, 0.4) 62%,
+    rgba(255, 255, 255, 0.55) 70%,
+    rgba(255, 255, 255, 0.69) 78%,
+    rgba(255, 255, 255, 0.81) 85%,
+    rgba(255, 255, 255, 0.91) 91%,
+    rgba(255, 255, 255, 0.97) 96%,
     var(--fondo) 100%
   );
 }

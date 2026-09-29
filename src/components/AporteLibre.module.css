@@ -11,7 +11,7 @@
   font-size: clamp(2rem, 7vw, 2.7rem);
   line-height: 1;
   color: var(--acento-osc);
-  margin-top: 0.4rem;
+  margin-bottom: 1.3rem;
 }
 
 .texto {
@@ -21,20 +21,7 @@
   margin: 0.8rem 0 1.5rem;
 }
 
-.sugeridos {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.9rem;
-}
-
 /* Los cuatro montos caen a 2×2 en pantallas angostas por el flex-basis. */
-.sugerido {
-  flex: 1 1 7rem;
-  min-height: 50px;
-  font-size: 0.95rem;
-  background: var(--fondo);
-}
 
 .entrada {
   display: flex;
@@ -61,21 +48,3 @@
 
 /* --- solo Modo edición --- */
 
-.sugeridoEditor {
-  display: flex;
-  align-items: center;
-  border: 1px dashed var(--acento-35);
-  border-radius: var(--radio-control);
-  background: var(--fondo);
-  padding: 0 0.5rem;
-}
-
-.sugeridoInput {
-  width: 100%;
-  min-height: 46px;
-  border: 0;
-  background: transparent;
-  font-size: 0.95rem;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-}

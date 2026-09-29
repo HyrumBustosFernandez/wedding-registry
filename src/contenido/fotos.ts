@@ -1,28 +1,46 @@
 import type { Foto } from './esquema';
 
 /**
- * Las fotos del sitio.
+ * Las fotos del sitio. Los archivos viven en `public/fotos/`.
  *
- * Para agregar una:
- *   1. Deja el archivo en `public/fotos/` (por ejemplo `public/fotos/portada.jpg`).
- *   2. Apunta acá a esa ruta, con un `alt` que describa lo que se ve.
- *   3. Despliega.
- *
- * Mientras una entrada sea `null` se dibuja el placeholder rayado del diseño,
- * así que el sitio se ve bien aunque falten fotos.
+ * Para cambiar una, se reemplaza el archivo o se apunta a otro nombre. Para
+ * agregar una al carrusel, basta con sumarla a `CARRUSEL`.
  */
 
-/** La foto grande de la portada, en marco polaroid. Ideal 1920×1080. */
-export const FOTO_PORTADA: Foto | null = null;
+/** Fondo a sangre completa del comienzo de la página, detrás de los nombres. */
+export const FONDO_INICIO: Foto = {
+  url: '/fotos/fondo-inicio.jpg',
+  alt: 'Ailyne y Jose',
+};
+
+/** Fondo a sangre completa del cierre de la página. */
+export const FONDO_FINAL: Foto = {
+  url: '/fotos/fondo-final.jpg',
+  alt: 'Ailyne y Jose',
+};
 
 /**
- * Las miniaturas cuadradas de la lista de regalos, por id de regalo.
- * Ideal ≥400×400. Los ids son los de `contenido.ts` (`regalo-japon`,
- * `regalo-ryokan`, …).
+ * Las fotos del carrusel, en orden. Se muestran 7 segundos cada una y vuelven
+ * a empezar al llegar al final.
  */
-export const FOTOS_REGALOS: Record<string, Foto> = {
-  // 'regalo-japon': { url: '/fotos/japon.jpg', alt: 'Calle de Tokio de noche' },
-};
+export const CARRUSEL: Foto[] = [
+  { url: '/fotos/galeria-01.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-02.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-03.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-04.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-05.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-06.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-07.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-08.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-09.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-10.jpg', alt: 'Ailyne y Jose' },
+];
+
+/** Segundos que se ve cada foto del carrusel antes de pasar a la siguiente. */
+export const SEGUNDOS_POR_FOTO = 7;
+
+/** Miniaturas cuadradas de la lista de regalos, por id de regalo. */
+export const FOTOS_REGALOS: Record<string, Foto> = {};
 
 /** La foto de un regalo, o null si todavía no tiene. */
 export function fotoDeRegalo(id: string): Foto | null {

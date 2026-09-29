@@ -74,17 +74,41 @@ Al final de ese archivo, en `opciones`, están los interruptores:
 | `estiloFoto` | `polaroid` | `polaroid` va inclinada, `marco` va recta |
 | `acento` | `#B06E6E` | Color de líneas, ondas y detalles |
 
+### Confirmación de asistencia
+
+El formulario manda las respuestas a **Formspree**. Para conectarlo:
+
+1. Crea un formulario gratis en [formspree.io](https://formspree.io).
+2. Copia el id de su URL (`https://formspree.io/f/XXXXXXX` → `XXXXXXX`).
+3. Pégalo en `confirmacion.formspreeId`, dentro de `contenido.ts`.
+4. Despliega.
+
+Sin ese id el formulario se ve igual, pero al enviar avisa que todavía no está
+conectado. No hay variables de entorno de por medio.
+
 ### Agregar fotos
 
-Las fotos van en **`src/contenido/fotos.ts`**:
+Las fotos van en **`src/contenido/fotos.ts`** y los archivos en `public/fotos/`:
 
-1. Deja el archivo en `public/fotos/`.
-2. Apúntalo en `FOTO_PORTADA` (la de portada) o en `FOTOS_REGALOS`, donde la
-   clave es el id del regalo.
-3. Despliega.
+| Constante | Dónde se ve |
+|---|---|
+| `FONDO_INICIO` | Banda a sangre completa que abre la página |
+| `FONDO_FINAL` | Banda a sangre completa que la cierra |
+| `CARRUSEL` | El carrusel de la portada, en orden |
+| `FOTOS_REGALOS` | Miniatura de cada regalo, por id |
 
-Mientras una entrada sea `null` se dibuja el placeholder rayado del diseño, así
-que el sitio se ve bien aunque falten fotos.
+El carrusel cambia sola cada `SEGUNDOS_POR_FOTO` (7 por defecto) y vuelve a
+empezar al llegar al final. Para sumar una foto basta con agregarla al arreglo.
+
+Conviene achicar las imágenes antes de subirlas; las originales de celular
+pesan varios MB cada una:
+
+```bash
+sips -s format jpeg -s formatOptions 72 -Z 1800 original.jpeg --out public/fotos/galeria-11.jpg
+```
+
+Mientras una miniatura de regalo no exista se dibuja el placeholder rayado del
+diseño, así que el sitio se ve bien aunque falten.
 
 ### Sin configuración
 

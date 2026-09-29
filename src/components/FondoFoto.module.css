@@ -1,0 +1,66 @@
+/* Banda de foto a sangre completa, al comienzo y al cierre de la página.
+   Se funde con el blanco del sitio en vez de cortar en seco: de ahí que lleve
+   un degradado en el borde por donde continúa el contenido. */
+
+.banda {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.inicio {
+  height: clamp(20rem, 62vh, 34rem);
+}
+
+.final {
+  height: clamp(16rem, 48vh, 28rem);
+}
+
+.imagen {
+  object-fit: cover;
+  object-position: center;
+  /* Acercamiento lentísimo: da vida sin que se note el movimiento. */
+  animation: acercar 28s ease-in-out infinite alternate;
+}
+
+@keyframes acercar {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+/* El velo que funde la foto con el fondo de la página. */
+.velo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.inicio .velo {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.75) 88%,
+    var(--fondo) 100%
+  );
+}
+
+.final .velo {
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.75) 88%,
+    var(--fondo) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imagen {
+    animation: none;
+  }
+}

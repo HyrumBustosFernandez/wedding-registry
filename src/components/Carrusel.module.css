@@ -1,0 +1,69 @@
+/* Carrusel dentro del marco polaroid: las fotos se cruzan en fundido, sin
+   desplazamiento lateral, para no pelear con la quietud del diseño. */
+
+.marco {
+  position: relative;
+  background: #fff;
+  padding: clamp(8px, 1.6vw, 14px);
+  padding-bottom: var(--foto-chin);
+  border: 1px solid rgba(20, 20, 20, 0.07);
+  box-shadow: var(--sombra-foto);
+  transform: rotate(var(--foto-giro));
+  margin: 0;
+}
+
+.ventana {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--papel);
+  aspect-ratio: 16 / 10;
+}
+
+.lamina {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease-in-out;
+}
+
+.activa {
+  opacity: 1;
+}
+
+.imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Puntos de posición, discretos, bajo el marco. */
+.puntos {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+}
+
+.punto {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 1px solid var(--acento);
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.punto:hover {
+  background: var(--acento-35);
+}
+
+.puntoActivo {
+  background: var(--acento);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lamina {
+    transition: none;
+  }
+}

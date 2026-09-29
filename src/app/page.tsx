@@ -1,9 +1,11 @@
 import { Confirmacion } from '@/components/Confirmacion';
 import { Encabezado } from '@/components/Encabezado';
+import { FondoDecorado } from '@/components/FondoDecorado';
 import { FondoFoto } from '@/components/FondoFoto';
 import { InfoBoda } from '@/components/InfoBoda';
 import { PieDePagina } from '@/components/PieDePagina';
 import { Portada } from '@/components/Portada';
+import { TituloPortada } from '@/components/TituloPortada';
 import { RevelarAlScroll } from '@/components/RevelarAlScroll';
 import { SeccionRegalos } from '@/components/SeccionRegalos';
 import { CONTENIDO } from '@/contenido/contenido';
@@ -13,13 +15,17 @@ import { variablesDeTema } from '@/lib/tema';
 
 export default function Pagina() {
   return (
-    <div style={variablesDeTema(CONTENIDO.opciones)}>
+    <div className="pagina" style={variablesDeTema(CONTENIDO.opciones)}>
+      <FondoDecorado />
+
       <Encabezado pareja={nombrePareja(CONTENIDO)} />
 
       <main>
-        {/* Abre con la foto a sangre completa, que se funde con el blanco de
-            la portada en vez de cortar en seco. */}
-        <FondoFoto foto={FONDO_INICIO} posicion="inicio" />
+        {/* Abre con la foto a sangre completa y los nombres encima, en la
+            franja de cielo donde no está la pareja. */}
+        <FondoFoto foto={FONDO_INICIO} posicion="inicio">
+          <TituloPortada contenido={CONTENIDO} />
+        </FondoFoto>
 
         <Portada contenido={CONTENIDO} />
 

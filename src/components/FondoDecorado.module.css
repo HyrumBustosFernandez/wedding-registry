@@ -1,0 +1,71 @@
+/* Capa fija detrás de todo. `fixed` y no `absolute` para que no crezca con la
+   página: son trece elementos pase lo que pase, y no aparecen ni desaparecen
+   al scrollear. */
+
+.capa {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* La luz que cruza. El difuminado está dentro del degradado, no en un
+   `filter`: así se pinta una vez y después solo se desplaza. */
+.luz {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 46rem;
+  height: 46rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(244, 234, 228, 0.9) 0%,
+    rgba(244, 234, 228, 0.55) 26%,
+    rgba(244, 234, 228, 0.22) 48%,
+    rgba(244, 234, 228, 0.06) 68%,
+    rgba(244, 234, 228, 0) 80%
+  );
+  animation: cruzar 150s ease-in-out infinite alternate;
+}
+
+@keyframes cruzar {
+  from {
+    transform: translate(-40%, -64%);
+  }
+  to {
+    transform: translate(85%, -36%);
+  }
+}
+
+/* Los pétalos. Cada uno flota en su propio ciclo, largo y desfasado, para que
+   nunca se muevan en bloque. */
+.petalo {
+  position: absolute;
+  border-radius: 60% 60% 55% 55% / 70% 70% 40% 40%;
+  background: var(--acento);
+  opacity: 0.13;
+  animation: flotar var(--dur) ease-in-out infinite alternate;
+  animation-delay: var(--retraso);
+}
+
+@keyframes flotar {
+  from {
+    transform: rotate(var(--giro)) translate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate(calc(var(--giro) + 24deg)) translate3d(0.9rem, -1.6rem, 0);
+  }
+}
+
+/* Sin movimiento queda la versión quieta, que es la que viste como opción 9. */
+@media (prefers-reduced-motion: reduce) {
+  .luz,
+  .petalo {
+    animation: none;
+  }
+  .luz {
+    transform: translate(20%, -50%);
+  }
+}

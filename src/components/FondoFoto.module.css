@@ -9,12 +9,30 @@
 }
 
 .inicio {
-  height: clamp(26rem, 82vh, 46rem);
+  height: clamp(32rem, 100vh, 58rem);
+}
+
+/* La pareja está al centro y algo bajo el medio de la foto; corriendo el
+   encuadre hacia arriba quedan enteros y el cielo llena la franja donde va
+   el título. */
+.inicio .imagen {
+  object-position: center 46%;
+}
+
+/* El título se apoya arriba, sobre el cielo. */
+.inicio .encima {
+  padding-top: clamp(3.5rem, 11vh, 7rem);
+  text-align: center;
 }
 
 .final {
   height: clamp(30rem, 92vh, 52rem);
-  border-top: 1px solid var(--linea);
+}
+
+/* El velo blanco le come saturación a la foto del cierre; esto se la devuelve
+   sin tocar el archivo, que sigue sirviendo para otra cosa. */
+.final .imagen {
+  filter: saturate(1.3) contrast(1.07);
 }
 
 /* Lo que va encima de la foto —el pie de página— se apoya en la franja más
@@ -58,17 +76,20 @@
 .inicio .velo {
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.02) 22%,
-    rgba(255, 255, 255, 0.07) 34%,
-    rgba(255, 255, 255, 0.15) 44%,
-    rgba(255, 255, 255, 0.26) 53%,
-    rgba(255, 255, 255, 0.4) 62%,
-    rgba(255, 255, 255, 0.55) 70%,
-    rgba(255, 255, 255, 0.69) 78%,
-    rgba(255, 255, 255, 0.81) 85%,
-    rgba(255, 255, 255, 0.91) 91%,
-    rgba(255, 255, 255, 0.97) 96%,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.76) 8%,
+    rgba(255, 255, 255, 0.62) 16%,
+    rgba(255, 255, 255, 0.44) 24%,
+    rgba(255, 255, 255, 0.26) 32%,
+    rgba(255, 255, 255, 0.12) 40%,
+    rgba(255, 255, 255, 0.04) 48%,
+    rgba(255, 255, 255, 0) 56%,
+    rgba(255, 255, 255, 0.06) 64%,
+    rgba(255, 255, 255, 0.18) 72%,
+    rgba(255, 255, 255, 0.36) 80%,
+    rgba(255, 255, 255, 0.58) 87%,
+    rgba(255, 255, 255, 0.79) 93%,
+    rgba(255, 255, 255, 0.94) 97%,
     var(--fondo) 100%
   );
 }

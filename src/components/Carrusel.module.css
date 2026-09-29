@@ -12,7 +12,10 @@
   border: 1px solid rgba(20, 20, 20, 0.07);
   box-shadow: var(--sombra-foto);
   transform: rotate(var(--foto-giro));
-  margin: 0;
+  /* `margin: 0` iba acá abajo y anulaba el auto de arriba: el marco quedaba
+     pegado a la izquierda, y con las fotos verticales —que son las
+     angostas— se notaba mucho. */
+  margin: 0 auto;
 }
 
 /* El marco toma la forma de cada foto. El alto se mantiene y lo que cambia
@@ -26,6 +29,7 @@
   height: clamp(13rem, 44vw, 22rem);
   aspect-ratio: var(--proporcion, 4 / 5);
   transition: aspect-ratio 0.9s ease-in-out;
+  margin-inline: auto;
 }
 
 .lamina {

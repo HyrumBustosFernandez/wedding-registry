@@ -1,6 +1,6 @@
 .portada {
   text-align: center;
-  padding: clamp(2.8rem, 10vw, 6.5rem) var(--pad-x) clamp(2.5rem, 7vw, 4rem);
+  padding: clamp(1.8rem, 5vw, 3rem) var(--pad-x) clamp(2.5rem, 7vw, 4rem);
 }
 
 .titulo {

@@ -58,3 +58,42 @@
   gap: clamp(1.6rem, 4vw, 2.6rem) clamp(1.2rem, 3vw, 2rem);
   margin-top: clamp(1.8rem, 5vw, 2.6rem);
 }
+
+/* El control de orden: una fila de chips, no un menú. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  font-family: var(--fuente-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--linea);
+  border-radius: 2px;
+  padding: 0.34rem 0.7rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.chip:hover {
+  color: var(--acento-osc);
+  border-color: var(--acento);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--acento-osc);
+  outline-offset: 2px;
+}
+
+/* El elegido se marca por relleno, no solo por color: a este tamaño el color
+   solo no alcanza para distinguirlo de un vistazo. */
+.chipActivo {
+  color: var(--acento-osc);
+  border-color: var(--acento);
+  background: var(--acento-12, rgba(176, 110, 110, 0.1));
+}

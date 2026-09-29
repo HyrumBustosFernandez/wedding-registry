@@ -1,0 +1,32 @@
+/* Los nombres sobre la foto de apertura. Sin sombra ni scrim: el velo de la
+   banda ya deja el cielo casi blanco ahí arriba, y una sombra sobre una
+   serif de este tamaño la ensucia. */
+
+.titular {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.kicker {
+  display: block;
+  color: #4b4341;
+}
+
+.titulo {
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 12vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin-top: 0.6rem;
+  color: var(--tinta);
+}
+
+/* La "y" manuscrita es el único uso de --acento en texto, y solo a este tamaño. */
+.conjuncion {
+  font-family: var(--fuente-mano);
+  font-size: 0.52em;
+  color: var(--acento-osc);
+  vertical-align: 0.18em;
+  padding: 0 0.1em;
+}

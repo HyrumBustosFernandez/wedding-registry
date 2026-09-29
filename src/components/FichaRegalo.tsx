@@ -5,6 +5,7 @@ import { fotoDeRegalo } from '@/contenido/fotos';
 import { clp } from '@/lib/clp';
 import { COPY } from '@/lib/copy';
 import { Foto } from './Foto';
+import { IlustracionRegalo } from './IlustracionRegalo';
 import estilos from './FichaRegalo.module.css';
 
 type Props = {
@@ -28,17 +29,18 @@ export function FichaRegalo({ regalo, texto, monto, alEscribir, alConfirmar, alQ
 
   return (
     <article className={`${estilos.ficha} ${elegido ? estilos.elegida : ''}`}>
-      <Foto
-        className={estilos.foto}
-        variante="mini"
-        ratio="1"
-        src={foto?.url}
-        alt={foto?.alt || COPY.foto.altRegalo(regalo.nombre)}
-        especificacion={COPY.foto.especificacionRegalo}
-      />
+      <div className={estilos.marcoFoto}>
+        <Foto
+          className={estilos.foto}
+          variante="mini"
+          ratio="1"
+          src={foto?.url}
+          alt={foto?.alt || COPY.foto.altRegalo(regalo.nombre)}
+        />
+        {!foto && <IlustracionRegalo id={regalo.id} />}
+      </div>
 
       <h3 className={estilos.nombre}>{regalo.nombre}</h3>
-      <p className={estilos.sugerido}>{COPY.regalos.sugerido(clp(regalo.precio))}</p>
 
       {elegido ? (
         <p className={estilos.puesto}>

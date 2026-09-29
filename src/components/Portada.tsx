@@ -5,19 +5,12 @@ import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Portada.module.css';
 
 export function Portada({ contenido }: { contenido: Contenido }) {
-  const { portada, pareja } = contenido;
+  const { portada } = contenido;
 
   return (
+    /* El rótulo y los nombres ya no están acá: van sobrepuestos a la foto de
+       apertura, en <TituloPortada>. */
     <section className={estilos.portada}>
-      <p className="kicker">{portada.kicker}</p>
-
-      <h1 className={estilos.titulo}>
-        {pareja.nombreUno}
-        <br />
-        <span className={estilos.conjuncion}>{pareja.conjuncion}</span>
-        {pareja.nombreDos}
-      </h1>
-
       <SubrayadoOndulado className={estilos.onda} />
 
       <div className={estilos.datos}>

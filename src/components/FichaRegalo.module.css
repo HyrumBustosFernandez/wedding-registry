@@ -8,9 +8,19 @@
   min-width: 0;
 }
 
+/* Envuelve la miniatura para poder poner el dibujo encima del papel cuando
+   el regalo todavía no tiene foto. */
+.marcoFoto {
+  position: relative;
+  transition: opacity 0.2s;
+}
+
 .foto {
   width: 100%;
-  transition: opacity 0.2s;
+}
+
+.elegida .marcoFoto {
+  opacity: 0.72;
 }
 
 .nombre {
@@ -114,6 +124,3 @@
   color: var(--acento-osc);
 }
 
-.elegida .foto {
-  opacity: 0.72;
-}

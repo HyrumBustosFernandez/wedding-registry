@@ -27,22 +27,24 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
           <p className={estilos.intro}>{regalos.intro}</p>
         </div>
 
-        <div className={estilos.orden}>
-          <label className={`kicker ${estilos.labelOrden}`} htmlFor="orden">
-            {COPY.regalos.ordenarLabel}
-          </label>
-          <select
-            id="orden"
-            className={estilos.select}
-            value={carrito.orden}
-            onChange={(e) => carrito.setOrden(e.target.value as Orden)}
-          >
+        {/* Chips en vez de un <select>: son cuatro opciones, caben a la
+            vista, y un menú desplegable obliga a abrirlo para saber qué hay. */}
+        <div className={estilos.orden} role="group" aria-label={COPY.regalos.ordenarLabel}>
+          <span className={`kicker ${estilos.labelOrden}`}>{COPY.regalos.ordenarLabel}</span>
+          <div className={estilos.chips}>
             {opcionesOrden.map((opcion) => (
-              <option key={opcion.valor} value={opcion.valor}>
-                {opcion.texto}
-              </option>
+              <button
+                key={opcion.valor}
+                type="button"
+                className={`${estilos.chip} ${carrito.orden === opcion.valor ? estilos.chipActivo : ''}`}
+                aria-pressed={carrito.orden === opcion.valor}
+                title={opcion.texto}
+                onClick={() => carrito.setOrden(opcion.valor as Orden)}
+              >
+                {opcion.corto}
+              </button>
             ))}
-          </select>
+          </div>
         </div>
       </div>
 

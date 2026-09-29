@@ -73,24 +73,28 @@
   );
 }
 
-/* El cierre se detiene en 0.86 y no en blanco opaco: la foto sigue asomando
-   detrás de la despedida, pero queda bastante lavada como para que el texto
-   oscuro se lea sin sombras ni trucos. */
+/* El cierre no elige un punto entre tapar la foto y mostrarla: recorre los
+   dos. Arriba es blanco puro, así que empalma con la página sin costura;
+   baja rápido hasta dejar la foto entrevista bajo la despedida, y de ahí
+   afloja poco a poco hasta la foto limpia al pie de la pantalla. */
 .final .velo {
   background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.02) 20%,
-    rgba(255, 255, 255, 0.06) 31%,
-    rgba(255, 255, 255, 0.13) 41%,
-    rgba(255, 255, 255, 0.23) 50%,
-    rgba(255, 255, 255, 0.35) 59%,
-    rgba(255, 255, 255, 0.48) 67%,
-    rgba(255, 255, 255, 0.6) 75%,
-    rgba(255, 255, 255, 0.74) 82%,
-    rgba(255, 255, 255, 0.83) 89%,
-    rgba(255, 255, 255, 0.89) 95%,
-    rgba(255, 255, 255, 0.91) 100%
+    to bottom,
+    var(--fondo) 0%,
+    rgba(255, 255, 255, 0.985) 3%,
+    rgba(255, 255, 255, 0.955) 6%,
+    rgba(255, 255, 255, 0.915) 10%,
+    rgba(255, 255, 255, 0.875) 14%,
+    rgba(255, 255, 255, 0.83) 19%,
+    rgba(255, 255, 255, 0.77) 25%,
+    rgba(255, 255, 255, 0.69) 33%,
+    rgba(255, 255, 255, 0.58) 42%,
+    rgba(255, 255, 255, 0.45) 52%,
+    rgba(255, 255, 255, 0.32) 63%,
+    rgba(255, 255, 255, 0.2) 74%,
+    rgba(255, 255, 255, 0.1) 85%,
+    rgba(255, 255, 255, 0.04) 93%,
+    rgba(255, 255, 255, 0) 100%
   );
 }
 

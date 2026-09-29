@@ -1,7 +1,6 @@
-import { nombrePareja, type Contenido } from '@/contenido/esquema';
-import { FOTO_PORTADA } from '@/contenido/fotos';
-import { COPY } from '@/lib/copy';
-import { Foto } from './Foto';
+import type { Contenido } from '@/contenido/esquema';
+import { Carrusel } from './Carrusel';
+import { RevelarAlScroll } from './RevelarAlScroll';
 import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Portada.module.css';
 
@@ -35,15 +34,9 @@ export function Portada({ contenido }: { contenido: Contenido }) {
       <blockquote className={estilos.cita}>{portada.cita}</blockquote>
       <p className={estilos.firma}>{portada.firma}</p>
 
-      <Foto
-        className={estilos.foto}
-        variante="grande"
-        ratio="16 / 10"
-        src={FOTO_PORTADA?.url}
-        alt={FOTO_PORTADA?.alt || COPY.foto.altPortada(nombrePareja(contenido))}
-        especificacion={COPY.foto.especificacionPortada}
-        pie={portada.pieFoto}
-      />
+      <RevelarAlScroll className={estilos.foto}>
+        <Carrusel />
+      </RevelarAlScroll>
     </section>
   );
 }

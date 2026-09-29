@@ -16,19 +16,17 @@ import { VERSION_ESQUEMA } from './esquema';
 export const CONTENIDO: Contenido = {
   version: VERSION_ESQUEMA,
 
-  pareja: { nombreUno: 'Antonia', conjuncion: 'y', nombreDos: 'Cristóbal' },
+  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'Jose' },
 
   portada: {
     kicker: 'Nos casamos',
     datos: [
-      { id: 'dato-fecha', kicker: 'Fecha', valor: '21.11.2026', numerico: true },
-      { id: 'dato-lugar', kicker: 'Lugar', valor: 'Casablanca', numerico: false },
-      { id: 'dato-hora', kicker: 'Hora', valor: '17:00', numerico: true },
+      { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
+      { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
     ],
     cita:
       'Siete años arrendando y por fin tenemos casa. Está bastante vacía, pero no queremos tres jugueras. Armamos esta lista con las cosas que de verdad vamos a usar y los viajes que llevamos años prometiéndonos.',
     firma: '— los dos, desde el living sin sillón',
-    pieFoto: 'La casa nueva, el primer día',
   },
 
   boda: {
@@ -62,7 +60,7 @@ export const CONTENIDO: Contenido = {
     ],
     enlace: {
       texto: 'Cómo llegar',
-      href: 'https://maps.google.com/?q=Vi%C3%B1a+Matetic+Casablanca',
+      href: 'https://maps.app.goo.gl/V3K8g8Nxh2FX8VySA?g_st=iw',
     },
   },
 
@@ -84,17 +82,22 @@ export const CONTENIDO: Contenido = {
   },
 
   libre: {
-    kicker: 'Sin elegir nada de la lista',
-    titulo: 'Aporte libre',
-    texto:
-      'Si prefieres no elegir, también sirve. Pon el monto que quieras y lo usamos en lo que más falte.',
-    sugeridos: [20000, 30000, 50000, 100000],
+    titulo: 'Aporte voluntario',
+    boton: 'Agregar',
+  },
+
+  confirmacion: {
+    kicker: 'Cuéntanos',
+    titulo: '¡Confirma si podrás acompañarnos!',
+    texto: 'Nos ayuda muchísimo saberlo con tiempo para organizar todo.',
+    /* Crea el formulario en formspree.io y pega acá el id de su URL. */
+    formspreeId: '',
   },
 
   pie: {
-    despedida: 'Nos vemos en noviembre',
-    detalle: 'Antonia & Cristóbal · 21 de noviembre de 2026 · Valle de Casablanca',
-    correo: 'hola@antoniaycristobal.cl',
+    despedida: 'Nos vemos en febrero',
+    detalle: 'Ailyne & Jose · 5 de febrero de 2027',
+    correo: '',
   },
 
   opciones: {

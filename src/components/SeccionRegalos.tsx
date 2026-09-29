@@ -32,7 +32,6 @@ export function SeccionRegalos({ contenido }: { contenido: Contenido }) {
             libre={contenido.libre}
             valor={carrito.libreTxt}
             alEscribir={carrito.escribirLibre}
-            alFijarTexto={carrito.setLibreTxt}
             alConfirmar={carrito.confirmarLibre}
           />
 

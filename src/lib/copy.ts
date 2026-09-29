@@ -9,14 +9,12 @@
 export const COPY = {
   nav: [
     { texto: 'La boda', href: '#boda' },
+    { texto: 'Confirmar', href: '#confirmar' },
     { texto: 'Los regalos', href: '#regalos' },
-    { texto: 'Aporte libre', href: '#libre' },
   ],
 
   foto: {
-    especificacionPortada: 'foto principal · 1920×1080',
     especificacionRegalo: 'foto · 1:1',
-    altPortada: (pareja: string) => `Foto de ${pareja}`,
     altRegalo: (nombre: string) => `Foto de ${nombre}`,
   },
 
@@ -39,10 +37,8 @@ export const COPY = {
   },
 
   libre: {
-    sugeridosLabel: 'Montos sugeridos',
-    inputLabel: 'Otro monto',
-    inputPlaceholder: 'Otro monto',
-    agregar: 'Agregar aporte',
+    inputLabel: 'Monto del aporte',
+    inputPlaceholder: 'Monto',
   },
 
   barra: {

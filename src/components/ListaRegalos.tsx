@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import type { Contenido } from '@/contenido/esquema';
 import type { Carrito, Orden } from '@/hooks/useCarrito';
 import { COPY } from '@/lib/copy';
@@ -12,7 +14,11 @@ type Props = {
   opciones: Contenido['opciones'];
 };
 
+/* Cuántos se ven antes de expandir. Cuatro es una fila entera en escritorio. */
+const A_LA_VISTA = 4;
+
 export function ListaRegalos({ carrito, regalos, opciones }: Props) {
+  const [expandida, setExpandida] = useState(false);
   /* "Los que más faltan" no significa nada sin metas. */
   const opcionesOrden = COPY.regalos.opcionesOrden.filter(
     (o) => o.valor !== 'faltan' || opciones.mostrarMetas,
@@ -49,7 +55,7 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
       </div>
 
       <div className={estilos.rejilla}>
-        {carrito.regalosOrdenados.map((regalo) => (
+        {(expandida ? carrito.regalosOrdenados : carrito.regalosOrdenados.slice(0, A_LA_VISTA)).map((regalo) => (
           <FichaRegalo
             key={regalo.id}
             regalo={regalo}
@@ -61,6 +67,22 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
           />
         ))}
       </div>
+
+      {carrito.regalosOrdenados.length > A_LA_VISTA && (
+        <div className={estilos.masCaja}>
+          <button
+            type="button"
+            className={estilos.mas}
+            aria-expanded={expandida}
+            onClick={() => setExpandida((v) => !v)}
+          >
+            <span className={estilos.masTexto}>
+              {expandida ? COPY.regalos.verMenos : COPY.regalos.verTodos(carrito.regalosOrdenados.length)}
+            </span>
+            <span className={estilos.masFlecha} aria-hidden="true" />
+          </button>
+        </div>
+      )}
     </>
   );
 }

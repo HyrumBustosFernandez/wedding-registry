@@ -1,6 +1,8 @@
-/* Capa fija detrás de todo. `fixed` y no `absolute` para que no crezca con la
-   página: son trece elementos pase lo que pase, y no aparecen ni desaparecen
-   al scrollear. */
+/* Capa fija detrás de todo: pétalos que caen y una luz que cruza.
+   Acá se eligió que se vean por sobre que sean baratos, así que hay más
+   pétalos, más grandes y más opacos que en la maqueta. Aun así todo lo que
+   se anima es `transform` y `opacity`, las dos propiedades que el navegador
+   resuelve en el compositor sin rehacer diseño ni repintar. */
 
 .capa {
   position: fixed;
@@ -10,8 +12,8 @@
   pointer-events: none;
 }
 
-/* La luz que cruza. El difuminado está dentro del degradado, no en un
-   `filter`: así se pinta una vez y después solo se desplaza. */
+/* La luz que cruza. El difuminado va dentro del degradado y no en un
+   `filter`, que sobre algo en movimiento se recalcula en cada cuadro. */
 .luz {
   position: absolute;
   top: 50%;
@@ -21,11 +23,11 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(244, 234, 228, 0.9) 0%,
-    rgba(244, 234, 228, 0.55) 26%,
-    rgba(244, 234, 228, 0.22) 48%,
-    rgba(244, 234, 228, 0.06) 68%,
-    rgba(244, 234, 228, 0) 80%
+    rgba(244, 228, 228, 0.95) 0%,
+    rgba(244, 228, 228, 0.6) 26%,
+    rgba(244, 228, 228, 0.24) 48%,
+    rgba(244, 228, 228, 0.07) 68%,
+    rgba(244, 228, 228, 0) 80%
   );
   animation: cruzar 150s ease-in-out infinite alternate;
 }
@@ -39,33 +41,57 @@
   }
 }
 
-/* Los pétalos. Cada uno flota en su propio ciclo, largo y desfasado, para que
-   nunca se muevan en bloque. */
+/* El pétalo: un contenedor que cae en línea recta y, dentro, la forma que
+   gira y se mece. Separar las dos animaciones evita que se peleen por la
+   misma propiedad `transform`. */
 .petalo {
   position: absolute;
-  border-radius: 60% 60% 55% 55% / 70% 70% 40% 40%;
-  background: var(--acento);
-  opacity: 0.13;
-  animation: flotar var(--dur) ease-in-out infinite alternate;
+  top: -8vh;
+  animation: caer var(--dur) linear infinite;
   animation-delay: var(--retraso);
 }
 
-@keyframes flotar {
+.forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 62% 62% 48% 48% / 74% 74% 38% 38%;
+  background: linear-gradient(150deg, var(--rosa-claro) 0%, var(--rosa) 62%, var(--rosa-hondo) 100%);
+  opacity: var(--op);
+  animation: mecer calc(var(--dur) / 5) ease-in-out infinite alternate;
+  animation-delay: var(--retraso);
+}
+
+@keyframes caer {
   from {
-    transform: rotate(var(--giro)) translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: rotate(calc(var(--giro) + 24deg)) translate3d(0.9rem, -1.6rem, 0);
+    transform: translate3d(var(--deriva), 116vh, 0);
   }
 }
 
-/* Sin movimiento queda la versión quieta, que es la que viste como opción 9. */
+@keyframes mecer {
+  from {
+    transform: rotate(var(--giro)) scaleX(1);
+  }
+  to {
+    transform: rotate(calc(var(--giro) + 168deg)) scaleX(0.35);
+  }
+}
+
+/* Sin movimiento los pétalos se quedan repartidos y quietos: la versión que
+   viste como opción 9. */
 @media (prefers-reduced-motion: reduce) {
   .luz,
-  .petalo {
+  .petalo,
+  .forma {
     animation: none;
   }
   .luz {
     transform: translate(20%, -50%);
+  }
+  .petalo {
+    top: var(--quieto);
   }
 }

@@ -28,6 +28,8 @@ export const COPY = {
       { valor: 'nombre-asc', texto: 'Nombre A–Z', corto: 'A–Z' },
     ],
     aportar: 'Aportar',
+    verTodos: (n: number) => `Ver los ${n} regalos`,
+    verMenos: 'Ver menos',
     sugerido: (monto: string) => `Sugerido ${monto}`,
     aporteLabel: (nombre: string) => `Tu aporte para ${nombre}`,
     quitarAporte: 'Quitar',

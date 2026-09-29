@@ -97,3 +97,62 @@
   border-color: var(--acento);
   background: var(--acento-12, rgba(176, 110, 110, 0.1));
 }
+
+/* El botón de expandir. Va centrado y con una línea a cada lado, para que se
+   lea como el final de la rejilla y no como un botón suelto más. */
+.masCaja {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 2rem);
+  margin-top: clamp(2.2rem, 6vw, 3.2rem);
+}
+
+.masCaja::before,
+.masCaja::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--linea);
+}
+
+.mas {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--acento-osc);
+  background: transparent;
+  border: 1px solid var(--acento-35);
+  border-radius: 999px;
+  padding: 0.6rem 1.3rem;
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.mas:hover {
+  background: var(--acento-osc);
+  border-color: var(--acento-osc);
+  color: #fff;
+}
+
+.mas:focus-visible {
+  outline: 2px solid var(--acento-osc);
+  outline-offset: 3px;
+}
+
+/* Una punta de flecha dibujada con dos bordes: gira al expandir. */
+.masFlecha {
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.mas[aria-expanded="true"] .masFlecha {
+  transform: translateY(1px) rotate(-135deg);
+}

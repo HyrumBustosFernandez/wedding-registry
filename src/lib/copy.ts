@@ -13,6 +13,10 @@ export const COPY = {
     { texto: 'Los regalos', href: '#regalos' },
   ],
 
+  mapa: {
+    titulo: 'Mapa del lugar de la boda',
+  },
+
   foto: {
     especificacionRegalo: 'foto · 1:1',
     altRegalo: (nombre: string) => `Foto de ${nombre}`,

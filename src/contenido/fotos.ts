@@ -10,13 +10,13 @@ import type { Foto } from './esquema';
 /** Fondo a sangre completa del comienzo de la página, detrás de los nombres. */
 export const FONDO_INICIO: Foto = {
   url: '/fotos/fondo-inicio.jpg',
-  alt: 'Ailyne y Jose',
+  alt: 'Ailyne y José',
 };
 
 /** Fondo a sangre completa del cierre de la página. */
 export const FONDO_FINAL: Foto = {
   url: '/fotos/fondo-final.jpg',
-  alt: 'Ailyne y Jose',
+  alt: 'Ailyne y José',
 };
 
 /**
@@ -28,16 +28,16 @@ export const FONDO_FINAL: Foto = {
  * Si se agrega una foto, hay que anotar sus medidas acá.
  */
 export const CARRUSEL: Foto[] = [
-  { url: '/fotos/galeria-01.jpg', alt: 'Ailyne y Jose', ancho: 1800, alto: 1276 },
-  { url: '/fotos/galeria-02.jpg', alt: 'Ailyne y Jose', ancho: 1800, alto: 1199 },
-  { url: '/fotos/galeria-03.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
-  { url: '/fotos/galeria-04.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
-  { url: '/fotos/galeria-05.jpg', alt: 'Ailyne y Jose', ancho: 1800, alto: 1199 },
-  { url: '/fotos/galeria-06.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
-  { url: '/fotos/galeria-07.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
-  { url: '/fotos/galeria-08.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
-  { url: '/fotos/galeria-09.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
-  { url: '/fotos/galeria-10.jpg', alt: 'Ailyne y Jose', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-01.jpg', alt: 'Ailyne y José', ancho: 1800, alto: 1276 },
+  { url: '/fotos/galeria-02.jpg', alt: 'Ailyne y José', ancho: 1800, alto: 1199 },
+  { url: '/fotos/galeria-03.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-04.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-05.jpg', alt: 'Ailyne y José', ancho: 1800, alto: 1199 },
+  { url: '/fotos/galeria-06.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-07.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-08.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-09.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-10.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
 ];
 
 /** Segundos que se ve cada foto del carrusel antes de pasar a la siguiente. */

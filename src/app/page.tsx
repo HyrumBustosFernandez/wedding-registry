@@ -5,7 +5,6 @@ import { FondoFoto } from '@/components/FondoFoto';
 import { InfoBoda } from '@/components/InfoBoda';
 import { PieDePagina } from '@/components/PieDePagina';
 import { Portada } from '@/components/Portada';
-import { TituloPortada } from '@/components/TituloPortada';
 import { RevelarAlScroll } from '@/components/RevelarAlScroll';
 import { SeccionRegalos } from '@/components/SeccionRegalos';
 import { CONTENIDO } from '@/contenido/contenido';
@@ -21,11 +20,9 @@ export default function Pagina() {
       <Encabezado pareja={nombrePareja(CONTENIDO)} />
 
       <main>
-        {/* Abre con la foto a sangre completa y los nombres encima, en la
-            franja de cielo donde no está la pareja. */}
-        <FondoFoto foto={FONDO_INICIO} posicion="inicio">
-          <TituloPortada contenido={CONTENIDO} />
-        </FondoFoto>
+        {/* Abre con la foto a sangre completa y limpia: los nombres vienen
+            después, ya sobre el blanco de la página. */}
+        <FondoFoto foto={FONDO_INICIO} posicion="inicio" />
 
         <Portada contenido={CONTENIDO} />
 

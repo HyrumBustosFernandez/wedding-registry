@@ -36,9 +36,23 @@
   margin-top: 0.4rem;
 }
 
+/* El mapa toma el ancho del contenedor y una proporción fija, así reserva su
+   alto antes de cargar y la sección no salta cuando aparece. La saturación
+   baja lo acerca al resto de la página, que casi no tiene color. */
+.mapa {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 22rem;
+  margin-top: clamp(1.8rem, 5vw, 2.6rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-control);
+  filter: saturate(0.72);
+}
+
 .comoLlegar {
   display: inline-block;
-  margin-top: clamp(1.6rem, 4vw, 2.2rem);
+  margin-top: clamp(1.2rem, 3vw, 1.6rem);
   font-size: 0.95rem;
   border-bottom: 1px solid var(--acento);
   padding-bottom: 2px;

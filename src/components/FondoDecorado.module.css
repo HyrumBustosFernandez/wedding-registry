@@ -12,23 +12,44 @@
   pointer-events: none;
 }
 
-/* La luz que cruza. El difuminado va dentro del degradado y no en un
-   `filter`, que sobre algo en movimiento se recalcula en cada cuadro. */
+/* La nube de luz que cruza. Tres manchas ovaladas superpuestas en vez de un
+   círculo: un `radial-gradient(circle, ...)` se dimensiona hasta la esquina
+   más lejana de su caja, así que todavía tiene color cuando la caja termina y
+   el `overflow: hidden` de la capa lo corta en un rectángulo — el borde recto
+   que se veía cruzando la página. Cada mancha de acá está dada en porcentaje
+   de la caja y llega a transparente dentro de ella, y las tres están
+   descentradas entre sí, que es lo que le da forma de nube y no de globo.
+   El difuminado va dentro del degradado y no en un `filter`, que sobre algo
+   en movimiento se recalcula en cada cuadro. */
 .luz {
   position: absolute;
   top: 50%;
   left: 0;
-  width: 46rem;
-  height: 46rem;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(244, 228, 228, 0.95) 0%,
-    rgba(244, 228, 228, 0.6) 26%,
-    rgba(244, 228, 228, 0.24) 48%,
-    rgba(244, 228, 228, 0.07) 68%,
-    rgba(244, 228, 228, 0) 80%
-  );
+  width: 62rem;
+  height: 44rem;
+  background:
+    radial-gradient(
+      34% 30% at 33% 41%,
+      rgba(244, 228, 228, 0.78) 0%,
+      rgba(244, 228, 228, 0.42) 42%,
+      rgba(244, 228, 228, 0.14) 70%,
+      rgba(244, 228, 228, 0) 100%
+    ),
+    radial-gradient(
+      29% 25% at 63% 58%,
+      rgba(244, 228, 228, 0.68) 0%,
+      rgba(244, 228, 228, 0.36) 44%,
+      rgba(244, 228, 228, 0.11) 72%,
+      rgba(244, 228, 228, 0) 100%
+    ),
+    radial-gradient(
+      46% 42% at 50% 50%,
+      rgba(244, 228, 228, 0.5) 0%,
+      rgba(244, 228, 228, 0.28) 38%,
+      rgba(244, 228, 228, 0.1) 66%,
+      rgba(244, 228, 228, 0.03) 84%,
+      rgba(244, 228, 228, 0) 100%
+    );
   animation: cruzar 150s ease-in-out infinite alternate;
 }
 

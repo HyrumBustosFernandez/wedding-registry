@@ -1,32 +1,26 @@
-/* Los nombres sobre la foto de apertura. Sin sombra ni scrim: el velo de la
-   banda ya deja el cielo casi blanco ahí arriba, y una sombra sobre una
-   serif de este tamaño la ensucia. */
+/* El logo de la pareja, abriendo la portada bajo la foto. Hereda el centrado
+   de la sección; acá solo va la tipografía del lockup. */
 
-.titular {
-  max-width: 34rem;
-  margin-inline: auto;
-}
-
-.kicker {
-  display: block;
-  color: #4b4341;
-}
-
+/* De corrido en una línea; en pantallas angostas parte sola por los espacios
+   que deja la conjunción, que es donde tiene que partir. */
 .titulo {
   font-family: var(--fuente-display);
   font-weight: 400;
-  font-size: clamp(2.9rem, 12vw, 5.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.015em;
-  margin-top: 0.6rem;
+  font-size: clamp(2.4rem, 10vw, 5.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
   color: var(--tinta);
 }
 
-/* La "y" manuscrita es el único uso de --acento en texto, y solo a este tamaño. */
+/* La "y" manuscrita es el único uso de --acento en texto, y solo a este
+   tamaño: sobre blanco y a tamaño display pasa el 3:1 que pide el texto
+   grande. */
 .conjuncion {
   font-family: var(--fuente-mano);
-  font-size: 0.52em;
-  color: var(--acento-osc);
-  vertical-align: 0.18em;
-  padding: 0 0.1em;
+  font-size: 0.72em;
+  color: var(--acento);
+  vertical-align: 0.06em;
+  padding: 0 0.16em;
 }

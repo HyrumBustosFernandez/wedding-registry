@@ -16,7 +16,7 @@ import { VERSION_ESQUEMA } from './esquema';
 export const CONTENIDO: Contenido = {
   version: VERSION_ESQUEMA,
 
-  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'Jose' },
+  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'José' },
 
   portada: {
     kicker: 'Nos casamos',
@@ -24,9 +24,7 @@ export const CONTENIDO: Contenido = {
       { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
       { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
     ],
-    cita:
-      'Siete años arrendando y por fin tenemos casa. Está bastante vacía, pero no queremos tres jugueras. Armamos esta lista con las cosas que de verdad vamos a usar y los viajes que llevamos años prometiéndonos.',
-    firma: '— los dos, desde el living sin sillón',
+    firma: 'La definición de lugar feliz',
   },
 
   boda: {
@@ -61,6 +59,7 @@ export const CONTENIDO: Contenido = {
     enlace: {
       texto: 'Cómo llegar',
       href: 'https://maps.app.goo.gl/V3K8g8Nxh2FX8VySA?g_st=iw',
+      consulta: 'Donde Carlitos, Tránsito Guerra 221, Limache, Valparaíso',
     },
   },
 
@@ -185,7 +184,7 @@ export const CONTENIDO: Contenido = {
 
   pie: {
     despedida: 'Nos vemos en febrero',
-    detalle: 'Ailyne & Jose · 5 de febrero de 2027',
+    detalle: 'Ailyne & José · 5 de febrero de 2027',
     correo: '',
   },
 

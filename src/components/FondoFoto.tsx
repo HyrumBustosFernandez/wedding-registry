@@ -15,16 +15,20 @@ type Props = {
 export function FondoFoto({ foto, posicion, children }: Props) {
   return (
     <div className={`${estilos.banda} ${estilos[posicion]}`}>
-      <Image
-        className={estilos.imagen}
-        src={foto.url}
-        alt={foto.alt}
-        fill
-        sizes="100vw"
-        priority={posicion === 'inicio'}
-        quality={80}
-      />
-      <div className={estilos.velo} />
+      {/* La foto y su velo van juntos en una caja aparte porque la caja lleva
+          la máscara que los desvanece, y lo que va encima no debe heredarla. */}
+      <div className={estilos.marco}>
+        <Image
+          className={estilos.imagen}
+          src={foto.url}
+          alt={foto.alt}
+          fill
+          sizes="100vw"
+          priority={posicion === 'inicio'}
+          quality={80}
+        />
+        <div className={estilos.velo} />
+      </div>
       {children && <div className={estilos.encima}>{children}</div>}
     </div>
   );

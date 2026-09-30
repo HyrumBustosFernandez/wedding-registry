@@ -79,14 +79,19 @@ export type Contenido = {
   portada: {
     kicker: string;
     datos: DatoPortada[];
-    cita: string;
+    /** Pie de la portada: la línea manuscrita bajo el carrusel. */
     firma: string;
   };
   boda: {
     kicker: string;
     titulo: string;
     bloques: BloqueBoda[];
-    enlace: { texto: string; href: string };
+    enlace: {
+      texto: string;
+      href: string;
+      /** Lo que busca el mapa incrustado: dirección o nombre del lugar. */
+      consulta: string;
+    };
   };
   regalos: {
     kicker: string;

@@ -21,6 +21,9 @@ export function useCarrito(contenido: Contenido) {
   const { mostrarMetas } = contenido.opciones;
 
   const [carro, setCarro] = useState<Record<string, number>>({});
+  /* Monto escrito para cada regalo, y su texto en crudo mientras se escribe. */
+  const [montos, setMontos] = useState<Record<string, number>>({});
+  const [montosTxt, setMontosTxt] = useState<Record<string, string>>({});
   const [prog, setProg] = useState<Record<string, number>>({});
   const [libre, setLibre] = useState(0);
   const [libreTxt, setLibreTxt] = useState('');
@@ -69,30 +72,39 @@ export function useCarrito(contenido: Contenido) {
   }, [regalos, orden, regalados]);
 
   const lineas = useMemo<Linea[]>(() => {
-    const filas: Linea[] = regalos
-      .filter((r) => (carro[r.id] ?? 0) > 0)
-      .map((r) => {
-        const n = carro[r.id];
-        return {
+    const filas: Linea[] = [];
+
+    for (const r of regalos) {
+      /* Un regalo suma por una vía o por la otra: el monto escrito en la
+         rejilla, o las partes del control de metas. Nunca por las dos. */
+      const monto = montos[r.id] ?? 0;
+      if (monto > 0) {
+        filas.push({ clave: r.id, etiqueta: r.nombre, monto });
+        continue;
+      }
+      const n = carro[r.id] ?? 0;
+      if (n > 0) {
+        filas.push({
           clave: r.id,
           /* Sin metas, aportar una sola vez no necesita el "× 1". */
           etiqueta: n > 1 ? `${r.nombre} × ${n}` : r.nombre,
           monto: r.precio * n,
-        };
-      });
+        });
+      }
+    }
 
     if (libre > 0) {
       filas.push({ clave: 'libre', etiqueta: contenido.libre.titulo, monto: libre });
     }
 
     return filas;
-  }, [regalos, carro, libre, contenido.libre.titulo]);
+  }, [regalos, carro, montos, libre, contenido.libre.titulo]);
 
   const total = useMemo(() => lineas.reduce((suma, l) => suma + l.monto, 0), [lineas]);
 
   const cantidadRegalos = useMemo(
-    () => Object.values(carro).filter((n) => n > 0).length,
-    [carro],
+    () => lineas.filter((l) => l.clave !== 'libre').length,
+    [lineas],
   );
 
   /* ---- acciones del carrito ---- */
@@ -115,6 +127,37 @@ export function useCarrito(contenido: Contenido) {
     });
   }, []);
 
+  /** Lo que se escribe en la casilla de un regalo de la rejilla. */
+  const escribirMonto = useCallback((id: string, valor: string) => {
+    setMontosTxt((t) => ({ ...t, [id]: formatearInputMonto(valor) }));
+  }, []);
+
+  /** Fija el aporte de un regalo. Reemplaza el anterior; nunca acumula. */
+  const confirmarMonto = useCallback((id: string) => {
+    setMontos((m) => {
+      const monto = parsearMonto(montosTxt[id] ?? '');
+      const siguiente = { ...m };
+      if (monto > 0) siguiente[id] = monto;
+      else delete siguiente[id];
+      return siguiente;
+    });
+  }, [montosTxt]);
+
+  /** Saca un regalo del carrito, venga por monto o por partes. */
+  const quitarRegalo = useCallback((id: string) => {
+    setMontos((m) => {
+      const siguiente = { ...m };
+      delete siguiente[id];
+      return siguiente;
+    });
+    setMontosTxt((t) => ({ ...t, [id]: '' }));
+    setCarro((c) => {
+      const siguiente = { ...c };
+      delete siguiente[id];
+      return siguiente;
+    });
+  }, []);
+
   const escribirLibre = useCallback((valor: string) => {
     setLibreTxt(formatearInputMonto(valor));
   }, []);
@@ -128,6 +171,8 @@ export function useCarrito(contenido: Contenido) {
 
   const vaciar = useCallback(() => {
     setCarro({});
+    setMontos({});
+    setMontosTxt({});
     setLibre(0);
     setLibreTxt('');
   }, []);
@@ -169,6 +214,8 @@ export function useCarrito(contenido: Contenido) {
       });
     }
     setCarro({});
+    setMontos({});
+    setMontosTxt({});
     setLibre(0);
     setLibreTxt('');
     setPaso('listo');
@@ -189,11 +236,12 @@ export function useCarrito(contenido: Contenido) {
   }, []);
 
   return {
-    carro, libre, libreTxt, orden, paso, nombre, correo, mensaje, err, gracias, cierre,
+    carro, montos, montosTxt, libre, libreTxt, orden, paso, nombre, correo, mensaje, err, gracias, cierre,
     regalosOrdenados, regalados, enCarro, cubierto, lleno, lineas, total, cantidadRegalos,
     mostrarMetas,
     setOrden, setNombre, setCorreo, setMensaje,
-    agregar, quitar, escribirLibre, setLibreTxt, confirmarLibre, vaciar,
+    agregar, quitar, escribirMonto, confirmarMonto, quitarRegalo,
+    escribirLibre, setLibreTxt, confirmarLibre, vaciar,
     continuar, irAPagar, pagar, completarPago, volver, volverALista,
   };
 }

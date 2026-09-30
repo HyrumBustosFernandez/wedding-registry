@@ -11,7 +11,7 @@
   font-size: clamp(2rem, 7vw, 2.7rem);
   line-height: 1;
   color: var(--acento-osc);
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.9rem;
 }
 
 .texto {
@@ -48,3 +48,11 @@
 
 /* --- solo Modo edición --- */
 
+
+/* Lo que los novios quieren decir antes de pedir nada. */
+.texto {
+  max-width: 34rem;
+  color: var(--tinta-suave, var(--ink-muted));
+  line-height: 1.6;
+  margin: 0 auto 1.6rem;
+}

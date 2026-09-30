@@ -16,7 +16,7 @@ import { VERSION_ESQUEMA } from './esquema';
 export const CONTENIDO: Contenido = {
   version: VERSION_ESQUEMA,
 
-  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'Jose' },
+  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'José' },
 
   portada: {
     kicker: 'Nos casamos',
@@ -24,9 +24,7 @@ export const CONTENIDO: Contenido = {
       { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
       { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
     ],
-    cita:
-      'Siete años arrendando y por fin tenemos casa. Está bastante vacía, pero no queremos tres jugueras. Armamos esta lista con las cosas que de verdad vamos a usar y los viajes que llevamos años prometiéndonos.',
-    firma: '— los dos, desde el living sin sillón',
+    firma: 'La definición de lugar feliz',
   },
 
   boda: {
@@ -61,6 +59,7 @@ export const CONTENIDO: Contenido = {
     enlace: {
       texto: 'Cómo llegar',
       href: 'https://maps.app.goo.gl/V3K8g8Nxh2FX8VySA?g_st=iw',
+      consulta: 'Donde Carlitos, Tránsito Guerra 221, Limache, Valparaíso',
     },
   },
 
@@ -69,20 +68,109 @@ export const CONTENIDO: Contenido = {
     titulo: 'Cosas que sí vamos a usar',
     intro: 'Elige lo que quieras regalar y aporta el monto que te acomode.',
     items: [
-      { id: 'regalo-japon', nombre: 'Pasajes a Japón', precio: 180000, objetivo: null, regalados: 0, nota: 'El viaje que venimos hablando desde la primera cita.' },
-      { id: 'regalo-ryokan', nombre: 'Noche en un ryokan', precio: 95000, objetivo: null, regalados: 0, nota: 'Dormir en tatami y desayunar mirando un jardín.' },
-      { id: 'regalo-cena', nombre: 'La cena de aniversario', precio: 60000, objetivo: null, regalados: 0, nota: 'Nos comprometimos a salir a comer cada 21 de noviembre.' },
-      { id: 'regalo-sartenes', nombre: 'Sartenes de fierro', precio: 45000, objetivo: null, regalados: 0, nota: 'El set que queremos dura cincuenta años.' },
-      { id: 'regalo-coreano', nombre: 'Clases de coreano', precio: 35000, objetivo: null, regalados: 0, nota: 'Empezamos por los dramas y ya no hay vuelta atrás.' },
-      { id: 'regalo-mudanza', nombre: 'La mudanza a la casa', precio: 70000, objetivo: null, regalados: 0, nota: 'Camión, cajas y alguien que suba el sillón por la escalera.' },
-      { id: 'regalo-termas', nombre: 'Termas de Chillán', precio: 50000, objetivo: null, regalados: 0, nota: 'Tres días de agua caliente en septiembre, sin teléfono.' },
-      { id: 'regalo-limonero', nombre: 'El limonero del patio', precio: 25000, objetivo: null, regalados: 0, nota: 'La idea es hacer pisco sour con sus limones en diez años.' },
-      { id: 'regalo-camara', nombre: 'La cámara del viaje', precio: 220000, objetivo: null, regalados: 0, nota: 'Para no volver de Japón con puras fotos de celular.' },
+      {
+        id: 'plancha',
+        nombre: 'La plancha',
+        nota: 'Para que la ropa de trabajo deje de ir arrugada.',
+        precio: 35000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'sillon',
+        nombre: 'El sillón del living',
+        nota: 'El mueble que falta desde que nos mudamos.',
+        precio: 220000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'sabanas',
+        nombre: 'Juego de sábanas',
+        nota: 'Dos juegos, para poder lavar uno y dormir con el otro.',
+        precio: 55000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'batidora',
+        nombre: 'La batidora',
+        nota: 'Ella hace queques, yo lavo el bol.',
+        precio: 70000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'ollas',
+        nombre: 'Set de ollas',
+        nota: 'Tenemos tres sartenes y ninguna olla grande.',
+        precio: 95000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'lampara',
+        nombre: 'Lámpara de pie',
+        nota: 'El living tiene una sola luz y es del techo.',
+        precio: 45000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'aspiradora',
+        nombre: 'La aspiradora',
+        nota: 'Con el perro en casa dejó de ser opcional.',
+        precio: 120000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'vajilla',
+        nombre: 'Vajilla para seis',
+        nota: 'Para cuando vengan a vernos y seamos más de cuatro.',
+        precio: 80000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'tostadora',
+        nombre: 'La tostadora',
+        nota: 'Todas las mañanas, sin excepción.',
+        precio: 30000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'alfombra',
+        nombre: 'Alfombra del living',
+        nota: 'El piso es frío y en julio se nota.',
+        precio: 65000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'espejo',
+        nombre: 'Espejo de cuerpo entero',
+        nota: 'Nos vestimos adivinando.',
+        precio: 50000,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'hervidor',
+        nombre: 'El hervidor',
+        nota: 'El nuestro tarda cinco minutos y silba raro.',
+        precio: 25000,
+        objetivo: null,
+        regalados: 0,
+      },
     ],
   },
 
   libre: {
     titulo: 'Aporte voluntario',
+    texto:
+      'Nos complace mucho que seas parte de este hermoso momento en nuestras vidas. Si te gustaría seguir apoyándonos en esta nueva etapa, estaríamos muy agradecidos.',
     boton: 'Agregar',
   },
 
@@ -96,7 +184,7 @@ export const CONTENIDO: Contenido = {
 
   pie: {
     despedida: 'Nos vemos en febrero',
-    detalle: 'Ailyne & Jose · 5 de febrero de 2027',
+    detalle: 'Ailyne & José · 5 de febrero de 2027',
     correo: '',
   },
 

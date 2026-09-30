@@ -1,0 +1,126 @@
+/* Una celda de la rejilla. Sin caja, sin sombra y sin borde: lo único que
+   dibuja un contorno es el marco de la foto, que ya lo traía. La lista tiene
+   que leerse como un catálogo tranquilo, no competir con las fotos grandes. */
+
+.ficha {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Envuelve la miniatura para poder poner el dibujo encima del papel cuando
+   el regalo todavía no tiene foto. */
+.marcoFoto {
+  position: relative;
+  transition: opacity 0.2s;
+}
+
+.foto {
+  width: 100%;
+}
+
+.elegida .marcoFoto {
+  opacity: 0.72;
+}
+
+.nombre {
+  font-family: var(--fuente-texto, inherit);
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0.85rem 0 0;
+}
+
+.sugerido {
+  font-family: var(--fuente-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin: 0.3rem 0 0;
+}
+
+/* La casilla del aporte: una línea, no una caja. */
+.entrada {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--tinta);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--linea);
+  padding: 0.35rem 0;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-bottom-color: var(--acento);
+  outline: none;
+}
+
+.agregar {
+  flex: 0 0 auto;
+  font-family: var(--fuente-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acento-osc);
+  background: transparent;
+  border: 1px solid var(--linea);
+  border-radius: 2px;
+  padding: 0 0.7rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.agregar:hover {
+  border-color: var(--acento);
+  background: var(--acento-12, rgba(176, 110, 110, 0.1));
+}
+
+.agregar:focus-visible,
+.quitar:focus-visible {
+  outline: 2px solid var(--acento-osc);
+  outline-offset: 2px;
+}
+
+/* Ya aportado: el monto en claro y la salida discreta al lado. */
+.puesto {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid var(--acento-35);
+  margin: 0.8rem 0 0;
+  padding-top: 0.55rem;
+}
+
+.montoPuesto {
+  font-family: var(--fuente-display);
+  font-size: 1.05rem;
+  color: var(--acento-osc);
+  font-variant-numeric: tabular-nums;
+}
+
+.quitar {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.quitar:hover {
+  color: var(--acento-osc);
+}
+

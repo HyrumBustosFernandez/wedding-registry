@@ -13,6 +13,10 @@ export const COPY = {
     { texto: 'Los regalos', href: '#regalos' },
   ],
 
+  mapa: {
+    titulo: 'Mapa del lugar de la boda',
+  },
+
   foto: {
     especificacionRegalo: 'foto · 1:1',
     altRegalo: (nombre: string) => `Foto de ${nombre}`,
@@ -21,13 +25,18 @@ export const COPY = {
   regalos: {
     ordenarLabel: 'Ordenar',
     opcionesOrden: [
-      { valor: 'original', texto: 'Orden sugerido' },
-      { valor: 'precio-asc', texto: 'Precio: menor a mayor' },
-      { valor: 'precio-desc', texto: 'Precio: mayor a menor' },
-      { valor: 'faltan', texto: 'Los que más faltan' },
-      { valor: 'nombre-asc', texto: 'Nombre A–Z' },
+      { valor: 'original', texto: 'Orden sugerido', corto: 'Sugerido' },
+      { valor: 'precio-asc', texto: 'Precio: menor a mayor', corto: 'Menor precio' },
+      { valor: 'precio-desc', texto: 'Precio: mayor a menor', corto: 'Mayor precio' },
+      { valor: 'faltan', texto: 'Los que más faltan', corto: 'Los que faltan' },
+      { valor: 'nombre-asc', texto: 'Nombre A–Z', corto: 'A–Z' },
     ],
     aportar: 'Aportar',
+    verTodos: (n: number) => `Ver los ${n} regalos`,
+    verMenos: 'Ver menos',
+    sugerido: (monto: string) => `Sugerido ${monto}`,
+    aporteLabel: (nombre: string) => `Tu aporte para ${nombre}`,
+    quitarAporte: 'Quitar',
     regalar: 'Regalar',
     completo: 'Completo',
     completoGracias: 'Completo — gracias',

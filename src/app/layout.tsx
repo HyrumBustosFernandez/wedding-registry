@@ -38,7 +38,7 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: `${nombrePareja(CONTENIDO)} · Lista de regalos`,
-  description: CONTENIDO.portada.cita,
+  description: CONTENIDO.regalos.intro,
 };
 
 export const viewport: Viewport = {

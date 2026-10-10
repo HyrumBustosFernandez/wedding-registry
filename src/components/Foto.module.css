@@ -35,12 +35,10 @@
   );
 }
 
+/* Las miniaturas de la lista no llevan trama: cuando no hay foto muestran un
+   dibujo a línea, y las rayas de fondo le comen el trazo. */
 .mini .interior:not(.conFoto) {
-  background-image: repeating-linear-gradient(
-    135deg,
-    var(--acento-22) 0 4px,
-    transparent 4px 9px
-  );
+  background-image: none;
 }
 
 .imagen {

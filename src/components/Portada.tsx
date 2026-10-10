@@ -2,21 +2,18 @@ import type { Contenido } from '@/contenido/esquema';
 import { Carrusel } from './Carrusel';
 import { RevelarAlScroll } from './RevelarAlScroll';
 import { SubrayadoOndulado } from './SubrayadoOndulado';
+import { TituloPortada } from './TituloPortada';
 import estilos from './Portada.module.css';
 
 export function Portada({ contenido }: { contenido: Contenido }) {
-  const { portada, pareja } = contenido;
+  const { portada } = contenido;
 
   return (
+    /* Los nombres abren la sección, justo debajo de la foto de apertura y ya
+       sobre el blanco de la página: el logo se lee sobre su propio fondo y no
+       sobre el cielo de la foto. */
     <section className={estilos.portada}>
-      <p className="kicker">{portada.kicker}</p>
-
-      <h1 className={estilos.titulo}>
-        {pareja.nombreUno}
-        <br />
-        <span className={estilos.conjuncion}>{pareja.conjuncion}</span>
-        {pareja.nombreDos}
-      </h1>
+      <TituloPortada contenido={contenido} />
 
       <SubrayadoOndulado className={estilos.onda} />
 
@@ -31,12 +28,12 @@ export function Portada({ contenido }: { contenido: Contenido }) {
         ))}
       </div>
 
-      <blockquote className={estilos.cita}>{portada.cita}</blockquote>
-      <p className={estilos.firma}>{portada.firma}</p>
-
       <RevelarAlScroll className={estilos.foto}>
         <Carrusel />
       </RevelarAlScroll>
+
+      {/* La firma cierra la portada: es el pie del carrusel, no del texto. */}
+      <p className={estilos.firma}>{portada.firma}</p>
     </section>
   );
 }

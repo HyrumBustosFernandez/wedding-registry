@@ -1,19 +1,116 @@
 /* Banda de foto a sangre completa, al comienzo y al cierre de la página.
-   Se funde con el blanco del sitio en vez de cortar en seco: de ahí que lleve
-   un degradado en el borde por donde continúa el contenido. */
+
+   La foto no se tapa con blanco para fundirla: se desvanece. Pintar blanco
+   opaco encima resolvía el borde contra la página, pero de paso escondía la
+   capa de pétalos y luz que va detrás de todo, así que en el canto exacto de
+   la banda esa capa aparecía de golpe — la línea recta que cruzaba la página.
+   Con una máscara en su lugar, la banda termina en transparente y el fondo
+   decorativo corre por debajo sin interrupción. */
 
 .banda {
   position: relative;
-  overflow: hidden;
   width: 100%;
 }
 
+/* La caja que se desvanece: lleva la foto y su velo, y nada más. Las curvas
+   de las máscaras son largas a propósito; una rampa de dos puntos deja una
+   banda visible donde el ojo engancha el cambio de pendiente. */
+.marco {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-mask-image: var(--fundido);
+  mask-image: var(--fundido);
+}
+
 .inicio {
-  height: clamp(20rem, 62vh, 34rem);
+  height: clamp(32rem, 100vh, 58rem);
+}
+
+/* La pareja está al centro y algo bajo el medio de la foto; corriendo el
+   encuadre hacia arriba quedan enteros. */
+.inicio .imagen {
+  object-position: center 46%;
+}
+
+/* Entera arriba y disuelta al pie, para entregarle la página al contenido. */
+.inicio .marco {
+  --fundido: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 56%,
+    rgba(0, 0, 0, 0.94) 64%,
+    rgba(0, 0, 0, 0.82) 72%,
+    rgba(0, 0, 0, 0.64) 80%,
+    rgba(0, 0, 0, 0.42) 87%,
+    rgba(0, 0, 0, 0.21) 93%,
+    rgba(0, 0, 0, 0.06) 97%,
+    transparent 100%
+  );
+}
+
+/* Un lavado blanco en lo alto de la apertura: no sostiene texto, solo empalma
+   con el encabezado, que es blanco al 94%. */
+.inicio .velo {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.3) 8%,
+    rgba(255, 255, 255, 0.24) 16%,
+    rgba(255, 255, 255, 0.17) 24%,
+    rgba(255, 255, 255, 0.1) 32%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.02) 48%,
+    rgba(255, 255, 255, 0) 56%
+  );
 }
 
 .final {
-  height: clamp(16rem, 48vh, 28rem);
+  height: clamp(30rem, 92vh, 52rem);
+}
+
+/* El cierre recorre el camino inverso: nace transparente, así empalma con la
+   página sin costura, sube despacio hasta dejar la foto entrevista bajo la
+   despedida y llega entera al pie de la pantalla. */
+.final .marco {
+  --fundido: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.015) 3%,
+    rgba(0, 0, 0, 0.045) 6%,
+    rgba(0, 0, 0, 0.085) 10%,
+    rgba(0, 0, 0, 0.125) 14%,
+    rgba(0, 0, 0, 0.17) 19%,
+    rgba(0, 0, 0, 0.23) 25%,
+    rgba(0, 0, 0, 0.31) 33%,
+    rgba(0, 0, 0, 0.42) 42%,
+    rgba(0, 0, 0, 0.55) 52%,
+    rgba(0, 0, 0, 0.68) 63%,
+    rgba(0, 0, 0, 0.8) 74%,
+    rgba(0, 0, 0, 0.9) 85%,
+    rgba(0, 0, 0, 0.96) 93%,
+    #000 100%
+  );
+}
+
+/* Al desvanecerse, la foto del cierre se mezcla con el blanco de la página y
+   pierde saturación; esto se la devuelve sin tocar el archivo, que sigue
+   sirviendo para otra cosa. */
+.final .imagen {
+  filter: saturate(1.3) contrast(1.07);
+}
+
+/* Lo que va encima de la foto —el pie de página— se apoya en la franja más
+   clara, arriba del todo. Va fuera de `.marco` para que la máscara no se lo
+   lleve junto con la foto. */
+.encima {
+  position: absolute;
+  inset: 0 0 auto;
+  padding: clamp(2.4rem, 6vw, 3.4rem) var(--pad-x) 0;
+  /* La foto asoma detrás del texto, así que el gris del sitio se queda corto
+     de contraste: acá se oscurece lo justo para pasar 4.5:1 sobre el punto
+     más oscuro que la foto llega a poner bajo estas líneas. */
+  --ink-muted: #453e3c;
 }
 
 .imagen {
@@ -32,31 +129,10 @@
   }
 }
 
-/* El velo que funde la foto con el fondo de la página. */
 .velo {
   position: absolute;
   inset: 0;
   pointer-events: none;
-}
-
-.inicio .velo {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.75) 88%,
-    var(--fondo) 100%
-  );
-}
-
-.final .velo {
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.75) 88%,
-    var(--fondo) 100%
-  );
 }
 
 @media (prefers-reduced-motion: reduce) {

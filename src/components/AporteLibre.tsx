@@ -15,6 +15,7 @@ export function AporteLibre({ libre, valor, alEscribir, alConfirmar }: Props) {
   return (
     <section id="libre" className={estilos.panel}>
       <h3 className={estilos.titulo}>{libre.titulo}</h3>
+      <p className={estilos.texto}>{libre.texto}</p>
 
       <div className={estilos.entrada}>
         <label className="oculto-visual" htmlFor="montoLibre">

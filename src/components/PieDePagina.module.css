@@ -1,9 +1,7 @@
-/* Vive dentro de la sección de regalos, separado por su propia línea. */
+/* Vive encima de la banda de foto del cierre; la línea que lo separa de la
+   lista la pone la banda. */
 .pie {
-  border-top: 1px solid var(--linea);
   text-align: center;
-  padding: clamp(2.4rem, 6vw, 3.5rem) 0 clamp(2.5rem, 7vw, 4rem);
-  margin-top: clamp(2.4rem, 6vw, 3.5rem);
 }
 
 .despedida {

@@ -10,37 +10,49 @@ import type { Foto } from './esquema';
 /** Fondo a sangre completa del comienzo de la página, detrás de los nombres. */
 export const FONDO_INICIO: Foto = {
   url: '/fotos/fondo-inicio.jpg',
-  alt: 'Ailyne y Jose',
+  alt: 'Ailyne y José',
 };
 
 /** Fondo a sangre completa del cierre de la página. */
 export const FONDO_FINAL: Foto = {
   url: '/fotos/fondo-final.jpg',
-  alt: 'Ailyne y Jose',
+  alt: 'Ailyne y José',
 };
 
 /**
  * Las fotos del carrusel, en orden. Se muestran 7 segundos cada una y vuelven
  * a empezar al llegar al final.
+ *
+ * `ancho` y `alto` son las medidas reales del archivo: el marco toma la forma
+ * de cada foto, así ninguna se recorta ni queda con relleno a los costados.
+ * Si se agrega una foto, hay que anotar sus medidas acá.
  */
 export const CARRUSEL: Foto[] = [
-  { url: '/fotos/galeria-01.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-02.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-03.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-04.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-05.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-06.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-07.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-08.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-09.jpg', alt: 'Ailyne y Jose' },
-  { url: '/fotos/galeria-10.jpg', alt: 'Ailyne y Jose' },
+  { url: '/fotos/galeria-01.jpg', alt: 'Ailyne y José', ancho: 1800, alto: 1276 },
+  { url: '/fotos/galeria-02.jpg', alt: 'Ailyne y José', ancho: 1800, alto: 1199 },
+  { url: '/fotos/galeria-03.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-04.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-05.jpg', alt: 'Ailyne y José', ancho: 1800, alto: 1199 },
+  { url: '/fotos/galeria-06.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-07.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-08.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-09.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
+  { url: '/fotos/galeria-10.jpg', alt: 'Ailyne y José', ancho: 1200, alto: 1800 },
 ];
 
 /** Segundos que se ve cada foto del carrusel antes de pasar a la siguiente. */
 export const SEGUNDOS_POR_FOTO = 7;
 
 /** Miniaturas cuadradas de la lista de regalos, por id de regalo. */
-export const FOTOS_REGALOS: Record<string, Foto> = {};
+export const FOTOS_REGALOS: Record<string, Foto> = {
+  electrodomesticos: {
+    url: '/fotos/regalo-electrodomesticos.jpg',
+    alt: 'Lavadora, refrigerador, microondas y otros electrodomésticos',
+  },
+  cocina: { url: '/fotos/regalo-cocina.jpg', alt: 'Ollas, platos, cubiertos y utensilios de cocina' },
+  muebles: { url: '/fotos/regalo-muebles.jpg', alt: 'Mesa, sillas, cómoda y decoración' },
+  'ropa-blanca': { url: '/fotos/regalo-ropa-blanca.jpg', alt: 'Sábanas, toallas, cojines y cortinas' },
+};
 
 /** La foto de un regalo, o null si todavía no tiene. */
 export function fotoDeRegalo(id: string): Foto | null {

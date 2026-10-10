@@ -10,6 +10,12 @@ type Campos = { nombre: string; apellido: string; contacto: string };
 
 const VACIO: Campos = { nombre: '', apellido: '', contacto: '' };
 
+/** Las dos respuestas posibles, cada una con su explicación. */
+const RESPUESTAS = [
+  { asiste: true, titulo: 'Sí, ahí estaré', nota: 'Nos vemos el 5 de febrero.' },
+  { asiste: false, titulo: 'No podré ir', nota: 'Avísanos igual, nos sirve saberlo.' },
+] as const;
+
 export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confirmacion'] }) {
   const [campos, setCampos] = useState<Campos>(VACIO);
   const [asiste, setAsiste] = useState(true);
@@ -77,6 +83,26 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
       <p className={estilos.texto}>{confirmacion.texto}</p>
 
       <form className={estilos.formulario} onSubmit={enviar} noValidate>
+        {/* La respuesta se elige entre dos tarjetas y no con una casilla: así
+            nadie envía sin haber decidido, y quien no puede venir tiene una
+            opción que decir que sí y no solo una casilla que dejar vacía. */}
+        <div className={estilos.par} role="radiogroup" aria-label="¿Podrás acompañarnos?">
+          {RESPUESTAS.map((r) => (
+            <button
+              key={r.titulo}
+              type="button"
+              role="radio"
+              aria-checked={asiste === r.asiste}
+              className={`${estilos.tarjeta} ${asiste === r.asiste ? estilos.elegida : ''}`}
+              onClick={() => setAsiste(r.asiste)}
+            >
+              <span className={estilos.punto} aria-hidden="true" />
+              <strong className={estilos.tarjetaTitulo}>{r.titulo}</strong>
+              <span className={estilos.tarjetaNota}>{r.nota}</span>
+            </button>
+          ))}
+        </div>
+
         <div className={estilos.fila}>
           <div className={estilos.campo}>
             <label className={estilos.label} htmlFor="rsvp-nombre">
@@ -107,30 +133,15 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
 
         <div className={estilos.campo}>
           <label className={estilos.label} htmlFor="rsvp-contacto">
-            Información de contacto
+            Correo o teléfono
           </label>
           <input
             id="rsvp-contacto"
             className={estilos.input}
-            placeholder="Correo o teléfono"
             value={campos.contacto}
             onChange={set('contacto')}
           />
         </div>
-
-        <label className={estilos.casilla}>
-          <input
-            type="checkbox"
-            checked={asiste}
-            onChange={(e) => setAsiste(e.target.checked)}
-          />
-          <span>
-            <strong>Sí, ahí estaré</strong>
-            <em className={estilos.ayuda}>
-              Si no puedes acompañarnos, deja la casilla sin marcar y avísanos igual.
-            </em>
-          </span>
-        </label>
 
         {error && <p className={estilos.error}>{error}</p>}
 

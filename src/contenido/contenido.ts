@@ -16,7 +16,7 @@ import { VERSION_ESQUEMA } from './esquema';
 export const CONTENIDO: Contenido = {
   version: VERSION_ESQUEMA,
 
-  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'Jose' },
+  pareja: { nombreUno: 'Ailyne', conjuncion: 'y', nombreDos: 'José' },
 
   portada: {
     kicker: 'Nos casamos',
@@ -24,9 +24,7 @@ export const CONTENIDO: Contenido = {
       { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
       { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
     ],
-    cita:
-      'Siete años arrendando y por fin tenemos casa. Está bastante vacía, pero no queremos tres jugueras. Armamos esta lista con las cosas que de verdad vamos a usar y los viajes que llevamos años prometiéndonos.',
-    firma: '— los dos, desde el living sin sillón',
+    firma: 'La definición de lugar feliz',
   },
 
   boda: {
@@ -34,55 +32,78 @@ export const CONTENIDO: Contenido = {
     titulo: 'La boda',
     bloques: [
       {
-        id: 'bloque-ceremonia',
-        kicker: 'Ceremonia',
-        titulo: 'Viña Matetic',
-        texto: 'Ruta 66, Valle de Casablanca. Llega 17:00, empezamos 17:30 en punto.',
+        id: 'bloque-matrimonio',
+        kicker: 'Matrimonio',
+        titulo: '18:30 a 00:00 hrs',
+        texto:
+          'Les esperamos desde las 18:30 hrs. Comenzamos a las 19:00 hrs en punto, así que no se atrasen, y celebramos juntos hasta las 00:00 hrs.',
       },
       {
-        id: 'bloque-fiesta',
-        kicker: 'Fiesta',
-        titulo: 'Misma viña',
-        texto: 'Cóctel en la terraza, cena a las 20:00, música hasta que aguanten.',
+        id: 'bloque-plan',
+        kicker: 'Plan de boda',
+        titulo: 'Mucho que celebrar',
+        texto: 'Habrá cóctel, brindis, juegos, competencias y, por supuesto, ¡fiesta!',
       },
       {
         id: 'bloque-vestimenta',
         kicker: 'Vestimenta',
-        titulo: 'Formal de jardín',
-        texto: 'El pasto es pasto: los tacos aguja se hunden. Trae otro par para bailar.',
-      },
-      {
-        id: 'bloque-traslado',
-        kicker: 'Traslado',
-        titulo: 'Bus desde Santiago',
-        texto: 'Sale 15:00 desde Metro Manquehue, vuelve a las 03:00. Avísanos si lo tomas.',
+        titulo: 'Pasto y pista',
+        texto:
+          'La ceremonia será al aire libre, sobre pasto: los tacos aguja se hunden. Algunas actividades y la fiesta serán bajo techo con piso firme, así que trae un par de recambio para bailar.',
       },
     ],
     enlace: {
       texto: 'Cómo llegar',
       href: 'https://maps.app.goo.gl/V3K8g8Nxh2FX8VySA?g_st=iw',
+      consulta: 'Donde Carlitos, Tránsito Guerra 221, Limache, Valparaíso',
     },
   },
 
   regalos: {
     kicker: 'La lista',
-    titulo: 'Cosas que sí vamos a usar',
-    intro: 'Elige lo que quieras regalar y aporta el monto que te acomode.',
+    titulo: 'Nuestro primer hogar',
+    intro:
+      'Que nos acompañen en este día ya es el regalo más grande. Si además quieren ayudarnos a armar nuestro primer hogar, no hace falta comprar nada: cualquier aporte, del monto que sea, lo recibiremos con muchísimo cariño y gratitud. Estas son las cosas en que lo usaremos.',
     items: [
-      { id: 'regalo-japon', nombre: 'Pasajes a Japón', precio: 180000, objetivo: null, regalados: 0, nota: 'El viaje que venimos hablando desde la primera cita.' },
-      { id: 'regalo-ryokan', nombre: 'Noche en un ryokan', precio: 95000, objetivo: null, regalados: 0, nota: 'Dormir en tatami y desayunar mirando un jardín.' },
-      { id: 'regalo-cena', nombre: 'La cena de aniversario', precio: 60000, objetivo: null, regalados: 0, nota: 'Nos comprometimos a salir a comer cada 21 de noviembre.' },
-      { id: 'regalo-sartenes', nombre: 'Sartenes de fierro', precio: 45000, objetivo: null, regalados: 0, nota: 'El set que queremos dura cincuenta años.' },
-      { id: 'regalo-coreano', nombre: 'Clases de coreano', precio: 35000, objetivo: null, regalados: 0, nota: 'Empezamos por los dramas y ya no hay vuelta atrás.' },
-      { id: 'regalo-mudanza', nombre: 'La mudanza a la casa', precio: 70000, objetivo: null, regalados: 0, nota: 'Camión, cajas y alguien que suba el sillón por la escalera.' },
-      { id: 'regalo-termas', nombre: 'Termas de Chillán', precio: 50000, objetivo: null, regalados: 0, nota: 'Tres días de agua caliente en septiembre, sin teléfono.' },
-      { id: 'regalo-limonero', nombre: 'El limonero del patio', precio: 25000, objetivo: null, regalados: 0, nota: 'La idea es hacer pisco sour con sus limones en diez años.' },
-      { id: 'regalo-camara', nombre: 'La cámara del viaje', precio: 220000, objetivo: null, regalados: 0, nota: 'Para no volver de Japón con puras fotos de celular.' },
+      {
+        id: 'electrodomesticos',
+        nombre: 'Electrodomésticos',
+        nota: 'Lavadora, microondas, tostador y todo lo que hace andar la casa.',
+        precio: 0,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'cocina',
+        nombre: 'Utensilios de cocina',
+        nota: 'Ollas, servicios, platos, cucharones y todo lo de la cocina.',
+        precio: 0,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'muebles',
+        nombre: 'Muebles y decoración',
+        nota: 'Mesas, sillas y los detalles que la harán sentirse nuestra.',
+        precio: 0,
+        objetivo: null,
+        regalados: 0,
+      },
+      {
+        id: 'ropa-blanca',
+        nombre: 'Ropa blanca',
+        nota: 'Sábanas, toallas, cojines y cortinas.',
+        precio: 0,
+        objetivo: null,
+        regalados: 0,
+      },
     ],
   },
 
   libre: {
     titulo: 'Aporte voluntario',
+    texto:
+      'Nos complace mucho que seas parte de este hermoso momento en nuestras vidas. Si te gustaría seguir apoyándonos en esta nueva etapa, estaríamos muy agradecidos.',
     boton: 'Agregar',
   },
 
@@ -96,7 +117,7 @@ export const CONTENIDO: Contenido = {
 
   pie: {
     despedida: 'Nos vemos en febrero',
-    detalle: 'Ailyne & Jose · 5 de febrero de 2027',
+    detalle: 'Ailyne & José · 5 de febrero de 2027',
     correo: '',
   },
 
@@ -104,7 +125,7 @@ export const CONTENIDO: Contenido = {
     /* Apagado: la lista es de aporte voluntario, sin barra ni meta. */
     mostrarMetas: false,
     mostrarMiniaturas: true,
-    mostrarNotas: false,
+    mostrarNotas: true,
     estiloFoto: 'polaroid',
     acento: '#B06E6E',
   },

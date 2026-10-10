@@ -1,0 +1,10 @@
+/* Ocupa la miniatura entera y toma el color del acento, muy bajado: el dibujo
+   tiene que leerse, no reclamar la vista. */
+.dibujo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--acento-osc);
+  opacity: 0.42;
+}

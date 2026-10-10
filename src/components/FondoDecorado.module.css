@@ -1,0 +1,118 @@
+/* Capa fija detrás de todo: pétalos que caen y una luz que cruza.
+   Acá se eligió que se vean por sobre que sean baratos, así que hay más
+   pétalos, más grandes y más opacos que en la maqueta. Aun así todo lo que
+   se anima es `transform` y `opacity`, las dos propiedades que el navegador
+   resuelve en el compositor sin rehacer diseño ni repintar. */
+
+.capa {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* La nube de luz que cruza. Tres manchas ovaladas superpuestas en vez de un
+   círculo: un `radial-gradient(circle, ...)` se dimensiona hasta la esquina
+   más lejana de su caja, así que todavía tiene color cuando la caja termina y
+   el `overflow: hidden` de la capa lo corta en un rectángulo — el borde recto
+   que se veía cruzando la página. Cada mancha de acá está dada en porcentaje
+   de la caja y llega a transparente dentro de ella, y las tres están
+   descentradas entre sí, que es lo que le da forma de nube y no de globo.
+   El difuminado va dentro del degradado y no en un `filter`, que sobre algo
+   en movimiento se recalcula en cada cuadro. */
+.luz {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 62rem;
+  height: 44rem;
+  background:
+    radial-gradient(
+      34% 30% at 33% 41%,
+      rgba(244, 228, 228, 0.78) 0%,
+      rgba(244, 228, 228, 0.42) 42%,
+      rgba(244, 228, 228, 0.14) 70%,
+      rgba(244, 228, 228, 0) 100%
+    ),
+    radial-gradient(
+      29% 25% at 63% 58%,
+      rgba(244, 228, 228, 0.68) 0%,
+      rgba(244, 228, 228, 0.36) 44%,
+      rgba(244, 228, 228, 0.11) 72%,
+      rgba(244, 228, 228, 0) 100%
+    ),
+    radial-gradient(
+      46% 42% at 50% 50%,
+      rgba(244, 228, 228, 0.5) 0%,
+      rgba(244, 228, 228, 0.28) 38%,
+      rgba(244, 228, 228, 0.1) 66%,
+      rgba(244, 228, 228, 0.03) 84%,
+      rgba(244, 228, 228, 0) 100%
+    );
+  animation: cruzar 150s ease-in-out infinite alternate;
+}
+
+@keyframes cruzar {
+  from {
+    transform: translate(-40%, -64%);
+  }
+  to {
+    transform: translate(85%, -36%);
+  }
+}
+
+/* El pétalo: un contenedor que cae en línea recta y, dentro, la forma que
+   gira y se mece. Separar las dos animaciones evita que se peleen por la
+   misma propiedad `transform`. */
+.petalo {
+  position: absolute;
+  top: -8vh;
+  animation: caer var(--dur) linear infinite;
+  animation-delay: var(--retraso);
+}
+
+.forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 62% 62% 48% 48% / 74% 74% 38% 38%;
+  background: linear-gradient(150deg, var(--rosa-claro) 0%, var(--rosa) 62%, var(--rosa-hondo) 100%);
+  opacity: var(--op);
+  animation: mecer calc(var(--dur) / 5) ease-in-out infinite alternate;
+  animation-delay: var(--retraso);
+}
+
+@keyframes caer {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(var(--deriva), 116vh, 0);
+  }
+}
+
+@keyframes mecer {
+  from {
+    transform: rotate(var(--giro)) scaleX(1);
+  }
+  to {
+    transform: rotate(calc(var(--giro) + 168deg)) scaleX(0.35);
+  }
+}
+
+/* Sin movimiento los pétalos se quedan repartidos y quietos: la versión que
+   viste como opción 9. */
+@media (prefers-reduced-motion: reduce) {
+  .luz,
+  .petalo,
+  .forma {
+    animation: none;
+  }
+  .luz {
+    transform: translate(20%, -50%);
+  }
+  .petalo {
+    top: var(--quieto);
+  }
+}

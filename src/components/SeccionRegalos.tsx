@@ -9,7 +9,6 @@ import { PasoConfirmar } from './PasoConfirmar';
 import { PasoListo } from './PasoListo';
 import { PasoMensaje } from './PasoMensaje';
 import { PasoPasarela } from './PasoPasarela';
-import { PieDePagina } from './PieDePagina';
 
 /**
  * Todo lo interactivo cuelga de acá: la lista comparte estado con el aporte
@@ -34,8 +33,6 @@ export function SeccionRegalos({ contenido }: { contenido: Contenido }) {
             alEscribir={carrito.escribirLibre}
             alConfirmar={carrito.confirmarLibre}
           />
-
-          <PieDePagina pie={contenido.pie} />
         </div>
       </section>
 

@@ -28,6 +28,10 @@ const TONOS = [
 const REFUERZO = 1.45;
 const OPACIDAD_MAX = 0.88;
 
+/* Intensidad general de los pétalos: 1 es la versión más marcada, 0.7 la deja
+   al setenta por ciento. Es la perilla para subirlos o bajarlos. */
+const INTENSIDAD = 0.7;
+
 const PETALOS = [
   { x: 43.7, tam: 25, giro: -3, dur: 42.3, retraso: -34.1, deriva: -11, op: 0.47, tono: 2, quieto: 73.4 },
   { x: 7.5, tam: 20, giro: -42, dur: 28.9, retraso: -47.0, deriva: -12, op: 0.62, tono: 1, quieto: 60.9 },
@@ -85,7 +89,7 @@ export function FondoDecorado() {
               style={
                 {
                   '--giro': `${p.giro}deg`,
-                  '--op': Math.min(p.op * REFUERZO, OPACIDAD_MAX),
+                  '--op': Math.min(p.op * REFUERZO, OPACIDAD_MAX) * INTENSIDAD,
                   '--rosa-claro': tono.claro,
                   '--rosa': tono.medio,
                   '--rosa-hondo': tono.hondo,

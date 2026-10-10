@@ -6,6 +6,7 @@
 .panel {
   max-width: 34rem;
   margin-inline: auto;
+  text-align: center;
 }
 
 .titulo {
@@ -13,8 +14,18 @@
   font-weight: 400;
   font-size: clamp(1.7rem, 5.5vw, 2.3rem);
   line-height: 1.12;
-  margin: 0.5rem 0 0.6rem;
+  margin: 0.5rem 0 0.9rem;
 }
+
+/* La onda de la portada bajo el título: repite el gesto manuscrito para que
+   cada sección abra como una invitación y no como una ficha. */
+.onda {
+  display: block;
+  width: 96px;
+  height: auto;
+  margin: 0 auto 1rem;
+}
+
 
 .texto {
   font-size: 0.95rem;
@@ -42,6 +53,7 @@
 .campo {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .label {
@@ -57,6 +69,7 @@
    partes y una caja acá sería el único recuadro de la página. */
 .input {
   width: 100%;
+  text-align: center;
   font-family: inherit;
   font-size: 1rem;
   color: var(--tinta);
@@ -83,7 +96,7 @@
 /* En el acento y no en el negro de la barra del carrito: esto no es una
    compra, y el negro le daba más peso del que le corresponde. */
 .enviar {
-  align-self: flex-start;
+  align-self: center;
   min-height: 0;
   font-size: 0.95rem;
   margin-top: 0.6rem;
@@ -125,7 +138,7 @@
 
 .tarjeta {
   display: block;
-  text-align: left;
+  text-align: center;
   background: transparent;
   border: 1px solid var(--linea);
   border-radius: 2px;
@@ -154,7 +167,7 @@
   height: 10px;
   border-radius: 50%;
   border: 1px solid var(--acento);
-  margin-bottom: 0.8rem;
+  margin: 0 auto 0.8rem;
 }
 
 .elegida .punto {

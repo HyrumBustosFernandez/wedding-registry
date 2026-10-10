@@ -16,12 +16,30 @@
   padding-block: 0.5rem;
 }
 
+/* El logo "entre filetes": versalitas espaciadas con una línea arriba y otra
+   abajo, en el lenguaje de una invitación grabada. */
 .pareja {
-  font-family: var(--fuente-mano);
-  font-size: clamp(1.3rem, 5.5vw, 1.6rem);
+  font-family: var(--fuente-display);
+  font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
   line-height: 1.2;
   color: var(--acento-osc);
   white-space: nowrap;
+  /* El espaciado deja aire tras la última letra; el mismo a la izquierda
+     centra el nombre entre los filetes. */
+  padding: 0.5em 0 0.5em 0.24em;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+}
+
+/* En un teléfono se aprieta para que el nav quepa en la misma línea. */
+@media (max-width: 30rem) {
+  .pareja {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    padding-left: 0.14em;
+  }
 }
 
 /* En pantallas angostas el nav baja solo a una segunda línea: flex-wrap, no

@@ -5,7 +5,11 @@ export function Encabezado({ pareja }: { pareja: string }) {
   return (
     <header className={estilos.encabezado}>
       <div className={`contenedor ${estilos.interior}`}>
-        <span className={estilos.pareja}>{pareja}</span>
+        {/* "#" sube al comienzo de la página; el desplazamiento suave lo
+            pone `scroll-behavior` en base.css. */}
+        <a className={estilos.pareja} href="#" aria-label={`${pareja}, volver al inicio`}>
+          {pareja}
+        </a>
         <nav className={estilos.nav}>
           {COPY.nav.map((item) => (
             <a key={item.href} className={estilos.enlace} href={item.href}>

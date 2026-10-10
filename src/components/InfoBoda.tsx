@@ -1,16 +1,18 @@
 import type { Contenido } from '@/contenido/esquema';
 import { COPY } from '@/lib/copy';
 import { DivisorAnillo } from './DivisorAnillo';
+import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './InfoBoda.module.css';
 
 export function InfoBoda({ boda }: { boda: Contenido['boda'] }) {
   return (
     <section id="boda" className="seccion">
-      <div className="contenedor">
+      <div className={`contenedor ${estilos.centrado}`}>
         <DivisorAnillo className={estilos.anillo} />
 
         <p className="kicker">{boda.kicker}</p>
         <h2 className={estilos.titulo}>{boda.titulo}</h2>
+        <SubrayadoOndulado className={estilos.onda} />
 
         <div className={estilos.grid}>
           {boda.bloques.map((bloque) => (

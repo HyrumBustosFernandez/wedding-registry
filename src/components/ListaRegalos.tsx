@@ -6,6 +6,7 @@ import type { Contenido } from '@/contenido/esquema';
 import type { Carrito, Orden } from '@/hooks/useCarrito';
 import { COPY } from '@/lib/copy';
 import { FichaRegalo } from './FichaRegalo';
+import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './ListaRegalos.module.css';
 
 type Props = {
@@ -30,6 +31,7 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
         <div className={estilos.presentacion}>
           <p className="kicker">{regalos.kicker}</p>
           <h2 className={estilos.titulo}>{regalos.titulo}</h2>
+          <SubrayadoOndulado className={estilos.onda} />
           <p className={estilos.intro}>{regalos.intro}</p>
         </div>
 

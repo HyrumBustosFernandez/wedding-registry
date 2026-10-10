@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { Contenido } from '@/contenido/esquema';
+import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Confirmacion.module.css';
 
 type Estado = 'inicio' | 'enviando' | 'listo' | 'error';
@@ -80,6 +81,7 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
     <section id="confirmar" className={estilos.panel}>
       <p className="kicker">{confirmacion.kicker}</p>
       <h2 className={estilos.titulo}>{confirmacion.titulo}</h2>
+      <SubrayadoOndulado className={estilos.onda} />
       <p className={estilos.texto}>{confirmacion.texto}</p>
 
       <form className={estilos.formulario} onSubmit={enviar} noValidate>

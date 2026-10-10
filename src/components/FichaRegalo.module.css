@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  text-align: center;
 }
 
 /* Envuelve la miniatura para poder poner el dibujo encima del papel cuando
@@ -60,6 +61,7 @@
 .input {
   flex: 1;
   min-width: 0;
+  text-align: center;
   font-family: inherit;
   font-size: 0.9rem;
   color: var(--tinta);

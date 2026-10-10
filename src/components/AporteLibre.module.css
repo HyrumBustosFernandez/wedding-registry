@@ -34,6 +34,7 @@
 
 .input {
   flex: 1 1 11rem;
+  text-align: center;
   min-height: 50px;
   padding: 0.7rem 0.9rem;
   border: 1px solid var(--linea);
@@ -43,10 +44,20 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* En el acento y no en negro, igual que el envío de la confirmación: esto es
+   un gesto de cariño, no una compra. */
 .agregar {
   flex: 1 1 11rem;
   min-height: 50px;
   font-size: 0.95rem;
+  color: #fff;
+  background: var(--acento-osc);
+  border: 1px solid var(--acento-osc);
+}
+
+.agregar:hover:not(:disabled) {
+  background: var(--acento);
+  border-color: var(--acento);
 }
 
 /* --- solo Modo edición --- */

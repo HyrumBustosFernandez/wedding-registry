@@ -12,6 +12,8 @@ type Props = {
   regalo: Regalo;
   texto: string;
   monto: number;
+  /** Muestra la nota del regalo bajo el nombre. */
+  conNota: boolean;
   alEscribir: (valor: string) => void;
   alConfirmar: () => void;
   alQuitar: () => void;
@@ -22,7 +24,7 @@ type Props = {
  * aporte. Deliberadamente callada —sin tarjeta, sin sombra, sin borde— para
  * que la lista no le quite protagonismo a las fotos de la pareja.
  */
-export function FichaRegalo({ regalo, texto, monto, alEscribir, alConfirmar, alQuitar }: Props) {
+export function FichaRegalo({ regalo, texto, monto, conNota, alEscribir, alConfirmar, alQuitar }: Props) {
   const foto = fotoDeRegalo(regalo.id);
   const elegido = monto > 0;
   const idInput = `aporte-${regalo.id}`;
@@ -41,6 +43,7 @@ export function FichaRegalo({ regalo, texto, monto, alEscribir, alConfirmar, alQ
       </div>
 
       <h3 className={estilos.nombre}>{regalo.nombre}</h3>
+      {conNota && regalo.nota && <p className={estilos.nota}>{regalo.nota}</p>}
 
       {elegido ? (
         <p className={estilos.puesto}>

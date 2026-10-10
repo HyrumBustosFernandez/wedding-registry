@@ -44,7 +44,15 @@ export const CARRUSEL: Foto[] = [
 export const SEGUNDOS_POR_FOTO = 7;
 
 /** Miniaturas cuadradas de la lista de regalos, por id de regalo. */
-export const FOTOS_REGALOS: Record<string, Foto> = {};
+export const FOTOS_REGALOS: Record<string, Foto> = {
+  electrodomesticos: {
+    url: '/fotos/regalo-electrodomesticos.jpg',
+    alt: 'Lavadora, refrigerador, microondas y otros electrodomésticos',
+  },
+  cocina: { url: '/fotos/regalo-cocina.jpg', alt: 'Ollas, platos, cubiertos y utensilios de cocina' },
+  muebles: { url: '/fotos/regalo-muebles.jpg', alt: 'Mesa, sillas, cómoda y decoración' },
+  'ropa-blanca': { url: '/fotos/regalo-ropa-blanca.jpg', alt: 'Sábanas, toallas, cojines y cortinas' },
+};
 
 /** La foto de un regalo, o null si todavía no tiene. */
 export function fotoDeRegalo(id: string): Foto | null {

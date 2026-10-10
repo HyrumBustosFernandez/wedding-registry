@@ -34,24 +34,27 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
         </div>
 
         {/* Chips en vez de un <select>: son cuatro opciones, caben a la
-            vista, y un menú desplegable obliga a abrirlo para saber qué hay. */}
-        <div className={estilos.orden} role="group" aria-label={COPY.regalos.ordenarLabel}>
-          <span className={`kicker ${estilos.labelOrden}`}>{COPY.regalos.ordenarLabel}</span>
-          <div className={estilos.chips}>
-            {opcionesOrden.map((opcion) => (
-              <button
-                key={opcion.valor}
-                type="button"
-                className={`${estilos.chip} ${carrito.orden === opcion.valor ? estilos.chipActivo : ''}`}
-                aria-pressed={carrito.orden === opcion.valor}
-                title={opcion.texto}
-                onClick={() => carrito.setOrden(opcion.valor as Orden)}
-              >
-                {opcion.corto}
-              </button>
-            ))}
+            vista, y un menú desplegable obliga a abrirlo para saber qué hay.
+            Si la lista entera ya se ve de una vez, ordenarla no aporta nada. */}
+        {carrito.regalosOrdenados.length > A_LA_VISTA && (
+          <div className={estilos.orden} role="group" aria-label={COPY.regalos.ordenarLabel}>
+            <span className={`kicker ${estilos.labelOrden}`}>{COPY.regalos.ordenarLabel}</span>
+            <div className={estilos.chips}>
+              {opcionesOrden.map((opcion) => (
+                <button
+                  key={opcion.valor}
+                  type="button"
+                  className={`${estilos.chip} ${carrito.orden === opcion.valor ? estilos.chipActivo : ''}`}
+                  aria-pressed={carrito.orden === opcion.valor}
+                  title={opcion.texto}
+                  onClick={() => carrito.setOrden(opcion.valor as Orden)}
+                >
+                  {opcion.corto}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className={estilos.rejilla}>
@@ -61,6 +64,7 @@ export function ListaRegalos({ carrito, regalos, opciones }: Props) {
             regalo={regalo}
             texto={carrito.montosTxt[regalo.id] ?? ''}
             monto={carrito.montos[regalo.id] ?? 0}
+            conNota={opciones.mostrarNotas}
             alEscribir={(valor) => carrito.escribirMonto(regalo.id, valor)}
             alConfirmar={() => carrito.confirmarMonto(regalo.id)}
             alQuitar={() => carrito.quitarRegalo(regalo.id)}

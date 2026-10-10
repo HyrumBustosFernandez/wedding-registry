@@ -1,7 +1,7 @@
 import estilos from './FondoDecorado.module.css';
 
 /**
- * La capa decorativa del fondo: pétalos rosados que caen y una luz que cruza.
+ * La capa decorativa del fondo: pétalos rosa beige que caen y una luz que cruza.
  *
  * Se priorizó que se vean por sobre que cuesten poco, así que son veintiséis
  * y bien visibles. Aun así, lo único que se anima es `transform` y `opacity`,
@@ -14,13 +14,19 @@ import estilos from './FondoDecorado.module.css';
  * Con movimiento reducido quedan repartidos y quietos.
  */
 
-/* Tres rosas, del más claro al más hondo, para que no parezcan recortados
-   del mismo papel. */
+/* Tres tonos rosa empolvado tirando a beige, del más claro al más hondo,
+   para que no parezcan recortados del mismo papel. Van más cargados de lo
+   que parecería: sobre el fondo casi blanco, un beige claro desaparece. */
 const TONOS = [
-  { claro: '#fbdfe2', medio: '#f3c2c8', hondo: '#e59fa8' },
-  { claro: '#fde8e6', medio: '#f6cfc9', hondo: '#e8aaa4' },
-  { claro: '#f9d6dd', medio: '#eeb0bb', hondo: '#dd8e9c' },
+  { claro: '#f0dccf', medio: '#e3c3b1', hondo: '#d2a891' },
+  { claro: '#f3e2d4', medio: '#e6c9b4', hondo: '#d5ad94' },
+  { claro: '#eed6cb', medio: '#dfbcac', hondo: '#cc9f8c' },
 ];
+
+/* Cuánto se refuerza la opacidad de cada pétalo, con un tope para que
+   ninguno quede del todo macizo. */
+const REFUERZO = 1.45;
+const OPACIDAD_MAX = 0.88;
 
 const PETALOS = [
   { x: 43.7, tam: 25, giro: -3, dur: 42.3, retraso: -34.1, deriva: -11, op: 0.47, tono: 2, quieto: 73.4 },
@@ -79,7 +85,7 @@ export function FondoDecorado() {
               style={
                 {
                   '--giro': `${p.giro}deg`,
-                  '--op': p.op,
+                  '--op': Math.min(p.op * REFUERZO, OPACIDAD_MAX),
                   '--rosa-claro': tono.claro,
                   '--rosa': tono.medio,
                   '--rosa-hondo': tono.hondo,

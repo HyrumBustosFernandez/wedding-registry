@@ -107,6 +107,23 @@ export const CONTENIDO: Contenido = {
     boton: 'Agregar',
   },
 
+  pago: {
+    /* Los datos que se muestran para transferir. Completa todos antes de
+       publicar; mientras `numero` esté vacío, el sitio avisa que vienen pronto. */
+    cuenta: {
+      titular: '',
+      rut: '',
+      banco: '',
+      tipo: '',
+      numero: '',
+      correo: '',
+    },
+    /* Opcional: link de Mercado Pago (u otro) para quien prefiera tarjeta. */
+    linkTarjeta: '',
+    /* Formspree que recibe el aviso "ya hice mi aporte". */
+    formspreeId: '',
+  },
+
   confirmacion: {
     kicker: 'Cuéntanos',
     titulo: '¡Confirma si podrás acompañarnos!',

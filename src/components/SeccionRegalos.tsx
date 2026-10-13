@@ -5,10 +5,9 @@ import { useCarrito } from '@/hooks/useCarrito';
 import { AporteLibre } from './AporteLibre';
 import { BarraCarrito } from './BarraCarrito';
 import { ListaRegalos } from './ListaRegalos';
-import { PasoConfirmar } from './PasoConfirmar';
 import { PasoListo } from './PasoListo';
 import { PasoMensaje } from './PasoMensaje';
-import { PasoPasarela } from './PasoPasarela';
+import { PasoTransferencia } from './PasoTransferencia';
 
 /**
  * Todo lo interactivo cuelga de acá: la lista comparte estado con el aporte
@@ -48,9 +47,8 @@ export function SeccionRegalos({ contenido }: { contenido: Contenido }) {
       />
 
       {carrito.paso === 'mensaje' && <PasoMensaje carrito={carrito} />}
-      {carrito.paso === 'confirmar' && <PasoConfirmar carrito={carrito} />}
-      {carrito.paso === 'pasarela' && carrito.cierre && (
-        <PasoPasarela total={carrito.cierre.total} alCompletar={carrito.completarPago} />
+      {carrito.paso === 'transferencia' && (
+        <PasoTransferencia carrito={carrito} pago={contenido.pago} />
       )}
       {carrito.paso === 'listo' && carrito.cierre && (
         <PasoListo

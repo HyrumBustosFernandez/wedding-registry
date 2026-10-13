@@ -97,7 +97,7 @@ export function PasoMensaje({ carrito }: { carrito: Carrito }) {
         <button
           type="button"
           className={`btn btn-primario ${estilos.boton}`}
-          onClick={carrito.irAPagar}
+          onClick={carrito.irATransferir}
         >
           {copy.continuar}
         </button>

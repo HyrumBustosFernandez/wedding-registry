@@ -111,12 +111,12 @@ export const CONTENIDO: Contenido = {
     /* Los datos que se muestran para transferir. Completa todos antes de
        publicar; mientras `numero` esté vacío, el sitio avisa que vienen pronto. */
     cuenta: {
-      titular: '',
-      rut: '',
-      banco: '',
-      tipo: '',
-      numero: '',
-      correo: '',
+      titular: 'JOSE JARED BUSTOS',
+      rut: '21.664.429-8',
+      banco: 'Banco BCI',
+      tipo: 'Cuenta Corriente',
+      numero: '69582414',
+      correo: 'jjose.bustos.f@gmail.com',
     },
     /* Opcional: link de Mercado Pago (u otro) para quien prefiera tarjeta. */
     linkTarjeta: '',

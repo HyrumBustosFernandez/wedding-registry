@@ -24,7 +24,7 @@ export const CONTENIDO: Contenido = {
       { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
       { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
     ],
-    firma: 'La definición de lugar feliz',
+    firma: 'La definición de mi lugar Feliz',
   },
 
   boda: {
@@ -35,21 +35,20 @@ export const CONTENIDO: Contenido = {
         id: 'bloque-matrimonio',
         kicker: 'Matrimonio',
         titulo: '18:30 a 00:00 hrs',
-        texto:
-          'Les esperamos desde las 18:30 hrs. Comenzamos a las 19:00 hrs en punto, así que no se atrasen, y celebramos juntos hasta las 00:00 hrs.',
+        texto: 'Les esperamos a las 18:30 en el lugar. Comenzamos 19:00 hrs en punto y termina 00:00 hrs.',
       },
       {
         id: 'bloque-plan',
         kicker: 'Plan de boda',
         titulo: 'Mucho que celebrar',
-        texto: 'Habrá cóctel, brindis, juegos, competencias y, por supuesto, ¡fiesta!',
+        texto: 'Habrá coctel, brindis, juegos, competiciones y fiesta.',
       },
       {
         id: 'bloque-vestimenta',
         kicker: 'Vestimenta',
         titulo: 'Pasto y pista',
         texto:
-          'La ceremonia será al aire libre, sobre pasto: los tacos aguja se hunden. Algunas actividades y la fiesta serán bajo techo con piso firme, así que trae un par de recambio para bailar.',
+          'La boda será al aire libre en pasto. Recuerda que los tacos aguja se hunden! Algunas actividades y la fiesta serán realizadas por cada uno. ¡Trae otro par!',
       },
     ],
     enlace: {

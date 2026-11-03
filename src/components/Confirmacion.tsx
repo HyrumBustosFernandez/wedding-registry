@@ -114,6 +114,7 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
               id="rsvp-nombre"
               className={estilos.input}
               autoComplete="given-name"
+              maxLength={80}
               value={campos.nombre}
               onChange={set('nombre')}
             />
@@ -127,6 +128,7 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
               id="rsvp-apellido"
               className={estilos.input}
               autoComplete="family-name"
+              maxLength={80}
               value={campos.apellido}
               onChange={set('apellido')}
             />
@@ -139,6 +141,7 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
           </label>
           <input
             id="rsvp-contacto"
+              maxLength={150}
             className={estilos.input}
             value={campos.contacto}
             onChange={set('contacto')}

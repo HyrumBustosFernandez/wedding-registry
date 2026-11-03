@@ -104,6 +104,32 @@ export type Contenido = {
     texto: string;
     boton: string;
   };
+  /** Cómo llega el aporte: transferencia, y opcionalmente un link para tarjeta. */
+  pago: {
+    /**
+     * Datos de la cuenta. Con `numero` vacío el paso de pago avisa que los
+     * datos se publican pronto, en vez de mostrar campos en blanco.
+     */
+    cuenta: {
+      titular: string;
+      rut: string;
+      banco: string;
+      tipo: string;
+      numero: string;
+      correo: string;
+    };
+    /**
+     * Link de pago con tarjeta (Mercado Pago u otro). Vacío = no se muestra.
+     * Tiene que dejar que quien paga escriba el monto: el sitio no puede
+     * fijarlo sin un servidor.
+     */
+    linkTarjeta: string;
+    /**
+     * Id de Formspree que recibe el aviso de cada aporte. Puede ser el mismo
+     * de la confirmación; el asunto del correo los distingue.
+     */
+    formspreeId: string;
+  };
   confirmacion: {
     kicker: string;
     titulo: string;

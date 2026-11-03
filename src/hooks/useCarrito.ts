@@ -2,19 +2,17 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import type { Contenido, Regalo } from '@/contenido/esquema';
-import { formatearInputMonto, parsearMonto } from '@/lib/clp';
+import { clp, formatearInputMonto, parsearMonto } from '@/lib/clp';
+import { COPY } from '@/lib/copy';
 import { validar, type ErroresFormulario } from '@/lib/validacion';
 
 export type Orden = 'original' | 'precio-asc' | 'precio-desc' | 'faltan' | 'nombre-asc';
-export type Paso = null | 'mensaje' | 'confirmar' | 'pasarela' | 'listo';
+export type Paso = null | 'mensaje' | 'transferencia' | 'listo';
 
 /** Una fila del resumen: un regalo con sus aportes, o el aporte libre. */
 export type Linea = { clave: string; etiqueta: string; monto: number };
 
 export type Cierre = { lineas: Linea[]; total: number };
-
-/** Duración de la pasarela simulada. En producción este paso no existe. */
-export const MS_PASARELA = 2000;
 
 export function useCarrito(contenido: Contenido) {
   const regalos = contenido.regalos.items;
@@ -35,6 +33,8 @@ export function useCarrito(contenido: Contenido) {
   const [err, setErr] = useState<ErroresFormulario>({});
   const [gracias, setGracias] = useState('');
   const [cierre, setCierre] = useState<Cierre | null>(null);
+  const [enviando, setEnviando] = useState(false);
+  const [errorAviso, setErrorAviso] = useState<string | null>(null);
 
   /* ---- derivados (nunca en estado) ---- */
 
@@ -183,23 +183,58 @@ export function useCarrito(contenido: Contenido) {
     if (total > 0) setPaso('mensaje');
   }, [total]);
 
-  const irAPagar = useCallback(() => {
+  const irATransferir = useCallback(() => {
     const errores = validar({ nombre, correo, mensaje });
     setErr(errores);
-    if (Object.keys(errores).length === 0) setPaso('confirmar');
+    if (Object.keys(errores).length === 0) {
+      setErrorAviso(null);
+      setPaso('transferencia');
+    }
   }, [nombre, correo, mensaje]);
 
-  const pagar = useCallback(() => {
+  /**
+   * "Ya hice mi aporte": manda a los novios quién aportó, cuánto y su mensaje.
+   * El sitio no puede ver la transferencia; el aviso es lo que les permite
+   * cruzarla con la cartola y agradecer.
+   */
+  const avisar = useCallback(async () => {
+    const { formspreeId } = contenido.pago;
+    const copy = COPY.checkout.transferencia;
+    setErrorAviso(null);
+
+    if (!formspreeId) {
+      setErrorAviso(copy.sinConectar);
+      return;
+    }
+
+    setEnviando(true);
+    try {
+      const respuesta = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `Aporte de ${nombre.trim()} · ${clp(total)}`,
+          _replyto: correo.trim(),
+          nombre: nombre.trim(),
+          correo: correo.trim(),
+          mensaje: mensaje.trim(),
+          detalle: lineas.map((l) => `${l.etiqueta}: ${clp(l.monto)}`).join('\n'),
+          total: clp(total),
+        }),
+      });
+      if (!respuesta.ok) throw new Error('Formspree respondió con error');
+    } catch {
+      setErrorAviso(copy.errorEnvio);
+      setEnviando(false);
+      return;
+    }
+
+    setEnviando(false);
     setCierre({ lineas, total });
     setGracias(nombre.trim());
-    setPaso('pasarela');
-  }, [lineas, total, nombre]);
 
-  /**
-   * Fin de la pasarela. Con metas encendidas, los aportes suman al progreso
-   * real; sin metas no hay progreso que llevar, solo se vacía el carrito.
-   */
-  const completarPago = useCallback(() => {
+    /* Con metas encendidas, los aportes suman al progreso; sin metas no hay
+       progreso que llevar, solo se vacía el carrito. */
     if (mostrarMetas) {
       setProg((p) => {
         const siguiente = { ...p };
@@ -219,10 +254,11 @@ export function useCarrito(contenido: Contenido) {
     setLibre(0);
     setLibreTxt('');
     setPaso('listo');
-  }, [mostrarMetas, regalos, carro]);
+  }, [contenido.pago, nombre, correo, mensaje, lineas, total, mostrarMetas, regalos, carro]);
 
   const volver = useCallback(() => {
-    setPaso((p) => (p === 'confirmar' ? 'mensaje' : null));
+    setErrorAviso(null);
+    setPaso((p) => (p === 'transferencia' ? 'mensaje' : null));
   }, []);
 
   const volverALista = useCallback(() => {
@@ -237,12 +273,13 @@ export function useCarrito(contenido: Contenido) {
 
   return {
     carro, montos, montosTxt, libre, libreTxt, orden, paso, nombre, correo, mensaje, err, gracias, cierre,
+    enviando, errorAviso,
     regalosOrdenados, regalados, enCarro, cubierto, lleno, lineas, total, cantidadRegalos,
     mostrarMetas,
     setOrden, setNombre, setCorreo, setMensaje,
     agregar, quitar, escribirMonto, confirmarMonto, quitarRegalo,
     escribirLibre, setLibreTxt, confirmarLibre, vaciar,
-    continuar, irAPagar, pagar, completarPago, volver, volverALista,
+    continuar, irATransferir, avisar, volver, volverALista,
   };
 }
 

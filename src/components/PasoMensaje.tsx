@@ -31,6 +31,7 @@ export function PasoMensaje({ carrito }: { carrito: Carrito }) {
           id="nombre"
           className={`${estilos.input} ${err.nombre ? estilos.invalido : ''}`}
           autoComplete="name"
+          maxLength={100}
           value={carrito.nombre}
           onChange={(e) => carrito.setNombre(e.target.value)}
           aria-invalid={err.nombre ? true : undefined}
@@ -52,6 +53,7 @@ export function PasoMensaje({ carrito }: { carrito: Carrito }) {
           type="email"
           className={`${estilos.input} ${err.correo ? estilos.invalido : ''}`}
           autoComplete="email"
+          maxLength={150}
           value={carrito.correo}
           onChange={(e) => carrito.setCorreo(e.target.value)}
           aria-invalid={err.correo ? true : undefined}
@@ -73,6 +75,7 @@ export function PasoMensaje({ carrito }: { carrito: Carrito }) {
         </label>
         <textarea
           id="mensaje"
+          maxLength={2000}
           className={`${estilos.textarea} ${err.mensaje ? estilos.invalido : ''}`}
           value={carrito.mensaje}
           onChange={(e) => carrito.setMensaje(e.target.value)}
@@ -97,7 +100,7 @@ export function PasoMensaje({ carrito }: { carrito: Carrito }) {
         <button
           type="button"
           className={`btn btn-primario ${estilos.boton}`}
-          onClick={carrito.irAPagar}
+          onClick={carrito.irATransferir}
         >
           {copy.continuar}
         </button>

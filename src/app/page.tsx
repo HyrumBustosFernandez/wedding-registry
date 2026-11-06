@@ -32,7 +32,7 @@ export default function Pagina() {
 
         <RevelarAlScroll como="section" className="seccion">
           <div className="contenedor">
-            <Confirmacion confirmacion={CONTENIDO.confirmacion} />
+            <Confirmacion confirmacion={CONTENIDO.confirmacion} urlRegistro={CONTENIDO.registro.url} />
           </div>
         </RevelarAlScroll>
 

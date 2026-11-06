@@ -74,17 +74,32 @@ Al final de ese archivo, en `opciones`, están los interruptores:
 | `estiloFoto` | `polaroid` | `polaroid` va inclinada, `marco` va recta |
 | `acento` | `#B06E6E` | Color de líneas, ondas y detalles |
 
-### Confirmación de asistencia
+### Asistencia y avisos de aporte (Google Sheets)
 
-El formulario manda las respuestas a **Formspree**. Para conectarlo:
+La confirmación de asistencia y el «Ya hice mi aporte» se guardan en una planilla
+de Google Sheets, una pestaña para cada uno. Cada aporte avisado además llega por
+correo. El código del lado de Google está en `google-apps-script/Codigo.gs`.
 
-1. Crea un formulario gratis en [formspree.io](https://formspree.io).
-2. Copia el id de su URL (`https://formspree.io/f/XXXXXXX` → `XXXXXXX`).
-3. Pégalo en `confirmacion.formspreeId`, dentro de `contenido.ts`.
-4. Despliega.
+1. Crea una planilla en blanco en [sheets.new](https://sheets.new).
+2. En la planilla: **Extensiones → Apps Script**. Borra lo que viene, pega todo
+   `google-apps-script/Codigo.gs` y guarda.
+3. **Implementar → Nueva implementación**, tipo **Aplicación web**:
+   - Ejecutar como: **Yo**
+   - Quién tiene acceso: **Cualquier usuario**
+4. Autoriza los permisos que pide (en «Google no verificó esta app» entra a
+   *Configuración avanzada → Ir a…*: es tu propio script).
+5. Copia la URL que termina en `/exec` y pégala en `registro.url`, dentro de
+   `contenido.ts`. Despliega.
 
-Sin ese id el formulario se ve igual, pero al enviar avisa que todavía no está
-conectado. No hay variables de entorno de por medio.
+Las pestañas *Asistencia* y *Aportes* se crean solas con el primer envío. La
+columna «¿Llegó la transferencia?» queda para marcarla a mano al revisar la
+cartola: el aviso lo escribe el invitado, no prueba el pago.
+
+Si cambias el script, publica la nueva versión en **Implementar → Gestionar
+implementaciones → editar → Versión: nueva**; así la URL no cambia.
+
+Sin URL los formularios se ven igual, pero al enviar avisan que todavía no están
+conectados.
 
 ### Agregar fotos
 
@@ -112,7 +127,8 @@ diseño, así que el sitio se ve bien aunque falten.
 
 ### Sin configuración
 
-El sitio no necesita variables de entorno, base de datos ni servicios externos:
+El sitio no necesita variables de entorno ni base de datos (los formularios van a
+Google Sheets):
 se exporta entero como HTML estático (`output: 'export'`). Basta con desplegar.
 
 ## Pendientes antes de producción

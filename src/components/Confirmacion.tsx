@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { Contenido } from '@/contenido/esquema';
+import { registrar } from '@/lib/registro';
 import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Confirmacion.module.css';
 
@@ -17,7 +18,12 @@ const RESPUESTAS = [
   { asiste: false, titulo: 'No podré ir', nota: 'Avísanos igual, nos sirve saberlo.' },
 ] as const;
 
-export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confirmacion'] }) {
+type Props = {
+  confirmacion: Contenido['confirmacion'];
+  urlRegistro: string;
+};
+
+export function Confirmacion({ confirmacion, urlRegistro }: Props) {
   const [campos, setCampos] = useState<Campos>(VACIO);
   const [asiste, setAsiste] = useState(true);
   const [estado, setEstado] = useState<Estado>('inicio');
@@ -38,25 +44,19 @@ export function Confirmacion({ confirmacion }: { confirmacion: Contenido['confir
       setError('Déjanos un correo o un teléfono para poder escribirte.');
       return;
     }
-    if (!confirmacion.formspreeId) {
+    if (!urlRegistro) {
       setError('El formulario todavía no está conectado. Escríbenos directamente, por favor.');
       return;
     }
 
     setEstado('enviando');
     try {
-      const respuesta = await fetch(`https://formspree.io/f/${confirmacion.formspreeId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          nombre: campos.nombre.trim(),
-          apellido: campos.apellido.trim(),
-          contacto: campos.contacto.trim(),
-          asiste: asiste ? 'Sí, asistirá' : 'No podrá asistir',
-        }),
+      await registrar(urlRegistro, 'asistencia', {
+        nombre: campos.nombre.trim(),
+        apellido: campos.apellido.trim(),
+        contacto: campos.contacto.trim(),
+        asiste: asiste ? 'Sí' : 'No',
       });
-
-      if (!respuesta.ok) throw new Error('Formspree respondió con error');
       setEstado('listo');
     } catch {
       setEstado('error');

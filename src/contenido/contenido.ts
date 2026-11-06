@@ -119,16 +119,18 @@ export const CONTENIDO: Contenido = {
     },
     /* Opcional: link de Mercado Pago (u otro) para quien prefiera tarjeta. */
     linkTarjeta: '',
-    /* Formspree que recibe el aviso "ya hice mi aporte". */
-    formspreeId: '',
   },
 
   confirmacion: {
     kicker: 'Cuéntanos',
     titulo: '¡Confirma si podrás acompañarnos!',
     texto: 'Nos ayuda muchísimo saberlo con tiempo para organizar todo.',
-    /* Crea el formulario en formspree.io y pega acá el id de su URL. */
-    formspreeId: '',
+  },
+
+  registro: {
+    /* La URL de la aplicación web del Apps Script, la que termina en /exec.
+       Los pasos para obtenerla están en el README. */
+    url: '',
   },
 
   pie: {

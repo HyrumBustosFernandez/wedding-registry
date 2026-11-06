@@ -124,22 +124,19 @@ export type Contenido = {
      * fijarlo sin un servidor.
      */
     linkTarjeta: string;
-    /**
-     * Id de Formspree que recibe el aviso de cada aporte. Puede ser el mismo
-     * de la confirmación; el asunto del correo los distingue.
-     */
-    formspreeId: string;
   };
   confirmacion: {
     kicker: string;
     titulo: string;
     texto: string;
-    /**
-     * Id del formulario de Formspree (la parte final de
-     * https://formspree.io/f/XXXXXXX). Vacío = el formulario se muestra pero
-     * avisa que todavía no está conectado.
-     */
-    formspreeId: string;
+  };
+  /**
+   * Dónde se guardan la asistencia y los avisos de aporte: la URL de la
+   * aplicación web del Apps Script (termina en /exec). Vacía = los formularios
+   * se muestran pero avisan que todavía no están conectados.
+   */
+  registro: {
+    url: string;
   };
   pie: {
     despedida: string;

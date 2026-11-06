@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import type { Contenido, Regalo } from '@/contenido/esquema';
 import { clp, formatearInputMonto, parsearMonto } from '@/lib/clp';
 import { COPY } from '@/lib/copy';
+import { registrar } from '@/lib/registro';
 import { validar, type ErroresFormulario } from '@/lib/validacion';
 
 export type Orden = 'original' | 'precio-asc' | 'precio-desc' | 'faltan' | 'nombre-asc';
@@ -198,31 +199,24 @@ export function useCarrito(contenido: Contenido) {
    * cruzarla con la cartola y agradecer.
    */
   const avisar = useCallback(async () => {
-    const { formspreeId } = contenido.pago;
+    const { url } = contenido.registro;
     const copy = COPY.checkout.transferencia;
     setErrorAviso(null);
 
-    if (!formspreeId) {
+    if (!url) {
       setErrorAviso(copy.sinConectar);
       return;
     }
 
     setEnviando(true);
     try {
-      const respuesta = await fetch(`https://formspree.io/f/${formspreeId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          _subject: `Aporte de ${nombre.trim()} · ${clp(total)}`,
-          _replyto: correo.trim(),
-          nombre: nombre.trim(),
-          correo: correo.trim(),
-          mensaje: mensaje.trim(),
-          detalle: lineas.map((l) => `${l.etiqueta}: ${clp(l.monto)}`).join('\n'),
-          total: clp(total),
-        }),
+      await registrar(url, 'aportes', {
+        nombre: nombre.trim(),
+        correo: correo.trim(),
+        mensaje: mensaje.trim(),
+        detalle: lineas.map((l) => `${l.etiqueta}: ${clp(l.monto)}`).join('\n'),
+        total,
       });
-      if (!respuesta.ok) throw new Error('Formspree respondió con error');
     } catch {
       setErrorAviso(copy.errorEnvio);
       setEnviando(false);
@@ -254,7 +248,7 @@ export function useCarrito(contenido: Contenido) {
     setLibre(0);
     setLibreTxt('');
     setPaso('listo');
-  }, [contenido.pago, nombre, correo, mensaje, lineas, total, mostrarMetas, regalos, carro]);
+  }, [contenido.registro, nombre, correo, mensaje, lineas, total, mostrarMetas, regalos, carro]);
 
   const volver = useCallback(() => {
     setErrorAviso(null);

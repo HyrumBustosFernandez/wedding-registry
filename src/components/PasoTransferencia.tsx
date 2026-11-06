@@ -50,9 +50,7 @@ export function PasoTransferencia({ carrito, pago }: Props) {
   const listos = cuenta.numero.trim() !== '';
   const total = clp(carrito.total);
 
-  /* El monto va sin puntos ni signo: así se pega limpio en la app del banco. */
   const filas = [
-    { clave: 'monto', etiqueta: copy.monto, valor: total, copia: String(carrito.total) },
     { clave: 'titular', etiqueta: copy.campos.titular, valor: cuenta.titular },
     { clave: 'rut', etiqueta: copy.campos.rut, valor: cuenta.rut },
     { clave: 'banco', etiqueta: copy.campos.banco, valor: cuenta.banco },
@@ -68,12 +66,9 @@ export function PasoTransferencia({ carrito, pago }: Props) {
     temporizador.current = setTimeout(() => setCopiado(null), 1800);
   };
 
-  /* Todo junto, en el orden en que lo pide una app de banco chilena. */
-  const todo = filas
-    .filter((f) => f.clave !== 'monto')
-    .map((f) => `${f.etiqueta}: ${f.valor}`)
-    .concat(`${copy.monto}: ${total}`)
-    .join('\n');
+  /* Todo junto, en el orden en que lo pide una app de banco chilena. El monto
+     va aparte: en el banco se escribe en otro paso, después del destinatario. */
+  const todo = filas.map((f) => `${f.etiqueta}: ${f.valor}`).join('\n');
 
   return (
     <Modal aria={copy.aria} alCerrar={carrito.volver}>
@@ -85,22 +80,23 @@ export function PasoTransferencia({ carrito, pago }: Props) {
 
       {listos ? (
         <>
-          <dl className={estilos.datos}>
-            {filas.map((f) => (
-              <div key={f.clave} className={estilos.dato}>
-                <dt className={estilos.datoEtiqueta}>{f.etiqueta}</dt>
-                <dd className={estilos.datoValor}>{f.valor}</dd>
-                <button
-                  type="button"
-                  className={estilos.copiar}
-                  onClick={() => copiar(f.clave, f.copia ?? f.valor)}
-                  aria-label={`${copy.copiar} ${f.etiqueta.toLowerCase()}`}
-                >
-                  {copiado === f.clave ? copy.copiado : copy.copiar}
-                </button>
-              </div>
-            ))}
-          </dl>
+          {/* El monto va sin puntos ni signo: así se pega limpio en la app del banco. */}
+          <div className={estilos.dato}>
+            <p className={estilos.datoEtiqueta}>{copy.monto}</p>
+            <p className={estilos.datoValor}>{total}</p>
+            <button
+              type="button"
+              className={estilos.copiar}
+              onClick={() => copiar('monto', String(carrito.total))}
+              aria-label={`${copy.copiar} ${copy.monto.toLowerCase()}`}
+            >
+              {copiado === 'monto' ? copy.copiado : copy.copiar}
+            </button>
+          </div>
+
+          {/* Los datos de la cuenta como un solo texto: un toque lo selecciona
+              entero, y se pega tal cual al agregar el destinatario. */}
+          <p className={estilos.bloqueDatos}>{todo}</p>
 
           <button
             type="button"

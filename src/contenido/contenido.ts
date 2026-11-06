@@ -130,7 +130,7 @@ export const CONTENIDO: Contenido = {
   registro: {
     /* La URL de la aplicación web del Apps Script, la que termina en /exec.
        Los pasos para obtenerla están en el README. */
-    url: '',
+    url: 'https://script.google.com/macros/s/AKfycbyl98xfBpkfYg4JBmwI3issBKsoae-wh9kdPfF9wrSg_Ch-QMK1UNTEHvwbX0DmKwrpvw/exec',
   },
 
   pie: {

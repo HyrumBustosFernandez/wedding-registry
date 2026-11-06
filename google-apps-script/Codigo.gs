@@ -10,8 +10,11 @@
  * fórmulas, y hay un tope de envíos por hora.
  */
 
-/** Manda un correo a la cuenta dueña de la planilla por cada aporte avisado. */
+/** Manda un correo por cada aporte avisado. */
 const AVISAR_APORTES_POR_CORREO = true;
+
+/** Quién recibe ese correo. Vacío = la cuenta dueña de la planilla. */
+const CORREO_AVISOS = 'jjose.bustos.f@gmail.com';
 
 /** Tope de envíos por hora entre todos los invitados, contra el spam. */
 const MAXIMO_POR_HORA = 60;
@@ -96,7 +99,7 @@ function avisarAporte(valores) {
   const mensaje = valores[4];
   const monto = typeof total === 'number' ? '$' + total.toLocaleString('es-CL') : total;
   MailApp.sendEmail({
-    to: Session.getEffectiveUser().getEmail(),
+    to: CORREO_AVISOS || Session.getEffectiveUser().getEmail(),
     subject: ('Aporte de ' + nombre + ' · ' + monto).replace(/\s+/g, ' '),
     body:
       nombre + ' (' + correo + ') avisó un aporte de ' + monto + '.\n\n' +

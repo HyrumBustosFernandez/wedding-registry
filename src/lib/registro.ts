@@ -6,7 +6,7 @@
  * de CORS, que Apps Script no sabe responder. La respuesta sí trae permiso para
  * leerla, y el script contesta `{ ok: true }` solo si guardó la fila.
  */
-export type Hoja = 'asistencia' | 'aportes';
+export type Hoja = 'asistencia' | 'aportes' | 'canciones';
 
 export async function registrar(
   url: string,

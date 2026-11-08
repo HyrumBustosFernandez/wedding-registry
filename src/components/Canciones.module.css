@@ -1,0 +1,32 @@
+/* Canciones para la fiesta. Es hermana de la confirmación de asistencia: toma
+   sus mismas piezas para que las dos secciones se lean como una sola voz. */
+
+.panel { composes: panel from './Confirmacion.module.css'; }
+.titulo { composes: titulo from './Confirmacion.module.css'; }
+.onda { composes: onda from './Confirmacion.module.css'; }
+.texto { composes: texto from './Confirmacion.module.css'; }
+.formulario { composes: formulario from './Confirmacion.module.css'; }
+.campo { composes: campo from './Confirmacion.module.css'; }
+.input { composes: input from './Confirmacion.module.css'; }
+.error { composes: error from './Confirmacion.module.css'; }
+.enviar { composes: enviar from './Confirmacion.module.css'; }
+.gracias { composes: gracias from './Confirmacion.module.css'; }
+.textoListo { composes: textoListo from './Confirmacion.module.css'; }
+
+/* La invitación a escribir va en la letra manuscrita de la portada y no en
+   las versalitas de las etiquetas: es una frase entera, con signos de
+   exclamación, y en mayúsculas se leería como un grito. */
+.pregunta {
+  font-family: var(--fuente-mano);
+  font-size: clamp(1.35rem, 4.5vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--acento-osc);
+  margin-bottom: 0.5rem;
+}
+
+.otra {
+  margin-top: 1.2rem;
+  min-height: 0;
+  padding: 0.7rem 1.4rem;
+  font-size: 0.92rem;
+}

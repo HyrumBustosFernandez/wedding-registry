@@ -1,3 +1,4 @@
+import { Canciones } from '@/components/Canciones';
 import { Confirmacion } from '@/components/Confirmacion';
 import { Encabezado } from '@/components/Encabezado';
 import { FondoDecorado } from '@/components/FondoDecorado';
@@ -33,6 +34,12 @@ export default function Pagina() {
         <RevelarAlScroll como="section" className="seccion">
           <div className="contenedor">
             <Confirmacion confirmacion={CONTENIDO.confirmacion} urlRegistro={CONTENIDO.registro.url} />
+          </div>
+        </RevelarAlScroll>
+
+        <RevelarAlScroll como="section" className="seccion">
+          <div className="contenedor">
+            <Canciones canciones={CONTENIDO.canciones} urlRegistro={CONTENIDO.registro.url} />
           </div>
         </RevelarAlScroll>
 

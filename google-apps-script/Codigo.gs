@@ -1,5 +1,5 @@
 /**
- * Recibe la asistencia y los avisos de aporte del sitio y los guarda en esta
+ * Recibe la asistencia, los avisos de aporte y las canciones del sitio y los guarda en esta
  * planilla, una pestaña para cada uno.
  *
  * Se pega en Extensiones → Apps Script de la planilla y se implementa como
@@ -29,6 +29,11 @@ const HOJAS = {
     nombre: 'Aportes',
     columnas: ['Fecha', 'Nombre', 'Correo', 'Total (CLP)', 'Detalle', 'Mensaje', '¿Llegó la transferencia?'],
     campos: ['nombre', 'correo', 'total', 'detalle', 'mensaje'],
+  },
+  canciones: {
+    nombre: 'Canciones',
+    columnas: ['Fecha', 'Canción, álbum o artista'],
+    campos: ['cancion'],
   },
 };
 

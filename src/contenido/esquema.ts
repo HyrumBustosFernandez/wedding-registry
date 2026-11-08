@@ -130,6 +130,14 @@ export type Contenido = {
     titulo: string;
     texto: string;
   };
+  /** Pedido de canciones para la fiesta. */
+  canciones: {
+    kicker: string;
+    titulo: string;
+    texto: string;
+    campo: string;
+    boton: string;
+  };
   /**
    * Dónde se guardan la asistencia y los avisos de aporte: la URL de la
    * aplicación web del Apps Script (termina en /exec). Vacía = los formularios

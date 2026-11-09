@@ -127,6 +127,14 @@ export const CONTENIDO: Contenido = {
     texto: 'Nos ayuda muchísimo saberlo con tiempo para organizar todo.',
   },
 
+  canciones: {
+    kicker: 'La fiesta',
+    titulo: '¿Qué canción no puede faltar?',
+    texto: 'Ayúdanos a armar la música de la noche.',
+    campo: '¡Ingresa aquí la canción, álbum o artista que quieras!',
+    boton: 'Enviar canción',
+  },
+
   registro: {
     /* La URL de la aplicación web del Apps Script, la que termina en /exec.
        Los pasos para obtenerla están en el README. */

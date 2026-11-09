@@ -169,6 +169,27 @@
   font-size: 0.92rem;
 }
 
+/* Tenpo: un bloque aparte bajo los datos del banco, separado por una línea,
+   con el mismo renglón de dato y botón que el monto. */
+.tenpo {
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--linea);
+  text-align: left;
+}
+
+.tenpoTitulo {
+  margin: 0;
+  font-family: var(--fuente-display);
+  font-size: 1.15rem;
+  color: var(--tinta);
+}
+
+.tenpo .dato {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
 /* El link de tarjeta: secundario, bajo los datos, nunca compitiendo con la
    transferencia. */
 .tarjeta {

@@ -119,6 +119,8 @@ export const CONTENIDO: Contenido = {
     },
     /* Opcional: link de Mercado Pago (u otro) para quien prefiera tarjeta. */
     linkTarjeta: '',
+    /* Para quien paga con Tenpo: se le envía al número. Vacío = no se muestra. */
+    tenpo: '+56 9 7564 9074',
   },
 
   confirmacion: {

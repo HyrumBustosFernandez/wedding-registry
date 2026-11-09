@@ -118,6 +118,28 @@ export function PasoTransferencia({ carrito, pago }: Props) {
         </p>
       )}
 
+      {/* Tenpo como alternativa a la transferencia: entre usuarios de Tenpo
+          basta el teléfono. Se copia sin espacios para pegarlo en el buscador
+          de la app. */}
+      {pago.tenpo && (
+        <div className={estilos.tenpo}>
+          <p className={estilos.tenpoTitulo}>{copy.tenpo.titulo}</p>
+          <p className={estilos.ayuda}>{copy.tenpo.texto}</p>
+          <div className={estilos.dato}>
+            <p className={estilos.datoEtiqueta}>{copy.tenpo.etiqueta}</p>
+            <p className={estilos.datoValor}>{pago.tenpo}</p>
+            <button
+              type="button"
+              className={estilos.copiar}
+              onClick={() => copiar('tenpo', pago.tenpo.replace(/\s+/g, ''))}
+              aria-label={`${copy.copiar} ${copy.tenpo.etiqueta.toLowerCase()}`}
+            >
+              {copiado === 'tenpo' ? copy.copiado : copy.copiar}
+            </button>
+          </div>
+        </div>
+      )}
+
       {pago.linkTarjeta && (
         <p className={estilos.tarjeta}>
           <a href={pago.linkTarjeta} target="_blank" rel="noopener noreferrer">
@@ -146,7 +168,7 @@ export function PasoTransferencia({ carrito, pago }: Props) {
           type="button"
           className={`btn btn-primario ${estilos.boton}`}
           onClick={carrito.avisar}
-          disabled={carrito.enviando || (!listos && !pago.linkTarjeta)}
+          disabled={carrito.enviando || (!listos && !pago.linkTarjeta && !pago.tenpo)}
         >
           {carrito.enviando ? copy.enviando : copy.avisar}
         </button>

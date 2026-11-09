@@ -94,6 +94,11 @@ export const COPY = {
       copiadoTodo: 'Datos copiados',
       pendienteTitulo: 'Muy pronto.',
       pendienteTexto: ' Estamos terminando de publicar los datos para transferir. Vuelve en unos días, por favor.',
+      tenpo: {
+        titulo: '¿Pagas con Tenpo?',
+        texto: 'Envíanos tu aporte desde la app, a este número.',
+        etiqueta: 'Teléfono Tenpo',
+      },
       tarjeta: '¿Prefieres pagar con tarjeta?',
       tarjetaAyuda: (monto: string) => `Se abre en otra pestaña. Escribe ${monto} como monto.`,
       avisar: 'Ya hice mi aporte',

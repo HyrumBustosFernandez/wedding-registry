@@ -70,7 +70,7 @@ export const COPY = {
         nombre: 'Tu nombre',
         correo: 'Tu correo',
         correoAyuda: 'Solo para poder agradecerte.',
-        mensaje: 'Tu mensaje',
+        mensaje: 'Tu mensaje (opcional)',
       },
       continuar: 'Continuar',
     },
@@ -119,6 +119,5 @@ export const COPY = {
     nombreVacio: 'Necesitamos tu nombre para saber de quién es el regalo.',
     correoVacio: 'Sin correo no podemos enviarte el comprobante.',
     correoFormato: 'Revisa el formato del correo.',
-    mensajeVacio: 'Escribe algo, aunque sea corto.',
   },
 } as const;

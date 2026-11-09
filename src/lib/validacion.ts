@@ -22,7 +22,5 @@ export function validar(campos: CamposFormulario): ErroresFormulario {
   if (!campos.correo.trim()) err.correo = COPY.errores.correoVacio;
   else if (!FORMATO_CORREO.test(campos.correo.trim())) err.correo = COPY.errores.correoFormato;
 
-  if (!campos.mensaje.trim()) err.mensaje = COPY.errores.mensajeVacio;
-
   return err;
 }

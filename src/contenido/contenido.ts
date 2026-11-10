@@ -35,7 +35,7 @@ export const CONTENIDO: Contenido = {
         id: 'bloque-matrimonio',
         kicker: 'Matrimonio',
         titulo: '18:30 a 00:00 hrs',
-        texto: 'Les esperamos a las 18:30 en el lugar. Comenzamos 19:00 hrs en punto y termina 00:00 hrs.',
+        texto: 'Les esperamos en el lugar. Comenzamos 18:30 hrs en punto y termina 00:00 hrs.',
       },
       {
         id: 'bloque-plan',

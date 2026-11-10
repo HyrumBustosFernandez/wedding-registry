@@ -22,7 +22,7 @@ export const CONTENIDO: Contenido = {
     kicker: 'Nos casamos',
     datos: [
       { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
-      { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
+      { id: 'dato-hora', kicker: 'Hora', valor: '18:30', numerico: true },
     ],
     firma: 'La definición de mi lugar Feliz',
   },

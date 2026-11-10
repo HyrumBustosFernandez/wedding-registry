@@ -132,6 +132,8 @@ export const CONTENIDO: Contenido = {
     texto:
       'Usamos tus datos solo para organizar el matrimonio y agradecerte. Los guardamos en una planilla privada de Google y los borramos después del evento. Si quieres que los eliminemos antes, escríbenos a',
     correo: 'jjose.bustos.f@gmail.com',
+    copiaLocal:
+      'Además, tu navegador guarda una copia de tus aportes solo en este dispositivo, para que puedas revisarlos. Puedes borrarla cuando quieras.',
   },
 
   canciones: {

@@ -100,6 +100,7 @@ export function AvisoPrivacidad({ privacidad }: Props) {
                 {privacidad.texto}{' '}
                 <a href={`mailto:${privacidad.correo}`}>{privacidad.correo}</a>.
               </p>
+              {privacidad.copiaLocal && <p className={estilos.texto}>{privacidad.copiaLocal}</p>}
               <button
                 ref={cerrar}
                 type="button"

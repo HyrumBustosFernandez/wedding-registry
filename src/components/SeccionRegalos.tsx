@@ -8,6 +8,7 @@ import { ListaRegalos } from './ListaRegalos';
 import { PasoListo } from './PasoListo';
 import { PasoMensaje } from './PasoMensaje';
 import { PasoTransferencia } from './PasoTransferencia';
+import { TusAportes } from './TusAportes';
 
 /**
  * Todo lo interactivo cuelga de acá: la lista comparte estado con el aporte
@@ -20,6 +21,8 @@ export function SeccionRegalos({ contenido }: { contenido: Contenido }) {
     <>
       <section id="regalos" className="seccion">
         <div className="contenedor">
+          <TusAportes alRetomar={carrito.retomar} />
+
           <ListaRegalos
             carrito={carrito}
             regalos={contenido.regalos}

@@ -50,6 +50,18 @@ export const COPY = {
     inputPlaceholder: 'Monto',
   },
 
+  tusAportes: {
+    kicker: 'En este dispositivo',
+    titulo: 'Tus aportes',
+    texto: 'Una copia de lo que aportaste desde este navegador. Solo la ves tú.',
+    estado: { pendiente: 'Pendiente', realizado: 'Realizado' },
+    ayudaPendiente: 'Viste los datos para transferir, pero no nos avisaste. Si ya transferiste, retómalo y avísanos.',
+    retomar: 'Retomar',
+    descartar: 'Descartar',
+    borrar: 'Borrar de este dispositivo',
+    confirmarBorrar: '¿Borrar la copia de tus aportes de este dispositivo? A nosotros no nos afecta: los avisos ya nos llegaron.',
+  },
+
   barra: {
     region: 'Tu regalo',
     kicker: 'Estás regalando',

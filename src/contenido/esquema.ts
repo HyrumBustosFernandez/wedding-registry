@@ -130,6 +130,13 @@ export type Contenido = {
     titulo: string;
     texto: string;
   };
+  /** El aviso de privacidad que se abre bajo cada formulario. */
+  privacidad: {
+    titulo: string;
+    texto: string;
+    /** A quién escribir para pedir que borren los datos. */
+    correo: string;
+  };
   /** Pedido de canciones para la fiesta. */
   canciones: {
     kicker: string;

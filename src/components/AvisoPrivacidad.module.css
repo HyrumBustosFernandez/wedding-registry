@@ -1,0 +1,59 @@
+/* El enlace va discreto, bajo el botón de cada formulario: está para quien
+   lo busque, no para competir con enviar. */
+.enlace {
+  align-self: center;
+  margin: 0.9rem auto 0;
+  display: block;
+  padding: 0.2rem 0;
+  font-family: var(--fuente-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--linea);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.enlace:hover {
+  color: var(--acento-osc);
+  border-bottom-color: var(--acento);
+}
+
+.enlace:focus-visible {
+  outline: 2px solid var(--acento-osc);
+  outline-offset: 2px;
+}
+
+.caja {
+  text-align: center;
+}
+
+.titulo {
+  font-family: var(--fuente-display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.texto {
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.texto a {
+  color: var(--acento-osc);
+  border-bottom: 1px solid var(--acento);
+  overflow-wrap: anywhere;
+}
+
+.cerrar {
+  margin-top: 1.4rem;
+  min-height: 0;
+  padding: 0.65rem 1.6rem;
+  font-size: 0.92rem;
+}

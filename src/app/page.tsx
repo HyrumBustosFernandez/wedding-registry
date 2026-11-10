@@ -33,13 +33,21 @@ export default function Pagina() {
 
         <RevelarAlScroll como="section" className="seccion">
           <div className="contenedor">
-            <Confirmacion confirmacion={CONTENIDO.confirmacion} urlRegistro={CONTENIDO.registro.url} />
+            <Confirmacion
+              confirmacion={CONTENIDO.confirmacion}
+              privacidad={CONTENIDO.privacidad}
+              urlRegistro={CONTENIDO.registro.url}
+            />
           </div>
         </RevelarAlScroll>
 
         <RevelarAlScroll como="section" className="seccion">
           <div className="contenedor">
-            <Canciones canciones={CONTENIDO.canciones} urlRegistro={CONTENIDO.registro.url} />
+            <Canciones
+              canciones={CONTENIDO.canciones}
+              privacidad={CONTENIDO.privacidad}
+              urlRegistro={CONTENIDO.registro.url}
+            />
           </div>
         </RevelarAlScroll>
 

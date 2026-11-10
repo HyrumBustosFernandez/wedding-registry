@@ -127,6 +127,13 @@ export const CONTENIDO: Contenido = {
     texto: 'Nos ayuda muchísimo saberlo con tiempo para organizar todo.',
   },
 
+  privacidad: {
+    titulo: 'Aviso de privacidad',
+    texto:
+      'Usamos tus datos solo para organizar el matrimonio y agradecerte. Los guardamos en una planilla privada de Google y los borramos después del evento. Si quieres que los eliminemos antes, escríbenos a',
+    correo: 'jjose.bustos.f@gmail.com',
+  },
+
   canciones: {
     kicker: 'La fiesta',
     titulo: '¿Qué canción no puede faltar?',

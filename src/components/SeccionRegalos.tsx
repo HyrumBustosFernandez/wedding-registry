@@ -46,7 +46,7 @@ export function SeccionRegalos({ contenido }: { contenido: Contenido }) {
         alContinuar={carrito.continuar}
       />
 
-      {carrito.paso === 'mensaje' && <PasoMensaje carrito={carrito} />}
+      {carrito.paso === 'mensaje' && <PasoMensaje carrito={carrito} privacidad={contenido.privacidad} />}
       {carrito.paso === 'transferencia' && (
         <PasoTransferencia carrito={carrito} pago={contenido.pago} />
       )}

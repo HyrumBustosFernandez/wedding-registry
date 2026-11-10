@@ -1,14 +1,21 @@
 'use client';
 
+import type { Contenido } from '@/contenido/esquema';
 import type { Carrito } from '@/hooks/useCarrito';
 import { COPY } from '@/lib/copy';
+import { AvisoPrivacidad } from './AvisoPrivacidad';
 import { Modal } from './Modal';
 import { ResumenLineas } from './ResumenLineas';
 import estilos from './Checkout.module.css';
 
 const { mensaje: copy, volver } = COPY.checkout;
 
-export function PasoMensaje({ carrito }: { carrito: Carrito }) {
+type Props = {
+  carrito: Carrito;
+  privacidad: Contenido['privacidad'];
+};
+
+export function PasoMensaje({ carrito, privacidad }: Props) {
   const { err } = carrito;
 
   return (
@@ -105,6 +112,8 @@ export function PasoMensaje({ carrito }: { carrito: Carrito }) {
           {copy.continuar}
         </button>
       </div>
+
+      <AvisoPrivacidad privacidad={privacidad} />
     </Modal>
   );
 }

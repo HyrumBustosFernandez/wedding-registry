@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Contenido } from '@/contenido/esquema';
 import { registrar } from '@/lib/registro';
+import { AvisoPrivacidad } from './AvisoPrivacidad';
 import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Canciones.module.css';
 
@@ -10,6 +11,7 @@ type Estado = 'inicio' | 'enviando' | 'listo';
 
 type Props = {
   canciones: Contenido['canciones'];
+  privacidad: Contenido['privacidad'];
   urlRegistro: string;
 };
 
@@ -18,7 +20,7 @@ type Props = {
  * Canciones de la planilla. Se puede sugerir más de una, así que al terminar
  * vuelve al formulario en vez de cerrarse.
  */
-export function Canciones({ canciones, urlRegistro }: Props) {
+export function Canciones({ canciones, privacidad, urlRegistro }: Props) {
   const [cancion, setCancion] = useState('');
   const [estado, setEstado] = useState<Estado>('inicio');
   const [error, setError] = useState<string | null>(null);
@@ -95,6 +97,8 @@ export function Canciones({ canciones, urlRegistro }: Props) {
           {estado === 'enviando' ? 'Enviando…' : canciones.boton}
         </button>
       </form>
+
+      <AvisoPrivacidad privacidad={privacidad} />
     </section>
   );
 }

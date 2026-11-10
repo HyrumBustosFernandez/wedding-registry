@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Contenido } from '@/contenido/esquema';
 import { registrar } from '@/lib/registro';
+import { AvisoPrivacidad } from './AvisoPrivacidad';
 import { SubrayadoOndulado } from './SubrayadoOndulado';
 import estilos from './Confirmacion.module.css';
 
@@ -20,10 +21,11 @@ const RESPUESTAS = [
 
 type Props = {
   confirmacion: Contenido['confirmacion'];
+  privacidad: Contenido['privacidad'];
   urlRegistro: string;
 };
 
-export function Confirmacion({ confirmacion, urlRegistro }: Props) {
+export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
   const [campos, setCampos] = useState<Campos>(VACIO);
   const [asiste, setAsiste] = useState(true);
   const [estado, setEstado] = useState<Estado>('inicio');
@@ -158,6 +160,8 @@ export function Confirmacion({ confirmacion, urlRegistro }: Props) {
           {estado === 'enviando' ? 'Enviando…' : 'Enviar confirmación'}
         </button>
       </form>
+
+      <AvisoPrivacidad privacidad={privacidad} />
     </section>
   );
 }

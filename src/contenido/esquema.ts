@@ -124,11 +124,6 @@ export type Contenido = {
      * fijarlo sin un servidor.
      */
     linkTarjeta: string;
-    /**
-     * Número de teléfono de la cuenta Tenpo, tal como se muestra
-     * ("+56 9 1234 5678"). Vacío = no se ofrece Tenpo.
-     */
-    tenpo: string;
   };
   confirmacion: {
     kicker: string;

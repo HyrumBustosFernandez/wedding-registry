@@ -22,7 +22,7 @@ export const CONTENIDO: Contenido = {
     kicker: 'Nos casamos',
     datos: [
       { id: 'dato-fecha', kicker: 'Fecha', valor: '05.02.2027', numerico: true },
-      { id: 'dato-hora', kicker: 'Hora', valor: '19:00', numerico: true },
+      { id: 'dato-hora', kicker: 'Hora', valor: '18:30', numerico: true },
     ],
     firma: 'La definición de mi lugar Feliz',
   },
@@ -35,7 +35,7 @@ export const CONTENIDO: Contenido = {
         id: 'bloque-matrimonio',
         kicker: 'Matrimonio',
         titulo: '18:30 a 00:00 hrs',
-        texto: 'Les esperamos a las 18:30 en el lugar. Comenzamos 19:00 hrs en punto y termina 00:00 hrs.',
+        texto: 'Les esperamos en el lugar. Comenzamos 18:30 hrs en punto y termina 00:00 hrs.',
       },
       {
         id: 'bloque-plan',

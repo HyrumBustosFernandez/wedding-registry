@@ -12,13 +12,19 @@ type Props = {
   aria: string;
   /** Retroceder un paso. `null` deja el modal sin salida (la pasarela). */
   alCerrar: (() => void) | null;
+  /** Clic en el fondo, fuera de la caja. Sin él, el fondo no hace nada. */
+  alClicFuera?: (() => void) | null;
   /** La pasarela va centrada vertical y en caja estrecha. */
   estrecho?: boolean;
   children: React.ReactNode;
 };
 
-export function Modal({ aria, alCerrar, estrecho = false, children }: Props) {
+export function Modal({ aria, alCerrar, alClicFuera, estrecho = false, children }: Props) {
   const caja = useRef<HTMLDivElement>(null);
+  /* El clic cuenta como "afuera" solo si también empezó afuera: al
+     seleccionar texto de la caja y soltar sobre el fondo, el navegador
+     dispara el click en el fondo. */
+  const empezoFuera = useRef(false);
 
   useEscape(alCerrar !== null, alCerrar ?? (() => {}));
 
@@ -60,7 +66,15 @@ export function Modal({ aria, alCerrar, estrecho = false, children }: Props) {
   }, []);
 
   return (
-    <div className={`${estilos.overlay} ${estrecho ? estilos.overlayCentrado : ''}`}>
+    <div
+      className={`${estilos.overlay} ${estrecho ? estilos.overlayCentrado : ''}`}
+      onMouseDown={(e) => {
+        empezoFuera.current = e.target === e.currentTarget;
+      }}
+      onClick={(e) => {
+        if (alClicFuera && empezoFuera.current && e.target === e.currentTarget) alClicFuera();
+      }}
+    >
       <div
         ref={caja}
         role="dialog"

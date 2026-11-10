@@ -71,7 +71,11 @@ export function PasoTransferencia({ carrito, pago }: Props) {
   const todo = filas.map((f) => `${f.etiqueta}: ${f.valor}`).join('\n');
 
   return (
-    <Modal aria={copy.aria} alCerrar={carrito.volver}>
+    <Modal
+      aria={copy.aria}
+      alCerrar={carrito.volver}
+      alClicFuera={carrito.enviando ? null : carrito.cerrar}
+    >
       <p className="kicker">{copy.kicker}</p>
       <h2 className={estilos.titulo}>{copy.titulo}</h2>
       <p className={estilos.texto}>{copy.texto}</p>

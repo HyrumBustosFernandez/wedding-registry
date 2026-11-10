@@ -26,6 +26,8 @@ export function AvisoPrivacidad({ privacidad }: Props) {
   const enlace = useRef<HTMLButtonElement>(null);
   const cerrar = useRef<HTMLButtonElement>(null);
   const caja = useRef<HTMLDivElement>(null);
+  /* Como en `Modal`: el clic cuenta como afuera solo si también empezó afuera. */
+  const empezoFuera = useRef(false);
 
   useEffect(() => {
     if (!abierto) return;
@@ -77,8 +79,11 @@ export function AvisoPrivacidad({ privacidad }: Props) {
         createPortal(
           <div
             className={`${modal.overlay} ${modal.overlayCentrado}`}
+            onMouseDown={(e) => {
+              empezoFuera.current = e.target === e.currentTarget;
+            }}
             onClick={(e) => {
-              if (e.target === e.currentTarget) setAbierto(false);
+              if (empezoFuera.current && e.target === e.currentTarget) setAbierto(false);
             }}
           >
             <div

@@ -255,6 +255,12 @@ export function useCarrito(contenido: Contenido) {
     setPaso((p) => (p === 'transferencia' ? 'mensaje' : null));
   }, []);
 
+  /** Cierra el checkout sin vaciar el carrito ni borrar lo que se escribió. */
+  const cerrar = useCallback(() => {
+    setErrorAviso(null);
+    setPaso(null);
+  }, []);
+
   const volverALista = useCallback(() => {
     setPaso(null);
     setCierre(null);
@@ -273,7 +279,7 @@ export function useCarrito(contenido: Contenido) {
     setOrden, setNombre, setCorreo, setMensaje,
     agregar, quitar, escribirMonto, confirmarMonto, quitarRegalo,
     escribirLibre, setLibreTxt, confirmarLibre, vaciar,
-    continuar, irATransferir, avisar, volver, volverALista,
+    continuar, irATransferir, avisar, volver, cerrar, volverALista,
   };
 }
 

@@ -19,7 +19,7 @@ export function PasoMensaje({ carrito, privacidad }: Props) {
   const { err } = carrito;
 
   return (
-    <Modal aria={copy.aria} alCerrar={carrito.volver}>
+    <Modal aria={copy.aria} alCerrar={carrito.volver} alClicFuera={carrito.cerrar}>
       <p className="kicker">{copy.kicker}</p>
       <h2 className={estilos.titulo}>{copy.titulo}</h2>
       <p className={estilos.texto}>{copy.texto}</p>

@@ -136,6 +136,8 @@ export type Contenido = {
     texto: string;
     /** A quién escribir para pedir que borren los datos. */
     correo: string;
+    /** Párrafo sobre la copia de los aportes que queda en el navegador. */
+    copiaLocal: string;
   };
   /** Pedido de canciones para la fiesta. */
   canciones: {

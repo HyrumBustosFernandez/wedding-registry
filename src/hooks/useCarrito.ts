@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import type { Contenido, Regalo } from '@/contenido/esquema';
 import { clp, formatearInputMonto, parsearMonto } from '@/lib/clp';
 import { COPY } from '@/lib/copy';
+import { guardarAporte, nuevoIdAporte, type AporteGuardado, type EstadoAporte } from '@/lib/historial';
 import { registrar } from '@/lib/registro';
 import { validar, type ErroresFormulario } from '@/lib/validacion';
 
@@ -36,6 +37,9 @@ export function useCarrito(contenido: Contenido) {
   const [cierre, setCierre] = useState<Cierre | null>(null);
   const [enviando, setEnviando] = useState(false);
   const [errorAviso, setErrorAviso] = useState<string | null>(null);
+  /* El aporte en curso dentro de la copia local: el mismo id va de
+     "pendiente" a "realizado", y retomar uno sigue con su id. */
+  const [idAporte, setIdAporte] = useState<string | null>(null);
 
   /* ---- derivados (nunca en estado) ---- */
 
@@ -184,14 +188,54 @@ export function useCarrito(contenido: Contenido) {
     if (total > 0) setPaso('mensaje');
   }, [total]);
 
+  /** Lo que queda en la copia local del dispositivo, tal como está ahora. */
+  const instantanea = useCallback(
+    (id: string, estado: EstadoAporte): AporteGuardado => ({
+      id,
+      fecha: new Date().toISOString(),
+      estado,
+      lineas,
+      total,
+      nombre: nombre.trim(),
+      correo: correo.trim(),
+      mensaje: mensaje.trim(),
+      carro,
+      montos,
+      libre,
+    }),
+    [lineas, total, nombre, correo, mensaje, carro, montos, libre],
+  );
+
   const irATransferir = useCallback(() => {
     const errores = validar({ nombre, correo, mensaje });
     setErr(errores);
     if (Object.keys(errores).length === 0) {
+      /* Al ver los datos para transferir ya queda registrado como pendiente:
+         si la página se cierra antes de avisar, al volver se puede retomar. */
+      const id = idAporte ?? nuevoIdAporte();
+      setIdAporte(id);
+      guardarAporte(instantanea(id, 'pendiente'));
       setErrorAviso(null);
       setPaso('transferencia');
     }
-  }, [nombre, correo, mensaje]);
+  }, [nombre, correo, mensaje, idAporte, instantanea]);
+
+  /** Vuelve a abrir un aporte pendiente de la copia local, tal como quedó. */
+  const retomar = useCallback((a: AporteGuardado) => {
+    const aTexto = (n: number) => formatearInputMonto(String(n));
+    setCarro(a.carro);
+    setMontos(a.montos);
+    setMontosTxt(Object.fromEntries(Object.entries(a.montos).map(([id, n]) => [id, aTexto(n)])));
+    setLibre(a.libre);
+    setLibreTxt(a.libre > 0 ? aTexto(a.libre) : '');
+    setNombre(a.nombre);
+    setCorreo(a.correo);
+    setMensaje(a.mensaje);
+    setErr({});
+    setErrorAviso(null);
+    setIdAporte(a.id);
+    setPaso('transferencia');
+  }, []);
 
   /**
    * "Ya hice mi aporte": manda a los novios quién aportó, cuánto y su mensaje.
@@ -224,6 +268,8 @@ export function useCarrito(contenido: Contenido) {
     }
 
     setEnviando(false);
+    guardarAporte(instantanea(idAporte ?? nuevoIdAporte(), 'realizado'));
+    setIdAporte(null);
     setCierre({ lineas, total });
     setGracias(nombre.trim());
 
@@ -248,7 +294,7 @@ export function useCarrito(contenido: Contenido) {
     setLibre(0);
     setLibreTxt('');
     setPaso('listo');
-  }, [contenido.registro, nombre, correo, mensaje, lineas, total, mostrarMetas, regalos, carro]);
+  }, [contenido.registro, nombre, correo, mensaje, lineas, total, mostrarMetas, regalos, carro, instantanea, idAporte]);
 
   const volver = useCallback(() => {
     setErrorAviso(null);
@@ -279,7 +325,7 @@ export function useCarrito(contenido: Contenido) {
     setOrden, setNombre, setCorreo, setMensaje,
     agregar, quitar, escribirMonto, confirmarMonto, quitarRegalo,
     escribirLibre, setLibreTxt, confirmarLibre, vaciar,
-    continuar, irATransferir, avisar, volver, cerrar, volverALista,
+    continuar, irATransferir, retomar, avisar, volver, cerrar, volverALista,
   };
 }
 

@@ -2,7 +2,7 @@
   "name": "wedding-registry",
   "version": "0.5.0",
   "private": true,
-  "description": "Lista de regalos de boda de aporte compartido \u2014 Antonia & Crist\u00f3bal",
+  "description": "Lista de regalos de boda de aporte compartido — Antonia & Cristóbal",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "^16.4.4",
+    "next": "^16.4.6",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },

@@ -27,7 +27,9 @@ type Props = {
 
 export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
   const [campos, setCampos] = useState<Campos>(VACIO);
-  const [asiste, setAsiste] = useState(true);
+  /* Sin respuesta al principio: ninguna tarjeta viene marcada. */
+  const [asiste, setAsiste] = useState<boolean | null>(null);
+  const [cuantos, setCuantos] = useState('');
   const [estado, setEstado] = useState<Estado>('inicio');
   const [error, setError] = useState<string | null>(null);
 
@@ -38,6 +40,15 @@ export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
     e.preventDefault();
     setError(null);
 
+    if (asiste === null) {
+      setError('Elige si podrás acompañarnos.');
+      return;
+    }
+    const total = Number(cuantos);
+    if (asiste && (!Number.isInteger(total) || total < 1 || total > 20)) {
+      setError('Dinos cuántos asistirán, contándote a ti (de 1 a 20).');
+      return;
+    }
     if (!campos.nombre.trim() || !campos.apellido.trim()) {
       setError('Necesitamos tu nombre y tu apellido.');
       return;
@@ -57,7 +68,8 @@ export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
         nombre: campos.nombre.trim(),
         apellido: campos.apellido.trim(),
         contacto: campos.contacto.trim(),
-        asiste: asiste ? 'Sí' : 'No',
+        asiste: asiste === true ? 'Sí' : 'No',
+        cuantos: asiste === true ? total : 0,
       });
       setEstado('listo');
     } catch {
@@ -71,7 +83,7 @@ export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
       <section id="confirmar" className={estilos.panel}>
         <p className={estilos.gracias}>¡Gracias!</p>
         <p className={estilos.textoListo}>
-          {asiste
+          {asiste === true
             ? 'Anotamos tu confirmación. Nos vemos el 5 de febrero.'
             : 'Gracias por avisarnos. Te vamos a extrañar.'}
         </p>
@@ -107,6 +119,8 @@ export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
           ))}
         </div>
 
+        {asiste !== null && (
+          <>
         <div className={estilos.fila}>
           <div className={estilos.campo}>
             <label className={estilos.label} htmlFor="rsvp-nombre">
@@ -149,6 +163,26 @@ export function Confirmacion({ confirmacion, privacidad, urlRegistro }: Props) {
             onChange={set('contacto')}
           />
         </div>
+
+        {asiste === true && (
+          <div className={estilos.campo}>
+            <label className={estilos.label} htmlFor="rsvp-cuantos">
+              ¿Cuántos asistirán? (contándote a ti)
+            </label>
+            <input
+              id="rsvp-cuantos"
+              className={estilos.input}
+              type="number"
+              inputMode="numeric"
+              min={1}
+              max={20}
+              value={cuantos}
+              onChange={(e) => setCuantos(e.target.value)}
+            />
+          </div>
+        )}
+          </>
+        )}
 
         {error && <p className={estilos.error}>{error}</p>}
 

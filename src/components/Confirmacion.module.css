@@ -142,7 +142,7 @@
   background: transparent;
   border: 1px solid var(--linea);
   border-radius: 2px;
-  padding: 1.15rem 1.25rem;
+  padding: 0.85rem 1rem;
   cursor: pointer;
   transition: border-color 0.2s, background-color 0.2s;
 }
@@ -167,7 +167,7 @@
   height: 10px;
   border-radius: 50%;
   border: 1px solid var(--acento);
-  margin: 0 auto 0.8rem;
+  margin: 0 auto 0.6rem;
 }
 
 .elegida .punto {

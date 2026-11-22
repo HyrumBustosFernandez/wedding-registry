@@ -22,8 +22,8 @@ const MAXIMO_POR_HORA = 60;
 const HOJAS = {
   asistencia: {
     nombre: 'Asistencia',
-    columnas: ['Fecha', 'Nombre', 'Apellido', 'Contacto', '¿Asiste?'],
-    campos: ['nombre', 'apellido', 'contacto', 'asiste'],
+    columnas: ['Fecha', 'Nombre', 'Apellido', 'Contacto', '¿Asiste?', '¿Cuántos asisten?'],
+    campos: ['nombre', 'apellido', 'contacto', 'asiste', 'cuantos'],
   },
   aportes: {
     nombre: 'Aportes',
